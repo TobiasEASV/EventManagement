@@ -1,5 +1,10 @@
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class Main extends Application {
 
@@ -8,7 +13,12 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) {
-
+    public void start(Stage primaryStage) throws IOException {
+        FXMLLoader loader = new FXMLLoader((getClass().getResource("gui/view/LoginView.fxml")));
+        primaryStage.setTitle("Event Management");
+        primaryStage.setScene(new Scene(loader.load()));
+        Image image = new Image("/gui/images/Icons/ticket_2_icon.png");
+        primaryStage.getIcons().add(image);
+        primaryStage.show();
     }
 }
