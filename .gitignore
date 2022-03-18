@@ -1,9 +1,5 @@
 
-
-
-
-# Costem Ignore Files/Folder
-/.data/
+# Custom Ignore Files/Folder
 *.settings
 ######
 
