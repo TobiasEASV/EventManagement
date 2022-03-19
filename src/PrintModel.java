@@ -10,31 +10,34 @@ import javax.print.event.PrintJobEvent;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-public class printTest {
+public class PrintModel {
 
-    public static void main(String[] args) throws PrintException, IOException {
+    private static  PrintModel single_instance = null;
 
-        //Get print services
-        PrintService[] printServices = PrintServiceLookup.lookupPrintServices(null, null);
-        System.out.println("Number of print services: " + printServices.length);
+    private PrintModel(){
 
-        for (PrintService printer : printServices)
-            System.out.println("Printer: " + printer.getName());
+    }
+
+    public static PrintModel getInstance()
+    {
+        if (single_instance == null)
+            single_instance = new PrintModel();
+
+        return single_instance;
+    }
+
+    public  void oldPrinter(PrintService printService, FileInputStream fileInputStream) throws PrintException, IOException {
+
 
         PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
         pras.add(new Copies(1));
 
 
-        PrintService pss[] = PrintServiceLookup.lookupPrintServices(DocFlavor.INPUT_STREAM.GIF, pras);
-        if (pss.length == 0)
-            throw new RuntimeException("No printer services available.");
-        PrintService ps = pss[pss.length-1];
+        System.out.println("Printing to " + printService);
 
-        System.out.println("Printing to " + ps);
+        DocPrintJob job = printService.createPrintJob();
 
-        DocPrintJob job = ps.createPrintJob();
-        FileInputStream fin = new FileInputStream("src/gui/images/Icons/ticket_2_icon.png");
-        Doc doc = new SimpleDoc(fin, DocFlavor.INPUT_STREAM.GIF, null);
+        Doc doc = new SimpleDoc(fileInputStream, DocFlavor.INPUT_STREAM.GIF, null);
 
 
         job.addPrintJobListener(new PrintJobAdapter() {
@@ -48,7 +51,7 @@ public class printTest {
 
 
         job.print(doc, pras);
-        fin.close();
+        fileInputStream.close();
 
 
     }
