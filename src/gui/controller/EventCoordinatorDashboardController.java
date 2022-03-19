@@ -1,16 +1,20 @@
 package gui.controller;
 
 import gui.model.PrintModel;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.*;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 
-import javax.print.PrintException;
+import javax.imageio.ImageIO;
 import javax.print.PrintService;
 import javax.print.PrintServiceLookup;
-import java.io.FileInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -77,11 +81,15 @@ public class EventCoordinatorDashboardController implements Initializable {
     @FXML
     private Label txtTicketType;
 
+    @FXML
+    private GridPane ticketPane;
+
     //Array that holds printservices available on the PC.
     private PrintService[] printServices;
 
     //gui.model.PrintModel for printing tickets (a singleton)
     PrintModel printModel;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -92,6 +100,7 @@ public class EventCoordinatorDashboardController implements Initializable {
         printServices = PrintServiceLookup.lookupPrintServices(null, null);
         //Add print services to choose printer drop-down
         comboBoxChoosePrinter.getItems().setAll(printServices);
+
     }
 
     public void handleSellTicketButton(ActionEvent actionEvent) {
@@ -100,12 +109,15 @@ public class EventCoordinatorDashboardController implements Initializable {
     public void handleRefundTicketButton(ActionEvent actionEvent) {
     }
 
-    public void handlePrintTicketButton(ActionEvent actionEvent) throws IOException, PrintException {
-        FileInputStream fin = new FileInputStream("src/gui/images/Icons/ticket_2_icon.png");
-        printModel.print((PrintService) comboBoxChoosePrinter.getSelectionModel().getSelectedItem(), fin);
+    public void handlePrintTicketButton(ActionEvent actionEvent) {
+        //Generate image of the ticket
+        generateTicket();
+        // Send print request to the print model with the selected printer
+        printModel.print((PrintService) comboBoxChoosePrinter.getSelectionModel().getSelectedItem());
     }
 
-    public void handleMailTicketButton(ActionEvent actionEvent) {
+    public void handleMailTicketButton(ActionEvent actionEvent) throws IOException {
+        generateTicket();
     }
 
     public void handleEditEventButton(ActionEvent actionEvent) {
@@ -118,5 +130,16 @@ public class EventCoordinatorDashboardController implements Initializable {
     }
 
     public void handleUserSettingsButton(ActionEvent actionEvent) {
+    }
+
+    public void generateTicket(){
+        WritableImage image = ticketPane.snapshot(new SnapshotParameters(),null);
+        File file = new File("src/gui/utility/temp/tempTicket.png");
+        try{
+            ImageIO.write(SwingFXUtils.fromFXImage(image, null), "PNG", file);
+        } catch (IOException ioe){
+            ioe.printStackTrace();
+        }
+
     }
 }
