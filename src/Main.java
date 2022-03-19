@@ -14,7 +14,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader loader = new FXMLLoader((getClass().getResource("gui/view/LoginView.fxml")));
+        FXMLLoader loader = new FXMLLoader((getClass().getResource("gui/view/EventCoordinatorDashboardView.fxml")));
         primaryStage.setTitle("Event Management");
         primaryStage.setScene(new Scene(loader.load()));
         Image image = new Image("/gui/images/Icons/ticket_2_icon.png");
