@@ -1,19 +1,21 @@
 package gui.controller;
 
+import gui.model.PrintModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 
+import javax.print.PrintException;
 import javax.print.PrintService;
 import javax.print.PrintServiceLookup;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class EventCoordinatorDashboardController<PrintModel> implements Initializable {
+public class EventCoordinatorDashboardController implements Initializable {
     @FXML
     private GridPane parentGridPane;
 
@@ -78,20 +80,18 @@ public class EventCoordinatorDashboardController<PrintModel> implements Initiali
     //Array that holds printservices available on the PC.
     private PrintService[] printServices;
 
-    //PrintModel for printing tickets (a singleton)
-    private PrintModel printModel;
-
+    //gui.model.PrintModel for printing tickets (a singleton)
+    PrintModel printModel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //instantiate the singleton PrintModel
         printModel = PrintModel.getInstance();
 
         //Get print services
         printServices = PrintServiceLookup.lookupPrintServices(null, null);
-
+        //Add print services to choose printer drop-down
         comboBoxChoosePrinter.getItems().setAll(printServices);
-
-
     }
 
     public void handleSellTicketButton(ActionEvent actionEvent) {
@@ -100,9 +100,9 @@ public class EventCoordinatorDashboardController<PrintModel> implements Initiali
     public void handleRefundTicketButton(ActionEvent actionEvent) {
     }
 
-    public void handlePrintTicketButton(ActionEvent actionEvent) throws FileNotFoundException {
-
+    public void handlePrintTicketButton(ActionEvent actionEvent) throws IOException, PrintException {
         FileInputStream fin = new FileInputStream("src/gui/images/Icons/ticket_2_icon.png");
+        printModel.print((PrintService) comboBoxChoosePrinter.getSelectionModel().getSelectedItem(), fin);
     }
 
     public void handleMailTicketButton(ActionEvent actionEvent) {
