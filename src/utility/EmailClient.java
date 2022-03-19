@@ -11,14 +11,8 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class EmailClient {
-    // Email name:event.ticket.easv@gamil.com
-    // Email Code:AdminEASV2022
+    
     private static final String PROP_FILE = ".data/email.settings";
-    //private final String username = "tobi9782@easv365.dk";
-    //private final String password = "EasvPoker123!!!";
-
-
-
 
     private Boolean sendEmail(String toEmail, String subject, String text) throws IOException {
 
