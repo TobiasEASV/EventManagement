@@ -52,21 +52,24 @@ public class EmailClient {
 
 
             message.setSubject(subject);
-            message.setText(text);
 
 
 
                 // Add a Ticket to the mail
                 Multipart multipart = new MimeMultipart();
                 MimeBodyPart attachmentPart = new MimeBodyPart();
+                MimeBodyPart textPart = new MimeBodyPart();
+
                 try {
                     attachmentPart.attachFile("src/gui/images/Icons/ticket_1_icon.png");
+                    textPart.setText(text);
+                    multipart.addBodyPart(textPart);
                     multipart.addBodyPart(attachmentPart);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
                 message.setContent(multipart);
-                
+
             Transport.send(message);
         } catch (MessagingException e) {
             e.printStackTrace();
