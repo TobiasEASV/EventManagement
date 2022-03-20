@@ -14,7 +14,7 @@ public class EmailClient {
     
     private static final String PROP_FILE = ".data/email.settings";
 
-    private Boolean sendEmail(String toEmail, String subject, String text) throws IOException {
+    private Boolean sendEmail(String toEmail, String subject, String text, String attachmentFileURL) throws IOException {
 
         Properties emailCredentials = new Properties();
         emailCredentials.load(new FileInputStream(PROP_FILE));
@@ -55,7 +55,7 @@ public class EmailClient {
                 MimeBodyPart textPart = new MimeBodyPart();
 
                 try {
-                    attachmentPart.attachFile("src/gui/images/Icons/ticket_1_icon.png");
+                    attachmentPart.attachFile(attachmentFileURL);
                     textPart.setText(text);
                     multipart.addBodyPart(textPart);
                     multipart.addBodyPart(attachmentPart);
@@ -75,7 +75,7 @@ public class EmailClient {
     public static void main(String[] args) throws IOException {
         EmailClient emailClient = new EmailClient();
         String sendTo = "tobi9782@easv365.dk";
-        if(emailClient.sendEmail(sendTo, "Your ticket", "Congratulations on your ticket, to Esbjerg musik hus")){
+        if(emailClient.sendEmail(sendTo, "Your ticket", "Congratulations on your ticket, to Esbjerg musik hus", "src/gui/images/Icons/ticket_2_icon.png")){
             System.out.println("Wooooooo");
         }
     }
