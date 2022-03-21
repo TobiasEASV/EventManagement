@@ -82,3 +82,5 @@ create table [Email]
     [EmailCredentials] VARCHAR(70) NULL,
     [PasswordCredentials] VARCHAR(30) NULL
 )
+
+INSERT INTO Email (EmailCredentials, PasswordCredentials) VALUES ('event_easv@outlook.com', 'EasvEvent2022')

@@ -1,5 +1,7 @@
 package utility;
 
+import bll.EmailManager;
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
@@ -8,23 +10,39 @@ import javax.mail.internet.MimeMultipart;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Properties;
+import java.util.*;
 
 public class EmailClient {
     
     private static final String PROP_FILE = ".data/email.settings";
 
-    private Boolean sendEmail(String toEmail, String subject, String text, String attachmentFileURL) throws IOException {
+    private EmailManager emailManager;
+
+    public EmailClient() throws IOException {
+        //emailManager = new EmailManager();
+    }
+
+    public Boolean sendEmail(String toEmail, String subject, String text, String attachmentFileURL) throws IOException {
+
+
 
         Properties emailCredentials = new Properties();
         emailCredentials.load(new FileInputStream(PROP_FILE));
+        //List<String> credentials = emailManager.getCredentials();
 
-        final String email = emailCredentials.getProperty("Email");
-        final String password = emailCredentials.getProperty("Password");
+
+        //final String email = credentials.get(0);
+        //final String password = credentials.get(1);
+
+        String email = emailCredentials.getProperty("Email");
+        String password = emailCredentials.getProperty("Password");
+
+        System.out.println("Eamil= " + email);
+        System.out.println("Password = " + password);
 
         Properties emailSetup = new Properties();
 
-            emailSetup.put("mail.smtp.host", "smtp.office365.com");
+            emailSetup.put("mail.smtp.host", "smtp.outlook.com");
             emailSetup.put("mail.smtp.port", "587");
             emailSetup.put("mail.smtp.auth", "true");
             emailSetup.put("mail.smtp.starttls.enable", "true"); //TLS;
@@ -46,9 +64,11 @@ public class EmailClient {
 
 
             message.setSubject(subject);
+            message.setText(text);
 
 
 
+            /**
                 // Add a Ticket to the mail
                 Multipart multipart = new MimeMultipart();
                 MimeBodyPart attachmentPart = new MimeBodyPart();
@@ -59,14 +79,15 @@ public class EmailClient {
                     textPart.setText(text);
                     multipart.addBodyPart(textPart);
                     multipart.addBodyPart(attachmentPart);
-                } catch (IOException e) {
-                    e.printStackTrace();
+                } catch (IOException IOe) {
+                    IOe.printStackTrace();
                 }
                 message.setContent(multipart);
-
+             **/
             Transport.send(message);
-        } catch (MessagingException e) {
-            e.printStackTrace();
+
+        } catch (MessagingException MessagEX) {
+                MessagEX.printStackTrace();
             return false;
         }
             return true;
@@ -74,9 +95,9 @@ public class EmailClient {
 
     public static void main(String[] args) throws IOException {
         EmailClient emailClient = new EmailClient();
-        String sendTo = "tobi9782@easv365.dk";
+        String sendTo = "tobiasrasmussen90@gmail.com";
         if(emailClient.sendEmail(sendTo, "Your ticket", "Congratulations on your ticket, to Esbjerg musik hus", "src/gui/images/Icons/ticket_2_icon.png")){
-            System.out.println("Wooooooo");
+            System.out.println("yesss");
         }
     }
 }
