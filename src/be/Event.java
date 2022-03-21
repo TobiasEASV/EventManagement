@@ -3,6 +3,7 @@ package be;
 import javafx.beans.property.*;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 public class Event {
 
@@ -19,10 +20,10 @@ public class Event {
 
     private IntegerProperty id = new SimpleIntegerProperty();
 
-    private LocalDate startDate;
-    private LocalDate endDate;
+    private ObjectProperty<LocalDate> startDate;
+    private ObjectProperty<LocalDate> endDate;
 
-    public Event (String title, String description, String location, String artist, String contactEmail, double price, double vipPrice, double foodPrice, double drinkPrice, int id, LocalDate startDate, LocalDate endDate)
+    public Event (String title, String description, String location, String artist, String contactEmail, double price, double vipPrice, double foodPrice, double drinkPrice, LocalDate startDate, LocalDate endDate)
     {
         this.title.set(title);
         this.description.set(description);
@@ -33,9 +34,9 @@ public class Event {
         this.vipPrice.set(vipPrice);
         this.foodPrice.set(foodPrice);
         this.drinkPrice.set(drinkPrice);
-        this.id.set(id);
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.id.set(-1);
+        this.startDate.set(startDate);
+        this.endDate.set(endDate);
     }
 
     public String getDescription() {

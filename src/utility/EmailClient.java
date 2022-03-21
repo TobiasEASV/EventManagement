@@ -61,7 +61,7 @@ public class EmailClient {
                     Message.RecipientType.TO,
                     InternetAddress.parse(toEmail)
             );
-            
+
             message.setSubject(subject);
 
                 // Add a Ticket to the mail

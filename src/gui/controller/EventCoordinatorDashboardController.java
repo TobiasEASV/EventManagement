@@ -1,7 +1,10 @@
 package gui.controller;
 
+import be.Event;
 import be.Ticket;
+import gui.model.EventListModel;
 import gui.model.PrintModel;
+import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,7 +14,9 @@ import javafx.scene.control.*;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import utility.EmailClient;
+import utility.SceneSwapper;
 
 import javax.imageio.ImageIO;
 import javax.print.PrintService;
@@ -41,7 +46,7 @@ public class EventCoordinatorDashboardController implements Initializable {
     @FXML
     private ComboBox comboBoxChoosePrinter;
     @FXML
-    private ComboBox comboBoxChooseEvent;
+    private static ComboBox<Event> comboBoxChooseEvent;
 
     @FXML
     private CheckBox checkBoxTicketTypeStandard;
@@ -99,6 +104,8 @@ public class EventCoordinatorDashboardController implements Initializable {
     PrintModel printModel;
     EmailClient email;
     Ticket ticket;
+    EventListModel eventListModel;
+    SceneSwapper sceneSwapper;
 
     private final String TICKET_FILE = "src/gui/utility/temp/tempTicket.png";
 
@@ -114,12 +121,18 @@ public class EventCoordinatorDashboardController implements Initializable {
             IOe.printStackTrace();
         }
         ticket = new Ticket();
+        eventListModel = new EventListModel();
+        sceneSwapper = new SceneSwapper();
 
         //Get print services
         printServices = PrintServiceLookup.lookupPrintServices(null, null);
         //Add print services to choose printer drop-down
         comboBoxChoosePrinter.getItems().setAll(printServices);
 
+    }
+
+    public static void updateComboBoxChooseEvent(Event event){
+        comboBoxChooseEvent.getItems().add(event);
     }
 
     public void handleSellTicketButton(ActionEvent actionEvent) {
@@ -145,7 +158,9 @@ public class EventCoordinatorDashboardController implements Initializable {
     }
 
     public void handleNewEventButton(ActionEvent actionEvent) {
+        sceneSwapper.sceneSwitch(new Stage(), "CreateEventView.fxml");
     }
+
 
     public void handleLogoutButton(ActionEvent actionEvent) {
     }
