@@ -20,6 +20,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class EventCoordinatorDashboardController implements Initializable {
+
     @FXML
     private GridPane parentGridPane;
 
@@ -50,36 +51,41 @@ public class EventCoordinatorDashboardController implements Initializable {
     private CheckBox checkBoxTicketTypeDrinksIncl;
 
     @FXML
-    private Label txtEventTitle;
+    private Label lblEventTitle;
     @FXML
-    private Label txtEventLocation;
+    private Label lblEventLocation;
     @FXML
-    private Label txtEventDescription;
+    private Label lblEventDescription;
     @FXML
-    private Label txtEventArtists;
+    private Label lblEventArtists;
     @FXML
-    private Label txtEventStartDate;
+    private Label lblEventStartDate;
     @FXML
-    private Label txtEventEndDate;
+    private Label lblEventEndDate;
     @FXML
-    private Label txtEventPrice;
+    private Label lblEventPrice;
     @FXML
-    private Label txtEventContactEmail;
+    private Label lblEventContactEmail;
 
+    // Ticket preview labels
     @FXML
-    private Label txtTicketTitle;
+    private Label lblTicketRowNumber;
     @FXML
-    private Label txtTicketName;
+    private Label lblTicketSeatNumber;
     @FXML
-    private Label txtTicketEmail;
+    private Label lblCustomerName;
     @FXML
-    private Label txtTicketStartDate;
+    private Label lblCustomerEmail;
     @FXML
-    private Label txtTicketEndDate;
+    private Label lblTicketTitle;
     @FXML
-    private Label txtTicketPrice;
+    private Label lblTicketSubtitle;
     @FXML
-    private Label txtTicketType;
+    private Label lblTicketDescription;
+    @FXML
+    private Label lblTicketLocation;
+    @FXML
+    private Label lblTicketContactEmail;
 
     @FXML
     private GridPane ticketPane;
