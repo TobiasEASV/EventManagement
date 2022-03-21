@@ -31,13 +31,10 @@ public class Ticket {
 
     }
 
-    public Ticket(String customerName, String customerEmail, int id, int customerId, int eventId, int seat, int row, double price, boolean isPaid,boolean vip, boolean drinks, boolean food, boolean isSeated)
+    public Ticket(String customerName, String customerEmail, int seat, int row, double price, boolean isPaid,boolean vip, boolean drinks, boolean food, boolean isSeated)
     {
         this.customerName.set(customerName);
         this.customerEmail.set(customerEmail);
-        this.id.set(id);
-        this.customerId.set(customerId);
-        this.eventId.set(eventId);
         this.seat.set(seat);
         this.row.set(row);
         this.price.set(price);
