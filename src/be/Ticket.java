@@ -8,9 +8,6 @@ import javafx.beans.property.*;
  */
 
 public class Ticket {
-    private StringProperty eventTitle = new SimpleStringProperty();
-    private StringProperty eventSubtitle= new SimpleStringProperty();
-    private StringProperty location= new SimpleStringProperty();
     private StringProperty customerName= new SimpleStringProperty();
     private StringProperty customerEmail= new SimpleStringProperty();
 
@@ -32,6 +29,23 @@ public class Ticket {
     public Ticket()
     {
 
+    }
+
+    public Ticket(String customerName, String customerEmail, int id, int customerId, int eventId, int seat, int row, double price, boolean isPaid,boolean vip, boolean drinks, boolean food, boolean isSeated)
+    {
+        this.customerName.set(customerName);
+        this.customerEmail.set(customerEmail);
+        this.id.set(id);
+        this.customerId.set(customerId);
+        this.eventId.set(eventId);
+        this.seat.set(seat);
+        this.row.set(row);
+        this.price.set(price);
+        this.isPaid.set(isPaid);
+        this.vip.set(vip);
+        this.drinks.set(drinks);
+        this.food.set(food);
+        this.seated.set(isSeated);
     }
 
     public double getPrice() {
@@ -96,30 +110,6 @@ public class Ticket {
 
     public void setCustomerName(String customerName) {
         this.customerName.set(customerName);
-    }
-
-    public String getEventSubtitle() {
-        return eventSubtitle.get();
-    }
-
-    public void setEventSubtitle(String eventSubtitle) {
-        this.eventSubtitle.set(eventSubtitle);
-    }
-
-    public String getEventTitle() {
-        return eventTitle.get();
-    }
-
-    public void setEventTitle(String eventTitle) {
-        this.eventTitle.set(eventTitle);
-    }
-
-    public String getLocation() {
-        return location.get();
-    }
-
-    public void setLocation(String location) {
-        this.location.set(location);
     }
 
     public boolean isVip() {
