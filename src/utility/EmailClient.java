@@ -61,14 +61,9 @@ public class EmailClient {
                     Message.RecipientType.TO,
                     InternetAddress.parse(toEmail)
             );
-
-
+            
             message.setSubject(subject);
-            message.setText(text);
 
-
-
-            /**
                 // Add a Ticket to the mail
                 Multipart multipart = new MimeMultipart();
                 MimeBodyPart attachmentPart = new MimeBodyPart();
@@ -83,7 +78,7 @@ public class EmailClient {
                     IOe.printStackTrace();
                 }
                 message.setContent(multipart);
-             **/
+
             Transport.send(message);
 
         } catch (MessagingException MessagEX) {
@@ -95,7 +90,7 @@ public class EmailClient {
 
     public static void main(String[] args) throws IOException {
         EmailClient emailClient = new EmailClient();
-        String sendTo = "tobiasrasmussen90@gmail.com";
+        String sendTo = "tobi9782@easv365.dk";
         if(emailClient.sendEmail(sendTo, "Your ticket", "Congratulations on your ticket, to Esbjerg musik hus", "src/gui/images/Icons/ticket_2_icon.png")){
             System.out.println("yesss");
         }
