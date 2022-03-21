@@ -1,5 +1,6 @@
 package gui.controller;
 
+import be.Ticket;
 import gui.model.PrintModel;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -10,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import utility.EmailClient;
 
 import javax.imageio.ImageIO;
 import javax.print.PrintService;
@@ -95,6 +97,8 @@ public class EventCoordinatorDashboardController implements Initializable {
 
     //gui.model.PrintModel for printing tickets (a singleton)
     PrintModel printModel;
+    EmailClient email;
+    Ticket ticket;
 
     private final String TICKET_FILE = "src/gui/utility/temp/tempTicket.png";
 
@@ -103,6 +107,13 @@ public class EventCoordinatorDashboardController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         //instantiate the singleton PrintModel
         printModel = PrintModel.getInstance();
+
+        try {
+            email = new EmailClient();
+        } catch (IOException IOe) {
+            IOe.printStackTrace();
+        }
+        ticket = new Ticket();
 
         //Get print services
         printServices = PrintServiceLookup.lookupPrintServices(null, null);
@@ -124,8 +135,10 @@ public class EventCoordinatorDashboardController implements Initializable {
         printModel.print((PrintService) comboBoxChoosePrinter.getSelectionModel().getSelectedItem(), TICKET_FILE);
     }
 
-    public void handleMailTicketButton(ActionEvent actionEvent) {
+    public void handleMailTicketButton(ActionEvent actionEvent) throws IOException {
         generateTicket();
+
+        email.sendEmail(ticket.getCustomerEmail(), "Your Ticket", "Congratulations on your ticket", TICKET_FILE);
     }
 
     public void handleEditEventButton(ActionEvent actionEvent) {
