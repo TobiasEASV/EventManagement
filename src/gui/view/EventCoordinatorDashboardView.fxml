@@ -39,6 +39,7 @@
       <TableView editable="true" prefHeight="200.0" prefWidth="550.0" tableMenuButtonVisible="true" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="4">
         <columns>
           <TableColumn fx:id="tcName" prefWidth="75.0" text="Name" />
+            <TableColumn fx:id="tcEmail" prefWidth="75.0" text="Email" />
           <TableColumn fx:id="tcTicketPrice" prefWidth="75.0" text="Ticket price" />
             <TableColumn fx:id="tcPaymentStatus" prefWidth="75.0" text="Payment Status" />
         </columns>
@@ -241,8 +242,8 @@
                       <RowConstraints percentHeight="32.0" valignment="BOTTOM" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label fx:id="txtTicketStartDate" styleClass="informationLabels" text="Start Date" GridPane.columnIndex="1" />
-                        <Label fx:id="txtTicketEndDate" layoutX="184.0" layoutY="90.0" styleClass="informationLabels" text="End Date" GridPane.columnIndex="2" />
+                        <Label fx:id="lblTicketStartDate" styleClass="informationLabels" text="Start Date" GridPane.columnIndex="1" />
+                        <Label fx:id="lblTicketEndDate" layoutX="184.0" layoutY="90.0" styleClass="informationLabels" text="End Date" GridPane.columnIndex="2" />
                         <Label fx:id="lblTicketDescription" layoutX="10.0" layoutY="150.0" styleClass="informationLabels" text="This is a very long description, to showcase how a description acts if it becomes longer than the horizontal space of its parent." wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="2" GridPane.rowSpan="2147483647" />
                         <Label fx:id="lblTicketLocation" layoutX="358.0" layoutY="150.0" styleClass="informationLabels" text="Location" />
                         <Separator prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" />

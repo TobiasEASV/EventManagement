@@ -21,6 +21,7 @@ import java.util.ResourceBundle;
 
 public class EventCoordinatorDashboardController implements Initializable {
 
+
     @FXML
     private GridPane parentGridPane;
 
@@ -86,6 +87,10 @@ public class EventCoordinatorDashboardController implements Initializable {
     private Label lblTicketLocation;
     @FXML
     private Label lblTicketContactEmail;
+    @FXML
+    private Label lblTicketStartDate;
+    @FXML
+    private Label lblTicketEndDate;
 
     @FXML
     private GridPane ticketPane;
