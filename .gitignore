@@ -1,7 +1,7 @@
 
 # Custom Ignore Files/Folder
 *.settings
-*.sql
+
 ######
 
 # Created by https://www.toptal.com/developers/gitignore/api/intellij
