@@ -31,10 +31,10 @@ public class PrintModel {
         return single_instance;
     }
 
-    public void print(PrintService printService) {
+    public void print(PrintService printService, String ticketFile) {
         printJobWasSuccessful=false;
 
-        try (FileInputStream fileInputStream = new FileInputStream("src/gui/utility/temp/tempTicket.png")){
+        try (FileInputStream fileInputStream = new FileInputStream(ticketFile)){
             Doc doc = new SimpleDoc(fileInputStream, DocFlavor.INPUT_STREAM.GIF, null);
             PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
             pras.add(new Copies(1));

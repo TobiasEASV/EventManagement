@@ -90,6 +90,8 @@ public class EventCoordinatorDashboardController implements Initializable {
     //gui.model.PrintModel for printing tickets (a singleton)
     PrintModel printModel;
 
+    private final String TICKET_FILE = "src/gui/utility/temp/tempTicket.png";
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -113,10 +115,10 @@ public class EventCoordinatorDashboardController implements Initializable {
         //Generate image of the ticket
         generateTicket();
         // Send print request to the print model with the selected printer
-        printModel.print((PrintService) comboBoxChoosePrinter.getSelectionModel().getSelectedItem());
+        printModel.print((PrintService) comboBoxChoosePrinter.getSelectionModel().getSelectedItem(), TICKET_FILE);
     }
 
-    public void handleMailTicketButton(ActionEvent actionEvent) throws IOException {
+    public void handleMailTicketButton(ActionEvent actionEvent) {
         generateTicket();
     }
 
