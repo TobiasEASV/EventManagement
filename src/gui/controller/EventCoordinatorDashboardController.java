@@ -142,6 +142,5 @@ public class EventCoordinatorDashboardController implements Initializable {
         } catch (IOException ioe){
             ioe.printStackTrace();
         }
-
     }
 }
