@@ -16,12 +16,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane fx:id="parentGridPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.EventCoordinatorDashboardController">
+<GridPane fx:id="parentGridPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.EventCoordinatorDashboardController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="15.0" prefWidth="100.0" />
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="15.0" prefWidth="100.0" />
       <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="35.0" prefWidth="100.0" />
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="35.0" prefWidth="100.0" />
+      <ColumnConstraints />
+      <ColumnConstraints />
   </columnConstraints>
   <rowConstraints>
       <RowConstraints minHeight="10.0" percentHeight="3.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
@@ -133,7 +135,7 @@
             <Label layoutX="20.0" layoutY="187.0" text="Price:" GridPane.rowIndex="11" />
             <Label layoutX="20.0" layoutY="261.0" text="Artists:" GridPane.rowIndex="5" />
             <Label layoutX="20.0" layoutY="34.0" text="Description:" GridPane.rowIndex="3" />
-            <Label fx:id="txtEventTitle" alignment="CENTER" layoutX="20.0" layoutY="89.0" prefHeight="17.0" prefWidth="348.0" text="Musik Med Gutterne" GridPane.columnSpan="2147483647">
+            <Label fx:id="lblEventTitle" alignment="CENTER" layoutX="20.0" layoutY="89.0" prefHeight="17.0" prefWidth="348.0" text="Musik Med Gutterne" GridPane.columnSpan="2147483647">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -155,13 +157,13 @@
             <Separator prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="10" />
             <Separator prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="12" />
             <Separator prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="14" />
-            <Label fx:id="txtEventLocation" text="Musikhuset, Esbjerg, 6700 - Der hvor alting vigtigt sker, hvis man er nede med de unge" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" />
-            <Label fx:id="txtEventDescription" text="Det her er en lang tekst for at vise, hvordan tekst opfører sig, hvis teksten bliver så lang at den ikke kan være inde i det pane den har som forældre." wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="3" />
-            <Label fx:id="txtEventArtists" text="MØ, Simon Nielsen, Tobias Rasmussen, JanMedEnPlan" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="5" />
-            <Label fx:id="txtEventStartDate" text="19-03-2022 19:00" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="7" />
-            <Label fx:id="txtEventEndDate" text="19-03-2022 23:00" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="9" />
-            <Label fx:id="txtEventPrice" layoutX="104.0" layoutY="333.0" text="350 .-" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="11" />
-            <Label fx:id="txtEventContactEmail" layoutX="104.0" layoutY="391.0" text="Simon@nielsen.dk" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="13" />
+            <Label fx:id="lblEventLocation" text="Musikhuset, Esbjerg, 6700 - Der hvor alting vigtigt sker, hvis man er nede med de unge" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" />
+            <Label fx:id="lblEventDescription" text="Det her er en lang tekst for at vise, hvordan tekst opfører sig, hvis teksten bliver så lang at den ikke kan være inde i det pane den har som forældre." wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="3" />
+            <Label fx:id="lblEventArtists" text="MØ, Simon Nielsen, Tobias Rasmussen, JanMedEnPlan" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="5" />
+            <Label fx:id="lblEventStartDate" text="19-03-2022 19:00" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="7" />
+            <Label fx:id="lblEventEndDate" text="19-03-2022 23:00" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="9" />
+            <Label fx:id="lblEventPrice" layoutX="104.0" layoutY="333.0" text="350 .-" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="11" />
+            <Label fx:id="lblEventContactEmail" layoutX="104.0" layoutY="391.0" text="Simon@nielsen.dk" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="13" />
          </children>
       </GridPane>
       <ComboBox fx:id="comboBoxChooseEvent" prefWidth="150.0" promptText="Choose an event" GridPane.rowIndex="3" />
@@ -174,24 +176,90 @@
                   <Font name="System Bold" size="25.0" />
                </font>
             </Label>
-            <GridPane fx:id="ticketPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="250.0" prefWidth="700.0" style="-fx-border-color: black; -fx-background-color: beige; -fx-border-width: 2;">
+            <GridPane fx:id="ticketPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="250.0" prefWidth="700.0" styleClass="parentPane" stylesheets="@../utility/temp/ticketStyleSheet.css">
               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="25.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" percentHeight="15.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints percentHeight="2.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="23.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" percentHeight="25.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" percentHeight="25.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="Label" GridPane.rowIndex="1" />
-                  <Label layoutX="12.0" layoutY="74.0" text="Label" GridPane.rowIndex="2" />
-                  <Label layoutX="12.0" layoutY="121.0" text="Label" GridPane.rowIndex="3" />
-                  <Label layoutX="12.0" layoutY="168.0" text="Label" />
+                  <HBox GridPane.columnIndex="3" GridPane.rowSpan="2">
+                     <children>
+                        <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="100.0" spacing="10.0" />
+                        <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="8.0">
+                           <children>
+                              <Label fx:id="lblTicketRowNumber" alignment="CENTER" styleClass="informationLabels" text="Row: 0" />
+                              <Label fx:id="lblTicketSeatNumber" styleClass="informationLabels" text="Seat: 0" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="35.0" styleClass="sidebar" GridPane.rowSpan="2147483647">
+                     <children>
+                        <Label fx:id="lblCustomerName" styleClass="sidebarLabels" text="John Doe" />
+                        <Label fx:id="lblCustomerEmail" styleClass="sidebarLabels" text="John@doe.dk" textAlignment="CENTER" wrapText="true" />
+                        <Label fx:id="txtTicketPrice" styleClass="sidebarLabels" text="350 .-" />
+                        <Label fx:id="txtTicketType" styleClass="sidebarLabels" text="VIP" />
+                     </children>
+                  </VBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="headerBar" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowSpan="2">
+                     <children>
+                        <Label fx:id="lblTicketTitle" styleClass="headerLabels" text="Musik med gutterne" />
+                     </children>
+                     <padding>
+                        <Insets left="10.0" top="5.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="186.0" layoutY="12.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
+                     <children>
+                        <Label fx:id="lblTicketSubtitle" styleClass="subtitleLabels" text="Musik med gutterne" />
+                     </children>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </HBox>
+                  <Separator prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="2" />
+                  <GridPane styleClass="informationGrid" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="3" GridPane.rowSpan="2147483647">
+                    <columnConstraints>
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" percentWidth="34.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="33.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="33.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints percentHeight="31.0" valignment="TOP" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="-Infinity" percentHeight="3.0" valignment="TOP" vgrow="SOMETIMES" />
+                      <RowConstraints percentHeight="32.0" valignment="TOP" vgrow="SOMETIMES" />
+                      <RowConstraints percentHeight="32.0" valignment="BOTTOM" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label fx:id="txtTicketStartDate" styleClass="informationLabels" text="Start Date" GridPane.columnIndex="1" />
+                        <Label fx:id="txtTicketEndDate" layoutX="184.0" layoutY="90.0" styleClass="informationLabels" text="End Date" GridPane.columnIndex="2" />
+                        <Label fx:id="lblTicketDescription" layoutX="10.0" layoutY="150.0" styleClass="informationLabels" text="This is a very long description, to showcase how a description acts if it becomes longer than the horizontal space of its parent." wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="2" GridPane.rowSpan="2147483647" />
+                        <Label fx:id="lblTicketLocation" layoutX="358.0" layoutY="150.0" styleClass="informationLabels" text="Location" />
+                        <Separator prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" />
+                        <VBox alignment="BOTTOM_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.rowIndex="2" GridPane.rowSpan="2147483647">
+                           <children>
+                              <Label styleClass="informationLabels" text="Contact information:" wrapText="true" />
+                              <Label fx:id="lblTicketContactEmail" layoutX="10.0" layoutY="96.0" styleClass="informationLabels" text="place@holder.dk" wrapText="true" />
+                           </children>
+                           <padding>
+                              <Insets right="10.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets top="15.0" />
+                     </padding>
+                  </GridPane>
                </children>
             </GridPane>
          </children>

@@ -1,0 +1,50 @@
+.parentPane{
+    -fx-border-width: 2;
+    -fx-border-color: black;
+}
+
+.sidebar{
+    -fx-background-color: linear-gradient(to right, black, red);
+}
+
+.sidebarLabels{
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.3), 10, 0.5, 0.0, 0.0);
+}
+
+.headerBar{
+    -fx-background-color: linear-gradient(to left, transparent, red);
+}
+
+.headerLabels{
+    -fx-text-fill: white;
+    -fx-font-size: 24;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);
+}
+
+.subtitleLabels{
+    -fx-text-fill: white;
+    -fx-font-size: 16;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);
+}
+
+.separator *.line{
+    -fx-border-style: solid;
+    -fx-padding: 0 -50 0 0;
+    -fx-border-color: linear-gradient(to right, black, red, transparent);
+    -fx-border-width: 2px;
+}
+
+.informationGrid{
+    -fx-background-color: linear-gradient(to left, transparent, red);
+}
+
+.informationLabels{
+    -fx-text-fill: black;
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.3), 10, 0.5, 0.0, 0.0);
+}
