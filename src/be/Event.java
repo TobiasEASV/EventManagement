@@ -39,34 +39,21 @@ public class Event {
         this.startDate = startDate;
         this.endDate = endDate;
     }
-
-    public String getDescription() {
-        return description.get();
-    }
-
     public void setDescription(String description) {
         this.description.set(description);
     }
 
-    public String getLocation() {
-        return location.get();
-    }
 
     public void setLocation(String location) {
         this.location.set(location);
     }
 
-    public String getTitle() {
-        return title.get();
-    }
 
     public void setTitle(String title) {
         this.title.set(title);
     }
 
-    public int getId() {
-        return id.get();
-    }
+
 
     public void setId(int id) {
         this.id.set(id);
@@ -88,41 +75,28 @@ public class Event {
         this.startDate = startDate;
     }
 
-    public double getDrinkPrice() {
-        return drinkPrice.get();
-    }
 
     public void setDrinkPrice(double drinkPrice) {
         this.drinkPrice.set(drinkPrice);
     }
 
-    public double getFoodPrice() {
-        return foodPrice.get();
-    }
 
     public void setFoodPrice(double foodPrice) {
         this.foodPrice.set(foodPrice);
     }
 
-    public String getArtists() {
-        return artists.get();
-    }
 
     public void setArtists(String artists) {
         this.artists.set(artists);
     }
 
-    public double getPrice() {
-        return price.get();
-    }
+
 
     public void setPrice(double price) {
         this.price.set(price);
     }
 
-    public double getVipPrice() {
-        return vipPrice.get();
-    }
+
 
     public void setVipPrice(double vipPrice) {
         this.vipPrice.set(vipPrice);
@@ -132,9 +106,6 @@ public class Event {
         this.contactEmail.set(contactEmail);
     }
 
-    public String getContactEmail() {
-        return contactEmail.get();
-    }
 
     public StringProperty titleProperty() {
         return title;
