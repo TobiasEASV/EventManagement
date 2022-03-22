@@ -1,5 +1,6 @@
 package gui.controller;
 
+import be.Customer;
 import be.Event;
 import be.Ticket;
 import javafx.event.ActionEvent;
@@ -66,8 +67,9 @@ public class SellTicketViewController implements Initializable {
         if (checkSeated.isSelected())
             isSeated= true;
 
+        Customer customer = new Customer(txtCustomerEmail.getText(), txtCustomerName.getText());
 
-        Ticket ticket = new Ticket(txtCustomerName.getText(), txtCustomerEmail.getText(),seat, row,Integer.parseInt(lblPrice.getText()), hasPaid, vip,drinks,food, isSeated);
+        Ticket ticket = new Ticket(customer,seat, row,Integer.parseInt(lblPrice.getText()), hasPaid, vip,drinks,food, isSeated);
     }
 
     public void vipClick(ActionEvent actionEvent) {

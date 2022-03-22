@@ -8,6 +8,8 @@ import javafx.beans.property.*;
  */
 
 public class Ticket {
+
+
     private StringProperty customerName= new SimpleStringProperty();
     private StringProperty customerEmail= new SimpleStringProperty();
 
@@ -31,10 +33,10 @@ public class Ticket {
 
     }
 
-    public Ticket(String customerName, String customerEmail, int seat, int row, double price, boolean isPaid,boolean vip, boolean drinks, boolean food, boolean isSeated)
+    public Ticket(Customer customer, int seat, int row, double price, boolean isPaid,boolean vip, boolean drinks, boolean food, boolean isSeated)
     {
-        this.customerName.set(customerName);
-        this.customerEmail.set(customerEmail);
+        this.customerName.set(customer.getCustomerName());
+        this.customerEmail.set(customer.getCustomerEmail());
         this.seat.set(seat);
         this.row.set(row);
         this.price.set(price);
@@ -147,5 +149,61 @@ public class Ticket {
 
     public void setDrinks(boolean drinks) {
         this.drinks.set(drinks);
+    }
+
+    public StringProperty customerNameProperty() {
+        return customerName;
+    }
+
+    public StringProperty customerEmailProperty() {
+        return customerEmail;
+    }
+
+    public IntegerProperty idProperty() {
+        return id;
+    }
+
+    public IntegerProperty customerIdProperty() {
+        return customerId;
+    }
+
+    public IntegerProperty eventIdProperty() {
+        return eventId;
+    }
+
+    public IntegerProperty seatProperty() {
+        return seat;
+    }
+
+    public IntegerProperty rowProperty() {
+        return row;
+    }
+
+    public DoubleProperty priceProperty() {
+        return price;
+    }
+
+    public boolean isIsPaid() {
+        return isPaid.get();
+    }
+
+    public BooleanProperty isPaidProperty() {
+        return isPaid;
+    }
+
+    public BooleanProperty vipProperty() {
+        return vip;
+    }
+
+    public BooleanProperty drinksProperty() {
+        return drinks;
+    }
+
+    public BooleanProperty foodProperty() {
+        return food;
+    }
+
+    public BooleanProperty seatedProperty() {
+        return seated;
     }
 }
