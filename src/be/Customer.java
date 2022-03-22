@@ -2,14 +2,8 @@ package be;
 
 public class Customer {
     private String customerEmail;
-
-
-
-
-
     private String customerName;
     private int id;
-
 
 
     public Customer(String customerEmail, String customerName)
