@@ -20,7 +20,7 @@ public class TicketManager {
     }
 
     public void updateTicket(Ticket ticket) {
-        ticketDAO.updateTicket(ticket);
+        //ticketDAO.updateTicket(ticket);
     }
 
     public void deleteTicket(Ticket ticket) {
