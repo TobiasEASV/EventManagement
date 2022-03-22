@@ -3,7 +3,7 @@ package be;
 import javafx.beans.property.*;
 
 import java.time.LocalDate;
-import java.util.Date;
+
 
 public class Event {
 
@@ -23,6 +23,7 @@ public class Event {
     private ObjectProperty<LocalDate> startDate;
     private ObjectProperty<LocalDate> endDate;
 
+
     public Event (String title, String description, String location, String artist, String contactEmail, double price, double vipPrice, double foodPrice, double drinkPrice, LocalDate startDate, LocalDate endDate)
     {
         this.title.set(title);
@@ -38,91 +39,58 @@ public class Event {
         this.startDate.set(startDate);
         this.endDate.set(endDate);
     }
-
-    public String getDescription() {
-        return description.get();
-    }
-
     public void setDescription(String description) {
         this.description.set(description);
-    }
-
-    public String getLocation() {
-        return location.get();
     }
 
     public void setLocation(String location) {
         this.location.set(location);
     }
 
-    public String getTitle() {
-        return title.get();
-    }
 
     public void setTitle(String title) {
         this.title.set(title);
-    }
-
-    public int getId() {
-        return id.get();
     }
 
     public void setId(int id) {
         this.id.set(id);
     }
 
-    public LocalDate getEndDate() {
+    public ObjectProperty<LocalDate> getEndDate() {
         return endDate;
     }
 
     public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
+        this.endDate.set(endDate);
     }
 
-    public LocalDate getStartDate() {
+    public ObjectProperty<LocalDate> getStartDate() {
         return startDate;
     }
 
     public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
+        this.startDate.set(startDate);
     }
 
-    public double getDrinkPrice() {
-        return drinkPrice.get();
-    }
 
     public void setDrinkPrice(double drinkPrice) {
         this.drinkPrice.set(drinkPrice);
     }
 
-    public double getFoodPrice() {
-        return foodPrice.get();
-    }
 
     public void setFoodPrice(double foodPrice) {
         this.foodPrice.set(foodPrice);
     }
 
-    public String getArtists() {
-        return artists.get();
-    }
 
     public void setArtists(String artists) {
         this.artists.set(artists);
     }
 
-    public double getPrice() {
-        return price.get();
-    }
-
     public void setPrice(double price) {
         this.price.set(price);
     }
-
-    public double getVipPrice() {
-        return vipPrice.get();
-    }
-
+    
     public void setVipPrice(double vipPrice) {
         this.vipPrice.set(vipPrice);
     }
@@ -131,7 +99,44 @@ public class Event {
         this.contactEmail.set(contactEmail);
     }
 
-    public String getContactEmail() {
-        return contactEmail.get();
+
+    public StringProperty titleProperty() {
+        return title;
+    }
+
+    public StringProperty descriptionProperty() {
+        return description;
+    }
+
+    public StringProperty locationProperty() {
+        return location;
+    }
+
+    public StringProperty artistsProperty() {
+        return artists;
+    }
+
+    public StringProperty contactEmailProperty() {
+        return contactEmail;
+    }
+
+    public DoubleProperty priceProperty() {
+        return price;
+    }
+
+    public DoubleProperty vipPriceProperty() {
+        return vipPrice;
+    }
+
+    public DoubleProperty foodPriceProperty() {
+        return foodPrice;
+    }
+
+    public DoubleProperty drinkPriceProperty() {
+        return drinkPrice;
+    }
+
+    public IntegerProperty idProperty() {
+        return id;
     }
 }
