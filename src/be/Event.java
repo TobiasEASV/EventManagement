@@ -19,6 +19,8 @@ public class Event {
 
     private IntegerProperty id = new SimpleIntegerProperty();
 
+
+
     private LocalDate startDate;
     private LocalDate endDate;
 
@@ -132,5 +134,45 @@ public class Event {
 
     public String getContactEmail() {
         return contactEmail.get();
+    }
+
+    public StringProperty titleProperty() {
+        return title;
+    }
+
+    public StringProperty descriptionProperty() {
+        return description;
+    }
+
+    public StringProperty locationProperty() {
+        return location;
+    }
+
+    public StringProperty artistsProperty() {
+        return artists;
+    }
+
+    public StringProperty contactEmailProperty() {
+        return contactEmail;
+    }
+
+    public DoubleProperty priceProperty() {
+        return price;
+    }
+
+    public DoubleProperty vipPriceProperty() {
+        return vipPrice;
+    }
+
+    public DoubleProperty foodPriceProperty() {
+        return foodPrice;
+    }
+
+    public DoubleProperty drinkPriceProperty() {
+        return drinkPrice;
+    }
+
+    public IntegerProperty idProperty() {
+        return id;
     }
 }
