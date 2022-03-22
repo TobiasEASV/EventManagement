@@ -17,11 +17,11 @@ public class TicketDAO {
                     " IsSeated, IsVIP, IsDrink, IsFood, Row, Seat) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-            ps.setInt(1, ticket.getCustomerId());
-            ps.setInt(2, ticket.getEventId());
-            ps.setDouble(3, ticket.getPrice());
+            ps.setInt(1, ticket.getCustomerIdProperty().get());
+            ps.setInt(2, ticket.getEventIdProperty().get());
+            ps.setDouble(3, ticket.getPriceProperty().get());
             byte bit = 0;
-            if (ticket.isPaid())
+            if (ticket.getIsPaidProperty().get())
                 bit = 1;
             ps.setByte(4, bit);
             int affectedRows = ps.executeUpdate();
@@ -32,13 +32,13 @@ public class TicketDAO {
                     ticket.setId(id);
                 }
             }
-            ps.setByte(5, bit2);
+            // wip ps.setByte(5, bit2);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }
 
-
+    /**
     public void updateTicket(Ticket ticket) {
         String sql = "UPDATE Ticket SET Price, IsPaid = (?, ?) WHERE categoryId = (?);";
         try(Connection connection = DC.getConnection())
@@ -52,6 +52,7 @@ public class TicketDAO {
         }
 
     }
+     */
 
 
     public void deleteTicket(Ticket ticket) {
