@@ -4,6 +4,7 @@ import be.Event;
 import be.Ticket;
 import gui.model.EventListModel;
 import gui.model.PrintModel;
+import gui.model.TicketListModel;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -105,12 +106,14 @@ public class EventCoordinatorDashboardController implements Initializable {
     //Array that holds printservices available on the PC.
     private PrintService[] printServices;
 
+    private TicketListModel ticketListModel;
+
     //gui.model.PrintModel for printing tickets (a singleton)
-    PrintModel printModel;
-    EmailClient email;
-    Ticket ticket;
-    EventListModel eventListModel;
-    SceneSwapper sceneSwapper;
+    private PrintModel printModel;
+    private EmailClient email;
+    private Ticket ticket;
+    private EventListModel eventListModel;
+    private SceneSwapper sceneSwapper;
 
     private final String TICKET_FILE = "src/gui/utility/temp/tempTicket.png";
 
@@ -119,6 +122,12 @@ public class EventCoordinatorDashboardController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         //instantiate the singleton PrintModel
         printModel = PrintModel.getInstance();
+        try {
+            ticketListModel = TicketListModel.getInstance();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
         try {
             email = new EmailClient();
@@ -133,6 +142,12 @@ public class EventCoordinatorDashboardController implements Initializable {
         printServices = PrintServiceLookup.lookupPrintServices(null, null);
         //Add print services to choose printer drop-down
         comboBoxChoosePrinter.getItems().setAll(printServices);
+
+
+        // Search in all Movies
+        textFieldSearch.textProperty().addListener((observableValue, oldValue, newValue) -> {
+                ticketListModel.searchTicket(newValue);
+        });
 
     }
 
