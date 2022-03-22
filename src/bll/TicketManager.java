@@ -19,9 +19,11 @@ public class TicketManager {
         return ticketDAO.createTicket(ticket);
     }
 
+
     public Ticket updateTicket(Ticket ticket) {
         return ticketDAO.updateTicket(ticket);
     }
+
 
     public void deleteTicket(Ticket ticket) {
         ticketDAO.deleteTicket(ticket);
