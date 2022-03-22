@@ -1,4 +1,0 @@
-Server=10.176.111.31
-Database=CSe21A_EventManagement
-User=CSe21A_32
-Password=CSe21A_32
