@@ -4,6 +4,7 @@ import javafx.beans.property.*;
 
 import java.time.LocalDate;
 
+
 public class Event {
 
     private StringProperty title = new SimpleStringProperty();
@@ -19,11 +20,8 @@ public class Event {
 
     private IntegerProperty id = new SimpleIntegerProperty();
 
-
-
     private ObjectProperty<LocalDate> startDate;
     private ObjectProperty<LocalDate> endDate;
-
 
 
     public Event (String title, String description, String location, String artist, String contactEmail, double price, double vipPrice, double foodPrice, double drinkPrice, LocalDate startDate, LocalDate endDate)
@@ -44,7 +42,6 @@ public class Event {
         this.description.set(description);
     }
 
-
     public void setLocation(String location) {
         this.location.set(location);
     }
@@ -54,14 +51,10 @@ public class Event {
         this.title.set(title);
     }
 
-
-
     public void setId(int id) {
         this.id.set(id);
     }
-
-
-
+    
     public ObjectProperty<LocalDate> endDateProperty() {
         return endDate;
     }
@@ -93,13 +86,9 @@ public class Event {
         this.artists.set(artists);
     }
 
-
-
     public void setPrice(double price) {
         this.price.set(price);
     }
-
-
 
     public void setVipPrice(double vipPrice) {
         this.vipPrice.set(vipPrice);
@@ -110,43 +99,43 @@ public class Event {
     }
 
 
-    public StringProperty titleProperty() {
+    public StringProperty getTitleProperty() {
         return title;
     }
 
-    public StringProperty descriptionProperty() {
+    public StringProperty getDescriptionProperty() {
         return description;
     }
 
-    public StringProperty locationProperty() {
+    public StringProperty getLocationProperty() {
         return location;
     }
 
-    public StringProperty artistsProperty() {
+    public StringProperty getArtistsProperty() {
         return artists;
     }
 
-    public StringProperty contactEmailProperty() {
+    public StringProperty getContactEmailProperty() {
         return contactEmail;
     }
 
-    public DoubleProperty priceProperty() {
+    public DoubleProperty getPriceProperty() {
         return price;
     }
 
-    public DoubleProperty vipPriceProperty() {
+    public DoubleProperty getVipPriceProperty() {
         return vipPrice;
     }
 
-    public DoubleProperty foodPriceProperty() {
+    public DoubleProperty getFoodPriceProperty() {
         return foodPrice;
     }
 
-    public DoubleProperty drinkPriceProperty() {
+    public DoubleProperty getDrinkPriceProperty() {
         return drinkPrice;
     }
 
-    public IntegerProperty idProperty() {
+    public IntegerProperty getIdProperty() {
         return id;
     }
 }

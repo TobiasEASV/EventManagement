@@ -8,7 +8,6 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 
@@ -28,14 +27,14 @@ public class EmailClient {
 
         Properties emailCredentials = new Properties();
         emailCredentials.load(new FileInputStream(PROP_FILE));
-        //List<String> credentials = emailManager.getCredentials();
+        HashMap<String,String> credentials = emailManager.getCredentials();
 
 
-        //final String email = credentials.get(0);
-        //final String password = credentials.get(1);
+        final String email = credentials.get("Email");
+        final String password = credentials.get("Password");
 
-        String email = emailCredentials.getProperty("Email");
-        String password = emailCredentials.getProperty("Password");
+        //String email = emailCredentials.getProperty("Email");
+        //String password = emailCredentials.getProperty("Password");
 
         System.out.println("Eamil= " + email);
         System.out.println("Password = " + password);
@@ -61,7 +60,7 @@ public class EmailClient {
                     Message.RecipientType.TO,
                     InternetAddress.parse(toEmail)
             );
-            
+
             message.setSubject(subject);
 
                 // Add a Ticket to the mail

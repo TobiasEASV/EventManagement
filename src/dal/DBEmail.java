@@ -22,9 +22,9 @@ public class DBEmail {
         dbConnecting = new DBConnecting();
     }
 
-    public List<String> getCredentials(){
+    public HashMap<String,String> getCredentials(){
 
-        final List<String> credentials = new ArrayList<>();
+        final HashMap<String,String> credentials = new HashMap<>();
 
         try(Connection connection = dbConnecting.getConnection()){
             String sql = "Select EmailCredentials, PasswordCredentials FROM Email";
@@ -37,8 +37,8 @@ public class DBEmail {
              if(resultSet.next()){
                  String email = resultSet.getString("EmailCredentials");
                  String password = resultSet.getString("PasswordCredentials");
-                 credentials.add(email);
-                 credentials.add(password);
+                 credentials.put("Email", email);
+                 credentials.put("Password", password);
              }
 
         } catch (SQLException SQLe) {
