@@ -35,7 +35,6 @@ public class Event {
         this.vipPrice.set(vipPrice);
         this.foodPrice.set(foodPrice);
         this.drinkPrice.set(drinkPrice);
-        this.id.set(-1);
         this.startDate.set(startDate);
         this.endDate.set(endDate);
     }
@@ -55,7 +54,7 @@ public class Event {
     public void setId(int id) {
         this.id.set(id);
     }
-
+    
     public ObjectProperty<LocalDate> endDateProperty() {
         return endDate;
     }
@@ -67,7 +66,7 @@ public class Event {
     public ObjectProperty<LocalDate> startDateProperty() {
         return startDate;
     }
-
+    
     public void setStartDate(LocalDate startDate) {
         this.startDate.set(startDate);
     }

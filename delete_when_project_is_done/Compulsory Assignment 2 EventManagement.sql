@@ -55,16 +55,21 @@ CREATE TABLE [Event]
 
 CREATE TABLE [Ticket]
 (
-   [ID] INT IDENTITY(69,1) NOT NULL,
-   [Customer_ID] INT,
-   [Event_ID] INT,
-   [Price] INT NULL,
-   [IsPaid] BIT NULL,
-   
+    [ID] INT IDENTITY(69,1) NOT NULL,
+    [Customer_ID] INT NOT NULL,
+    [Event_ID] INT,
+    [Price] INT NOT NULL,
+    [IsPaid] BIT,
+    [IsSeated] BIT,
+    [IsVIP] BIT,
+    [IsDrink] BIT,
+    [IsFood] BIT,
+    [Row] INT,
+    [Seat] INT
+
    CONSTRAINT Ticket_ID PRIMARY KEY (Customer_ID, Event_ID),
    CONSTRAINT FK_Customer_ID FOREIGN KEY(Customer_ID) REFERENCES Customer(ID),
    CONSTRAINT FK_EventID FOREIGN KEY(Event_ID) REFERENCES [Event](ID)
-  
 )
 
 CREATE TABLE [CoordinatorsOnEvent]

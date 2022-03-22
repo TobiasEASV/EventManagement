@@ -75,12 +75,12 @@ public class SellTicketViewController implements Initializable {
     public void vipClick(ActionEvent actionEvent) {
         if (checkVIP.isSelected())
         {
-            price = price + event.getVipPrice();
+            price = price + event.vipPriceProperty().get();
             lblPrice.setText(String.valueOf(price));
         }
         else
         {
-            price = price - event.getVipPrice();
+            price = price - event.vipPriceProperty().get();
             lblPrice.setText(String.valueOf(price));
         }
 
@@ -89,12 +89,12 @@ public class SellTicketViewController implements Initializable {
     public void foodClick(ActionEvent actionEvent) {
         if (checkFood.isSelected())
         {
-            price = price + event.getFoodPrice();
+            price = price + event.foodPriceProperty().get();
             lblPrice.setText(String.valueOf(price));
         }
         else
         {
-            price = price - event.getFoodPrice();
+            price = price - event.foodPriceProperty().get();
             lblPrice.setText(String.valueOf(price));
         }
     }
@@ -102,12 +102,12 @@ public class SellTicketViewController implements Initializable {
     public void drinksclick(ActionEvent actionEvent) {
         if (checkDrinks.isSelected())
         {
-            price = price + event.getDrinkPrice();
+            price = price + event.drinkPriceProperty().get();
             lblPrice.setText(String.valueOf(price));
         }
         else
         {
-            price = price - event.getDrinkPrice();
+            price = price - event.drinkPriceProperty().get();
             lblPrice.setText(String.valueOf(price));
         }
     }
@@ -118,7 +118,7 @@ public class SellTicketViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        price = event.getPrice();
+        price = event.priceProperty().get();
         lblPrice.setText(String.valueOf(price));
     }
 }
