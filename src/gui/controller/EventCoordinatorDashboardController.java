@@ -4,7 +4,6 @@ import be.Event;
 import be.Ticket;
 import gui.model.EventListModel;
 import gui.model.PrintModel;
-import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,7 +14,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import utility.EmailClient;
 import utility.SceneSwapper;
@@ -23,7 +21,6 @@ import utility.SceneSwapper;
 import javax.imageio.ImageIO;
 import javax.print.PrintService;
 import javax.print.PrintServiceLookup;
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -131,7 +128,7 @@ public class EventCoordinatorDashboardController implements Initializable {
         ticket = new Ticket();
         eventListModel = new EventListModel();
         sceneSwapper = new SceneSwapper();
-        comboBoxChooseEvent.getItems().add(new Event(null,null,null,null,null,0,0, 0,0,null,null));
+        //comboBoxChooseEvent.getItems().add(new Event(null,null,null,null,null,0,0, 0,0,null,null));
 
         //Get print services
         printServices = PrintServiceLookup.lookupPrintServices(null, null);

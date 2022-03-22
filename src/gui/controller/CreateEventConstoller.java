@@ -11,6 +11,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import utility.SceneSwapper;
 
 import java.io.IOException;
 import java.net.URL;
@@ -48,7 +49,6 @@ public class CreateEventConstoller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //EventCoordinatorDashboardController eventCoordinatorDashboardController = new A
         try {
             eventManager = new EventManager();
         } catch (IOException e) {
@@ -78,8 +78,9 @@ public class CreateEventConstoller implements Initializable {
                 Double.parseDouble(txDrinkPrice.getText()),
                 dpStartData.getValue(),
                 dpEndData.getValue());
-        ma
-        updateComboBoxChooseEvent(eventManager.createEvent(event));
+        EventCoordinatorDashboardController dashboardController = new SceneSwapper().getDashboardController();
+        dashboardController.updateComboBoxChooseEvent(event);
+        //dashboardController.updateComboBoxChooseEvent(eventManager.createEvent(event));
 
     }
 
