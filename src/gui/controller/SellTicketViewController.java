@@ -42,8 +42,7 @@ public class SellTicketViewController implements Initializable {
 
     private CustomerModel customerModel;
 
-    public SellTicketViewController(Event event) throws IOException {
-     this.event = event;
+    public SellTicketViewController() throws IOException {
      customerModel = new CustomerModel();
     }
 
@@ -123,7 +122,8 @@ public class SellTicketViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        price = event.getPriceProperty().get();
+        //price = event.getPriceProperty().get();
+        price = 200;
         lblPrice.setText(String.valueOf(price));
     }
 }
