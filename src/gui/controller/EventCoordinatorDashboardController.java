@@ -11,6 +11,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -21,6 +23,7 @@ import utility.SceneSwapper;
 import javax.imageio.ImageIO;
 import javax.print.PrintService;
 import javax.print.PrintServiceLookup;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -47,7 +50,7 @@ public class EventCoordinatorDashboardController implements Initializable {
     @FXML
     private ComboBox comboBoxChoosePrinter;
     @FXML
-    private static ComboBox<Event> comboBoxChooseEvent;
+    private ComboBox<Event> comboBoxChooseEvent;
 
     @FXML
     private CheckBox checkBoxTicketTypeStandard;
@@ -128,6 +131,7 @@ public class EventCoordinatorDashboardController implements Initializable {
         ticket = new Ticket();
         eventListModel = new EventListModel();
         sceneSwapper = new SceneSwapper();
+        comboBoxChooseEvent.getItems().add(new Event(null,null,null,null,null,0,0, 0,0,null,null));
 
         //Get print services
         printServices = PrintServiceLookup.lookupPrintServices(null, null);
@@ -136,7 +140,7 @@ public class EventCoordinatorDashboardController implements Initializable {
 
     }
 
-    public static void updateComboBoxChooseEvent(Event event){
+    public void updateComboBoxChooseEvent(Event event){
         comboBoxChooseEvent.getItems().add(event);
     }
 

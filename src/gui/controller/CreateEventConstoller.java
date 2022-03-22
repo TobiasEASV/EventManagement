@@ -2,6 +2,8 @@ package gui.controller;
 
 import be.Event;
 import bll.EventManager;
+
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,11 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.ResourceBundle;
-
-import static gui.controller.EventCoordinatorDashboardController.updateComboBoxChooseEvent;
 
 public class CreateEventConstoller implements Initializable {
 
@@ -50,6 +48,7 @@ public class CreateEventConstoller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //EventCoordinatorDashboardController eventCoordinatorDashboardController = new A
         try {
             eventManager = new EventManager();
         } catch (IOException e) {
@@ -74,12 +73,12 @@ public class CreateEventConstoller implements Initializable {
                 txArtists.getText(),
                 txContactEmail.getText(),
                 Double.parseDouble(txTicktePrice.getText()),
-                VIPPrice,
-                foodPrice,
-                drinkPrice,
+                Double.parseDouble(txVIPPrice.getText()),
+                Double.parseDouble(txFoodPrice.getText()),
+                Double.parseDouble(txDrinkPrice.getText()),
                 dpStartData.getValue(),
                 dpEndData.getValue());
-
+        ma
         updateComboBoxChooseEvent(eventManager.createEvent(event));
 
     }
