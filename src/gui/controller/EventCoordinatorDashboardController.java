@@ -183,6 +183,7 @@ public class EventCoordinatorDashboardController implements Initializable {
 
 
     public void handleLogoutButton(ActionEvent actionEvent) {
+        System.exit(1);
     }
 
     public void handleUserSettingsButton(ActionEvent actionEvent) {
