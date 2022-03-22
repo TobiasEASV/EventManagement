@@ -3,6 +3,7 @@ package gui.controller;
 import be.Customer;
 import be.Event;
 import be.Ticket;
+import gui.model.CustomerModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,6 +11,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -38,9 +40,11 @@ public class SellTicketViewController implements Initializable {
     private Event event;
     private double price;
 
-    public SellTicketViewController(Event event)
-    {
+    private CustomerModel customerModel;
+
+    public SellTicketViewController(Event event) throws IOException {
      this.event = event;
+     customerModel = new CustomerModel();
     }
 
     public void btnSave(ActionEvent actionEvent) {
@@ -68,6 +72,7 @@ public class SellTicketViewController implements Initializable {
             isSeated= true;
 
         Customer customer = new Customer(txtCustomerEmail.getText(), txtCustomerName.getText());
+        customerModel.createCustomer(customer);
 
         Ticket ticket = new Ticket(customer,seat, row,Integer.parseInt(lblPrice.getText()), hasPaid, vip,drinks,food, isSeated);
     }
