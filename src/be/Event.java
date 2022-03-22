@@ -21,8 +21,10 @@ public class Event {
 
 
 
-    private LocalDate startDate;
-    private LocalDate endDate;
+    private ObjectProperty<LocalDate> startDate;
+    private ObjectProperty<LocalDate> endDate;
+
+
 
     public Event (String title, String description, String location, String artist, String contactEmail, double price, double vipPrice, double foodPrice, double drinkPrice, int id, LocalDate startDate, LocalDate endDate)
     {
@@ -36,8 +38,8 @@ public class Event {
         this.foodPrice.set(foodPrice);
         this.drinkPrice.set(drinkPrice);
         this.id.set(id);
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.startDate.set(startDate);
+        this.endDate.set(endDate);
     }
     public void setDescription(String description) {
         this.description.set(description);
@@ -59,20 +61,22 @@ public class Event {
         this.id.set(id);
     }
 
-    public LocalDate getEndDate() {
+
+
+    public ObjectProperty<LocalDate> endDateProperty() {
         return endDate;
     }
 
     public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
+        this.endDate.set(endDate);
     }
 
-    public LocalDate getStartDate() {
+    public ObjectProperty<LocalDate> startDateProperty() {
         return startDate;
     }
-
+    
     public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
+        this.startDate.set(startDate);
     }
 
 
