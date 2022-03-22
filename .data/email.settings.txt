@@ -1,2 +1,0 @@
-Email=event_easv@outlook.com
-Password=EasvEvent2022
