@@ -23,12 +23,12 @@ public class DBEvent {
         try(Connection connection = dbConnecting.getConnection()){
             String sql = "INSERT INTO Event(Title, Artist, Description, Location, Price, Contact_Mail, Start_Data, End_Data) VALUES (?,?,?,?,?,?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, event.titleProperty().get());
-            preparedStatement.setString(2, event.artistsProperty().get());
-            preparedStatement.setString(3, event.descriptionProperty().get());
-            preparedStatement.setString(4, event.locationProperty().get());
-            preparedStatement.setDouble(5, event.priceProperty().get());
-            preparedStatement.setString(6, event.contactEmailProperty().get());
+            preparedStatement.setString(1, event.getTitleProperty().get());
+            preparedStatement.setString(2, event.getArtistsProperty().get());
+            preparedStatement.setString(3, event.getDescriptionProperty().get());
+            preparedStatement.setString(4, event.getLocationProperty().get());
+            preparedStatement.setDouble(5, event.getPriceProperty().get());
+            preparedStatement.setString(6, event.getContactEmailProperty().get());
             preparedStatement.setObject(7, event.startDateProperty().get());
             preparedStatement.setObject(8, event.endDateProperty().get());
 
