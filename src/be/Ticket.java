@@ -27,6 +27,7 @@ public class Ticket {
     private BooleanProperty food= new SimpleBooleanProperty();
     private BooleanProperty seated= new SimpleBooleanProperty();
 
+    private Customer customer;
 
     public Ticket()
     {
@@ -35,6 +36,7 @@ public class Ticket {
 
     public Ticket(Customer customer, int seat, int row, double price, boolean isPaid,boolean vip, boolean drinks, boolean food, boolean isSeated)
     {
+        this.customer = customer;
         this.customerName.set(customer.getCustomerName());
         this.customerEmail.set(customer.getCustomerEmail());
         this.seat.set(seat);
@@ -48,6 +50,13 @@ public class Ticket {
     }
 
 
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 
     public void setPrice(double price) {
         this.price.set(price);

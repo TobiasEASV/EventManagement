@@ -3,13 +3,16 @@ package gui.controller;
 import be.Event;
 import be.Ticket;
 import gui.model.EventListModel;
+import gui.model.CustomerModel;
 import gui.model.PrintModel;
 import gui.model.TicketListModel;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.*;
 import javafx.scene.image.WritableImage;
@@ -29,6 +32,9 @@ import java.util.ResourceBundle;
 
 public class EventCoordinatorDashboardController implements Initializable {
 
+
+    @FXML
+    private TableView<Ticket> tvTickets;
 
     @FXML
     private GridPane parentGridPane;
@@ -103,6 +109,8 @@ public class EventCoordinatorDashboardController implements Initializable {
     @FXML
     private GridPane ticketPane;
 
+    private CustomerModel customerModel;
+
     //Array that holds printservices available on the PC.
     private PrintService[] printServices;
 
@@ -117,6 +125,9 @@ public class EventCoordinatorDashboardController implements Initializable {
 
     private final String TICKET_FILE = "src/gui/utility/temp/tempTicket.png";
 
+    public EventCoordinatorDashboardController() throws IOException {
+        customerModel = new CustomerModel();
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -155,10 +166,12 @@ public class EventCoordinatorDashboardController implements Initializable {
         comboBoxChooseEvent.getItems().add(event);
     }
 
-    public void handleSellTicketButton(ActionEvent actionEvent) {
+    public void handleSellTicketButton(ActionEvent actionEvent) throws IOException {
+
     }
 
     public void handleRefundTicketButton(ActionEvent actionEvent) {
+        customerModel.deleteCustomer(tvTickets.getSelectionModel().getSelectedItem().getCustomer());
     }
 
     public void handlePrintTicketButton(ActionEvent actionEvent) {
