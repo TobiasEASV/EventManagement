@@ -13,7 +13,8 @@ public class TicketDAO {
 
     public void createTicket(Ticket ticket) {
         try (Connection connection = dbc.getConnection()) {
-            String sql = "INSERT INTO Ticket(Customer_ID, Event_ID, Price, IsPaid) VALUES (?, ?, ?, ?);";
+            String sql = "INSERT INTO Ticket(Customer_ID, Event_ID, Price, IsPaid," +
+                    " IsSeated, IsVIP, IsDrink, IsFood, Row, Seat) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             ps.setInt(1, ticket.getCustomerId());
@@ -31,6 +32,7 @@ public class TicketDAO {
                     ticket.setId(id);
                 }
             }
+            ps.setByte(5, bit2);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -38,6 +40,17 @@ public class TicketDAO {
 
 
     public void updateTicket(Ticket ticket) {
+        String sql = "UPDATE Ticket SET Price, IsPaid = (?, ?) WHERE categoryId = (?);";
+        try(Connection connection = DC.getConnection())
+        {
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, category.getCategoryName());
+            ps.setInt(2, category.getId());
+            ps.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
     }
 
 
