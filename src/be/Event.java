@@ -20,8 +20,8 @@ public class Event {
 
     private IntegerProperty id = new SimpleIntegerProperty();
 
-    private ObjectProperty<LocalDate> startDate;
-    private ObjectProperty<LocalDate> endDate;
+    private ObjectProperty<LocalDate> startDate = new SimpleObjectProperty<>();
+    private ObjectProperty<LocalDate> endDate = new SimpleObjectProperty<>();
 
 
     public Event (String title, String description, String location, String artist, String contactEmail, double price, double vipPrice, double foodPrice, double drinkPrice, LocalDate startDate, LocalDate endDate)
@@ -55,7 +55,7 @@ public class Event {
         this.id.set(id);
     }
     
-    public ObjectProperty<LocalDate> endDateProperty() {
+    public ObjectProperty<LocalDate> getEndDateProperty() {
         return endDate;
     }
 
@@ -63,7 +63,7 @@ public class Event {
         this.endDate.set(endDate);
     }
 
-    public ObjectProperty<LocalDate> startDateProperty() {
+    public ObjectProperty<LocalDate> getStartDateProperty() {
         return startDate;
     }
     

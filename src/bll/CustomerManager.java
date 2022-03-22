@@ -15,4 +15,18 @@ public class CustomerManager {
         dbCustomer.createCustomer(customer);
     }
 
+    public void updateCustomer(Customer customer)
+    {
+        dbCustomer.updateCustomer(customer);
+    }
+
+    public void deleteCustomer(Customer customer)
+    {
+        dbCustomer.deleteCustomer(customer);
+    }
+    public void getCustomer(Customer customer)
+    {
+        dbCustomer.getCustomer(customer);
+    }
+
 }

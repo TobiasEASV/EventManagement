@@ -21,6 +21,7 @@ public class SceneSwapper {
     public void sceneSwitch(Stage stage, String fxmlClassName){
         try {
             URL url = new File("src/gui/view/" + fxmlClassName).toURI().toURL();
+            System.out.println(url);
             Parent Scene = FXMLLoader.load(url);
             Scene ViewScene = new Scene(Scene);
             stage.setTitle("Event Manager");

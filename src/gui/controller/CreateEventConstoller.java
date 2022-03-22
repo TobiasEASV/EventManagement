@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -58,15 +59,24 @@ public class CreateEventConstoller implements Initializable {
     }
 
     public void handleButtonOK(ActionEvent actionEvent) {
-        event = new Event(txTitle.getText(),
+        double ticketPrice = 0.0;
+        double VIPPrice = 0.0;
+        double foodPrice = 0.0;
+        double drinkPrice = 0.0;
+        if(txVIPPrice.getText().equals("0") || txVIPPrice.getText().isEmpty()){
+
+        }
+        System.out.println(dpStartData.getValue());
+        event = new Event(
+                txTitle.getText(),
                 txDescription.getText(),
                 txLocation.getText(),
                 txArtists.getText(),
                 txContactEmail.getText(),
                 Double.parseDouble(txTicktePrice.getText()),
-                Double.parseDouble(txVIPPrice.getText()),
-                Double.parseDouble(txFoodPrice.getText()),
-                Double.parseDouble(txDrinkPrice.getText()),
+                VIPPrice,
+                foodPrice,
+                drinkPrice,
                 dpStartData.getValue(),
                 dpEndData.getValue());
 
