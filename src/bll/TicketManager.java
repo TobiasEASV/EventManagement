@@ -15,12 +15,12 @@ public class TicketManager {
         ticketDAO = new TicketDAO();
     }
 
-    public void createTicket(Ticket ticket) {
-        ticketDAO.createTicket(ticket);
+    public Ticket createTicket(Ticket ticket) {
+        return ticketDAO.createTicket(ticket);
     }
 
-    public void updateTicket(Ticket ticket) {
-        ticketDAO.updateTicket(ticket);
+    public Ticket updateTicket(Ticket ticket) {
+        return ticketDAO.updateTicket(ticket);
     }
 
     public void deleteTicket(Ticket ticket) {
