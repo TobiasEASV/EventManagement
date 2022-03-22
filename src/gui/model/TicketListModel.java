@@ -5,6 +5,8 @@ import bll.TicketManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.io.IOException;
+
 
 public class TicketListModel {
 
@@ -12,7 +14,7 @@ public class TicketListModel {
     private TicketManager ticketManager;
     private ObservableList<Ticket> ticketList;
 
-    private TicketListModel(){
+    private TicketListModel() throws IOException {
         ticketManager = new TicketManager();
         //ticketList = ticketManager.getAllTicketToObservable();
         //mock
@@ -24,7 +26,7 @@ public class TicketListModel {
 
     }
 
-    public static TicketListModel getInstance() {
+    public static TicketListModel getInstance() throws IOException {
         if (single_instance == null)
             single_instance = new TicketListModel();
 

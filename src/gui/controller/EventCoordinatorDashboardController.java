@@ -143,7 +143,7 @@ public class EventCoordinatorDashboardController implements Initializable {
     public void handleMailTicketButton(ActionEvent actionEvent) throws IOException {
         generateTicket();
 
-        email.sendEmail(ticket.getCustomerEmail(), "Your Ticket", "Congratulations on your ticket", TICKET_FILE);
+        email.sendEmail(ticket.getCustomerEmailProperty().get(), "Your Ticket", "Congratulations on your ticket", TICKET_FILE);
     }
 
     public void handleEditEventButton(ActionEvent actionEvent) {

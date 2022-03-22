@@ -123,59 +123,55 @@ public class Ticket {
         this.drinks.set(drinks);
     }
 
-    public StringProperty customerNameProperty() {
+    public StringProperty getCustomerNameProperty() {
         return customerName;
     }
 
-    public StringProperty customerEmailProperty() {
+    public StringProperty getCustomerEmailProperty() {
         return customerEmail;
     }
 
-    public IntegerProperty idProperty() {
+    public IntegerProperty getIdProperty() {
         return id;
     }
 
-    public IntegerProperty customerIdProperty() {
+    public IntegerProperty getCustomerIdProperty() {
         return customerId;
     }
 
-    public IntegerProperty eventIdProperty() {
+    public IntegerProperty getEventIdProperty() {
         return eventId;
     }
 
-    public IntegerProperty seatProperty() {
+    public IntegerProperty getSeatProperty() {
         return seat;
     }
 
-    public IntegerProperty rowProperty() {
+    public IntegerProperty getRowProperty() {
         return row;
     }
 
-    public DoubleProperty priceProperty() {
+    public DoubleProperty getPriceProperty() {
         return price;
     }
 
-    public boolean isIsPaid() {
-        return isPaid.get();
-    }
-
-    public BooleanProperty isPaidProperty() {
+    public BooleanProperty getIsPaidProperty() {
         return isPaid;
     }
 
-    public BooleanProperty vipProperty() {
+    public BooleanProperty getVipProperty() {
         return vip;
     }
 
-    public BooleanProperty drinksProperty() {
+    public BooleanProperty getDrinksProperty() {
         return drinks;
     }
 
-    public BooleanProperty foodProperty() {
+    public BooleanProperty getFoodProperty() {
         return food;
     }
 
-    public BooleanProperty seatedProperty() {
+    public BooleanProperty getSeatedProperty() {
         return seated;
     }
 }
