@@ -16,4 +16,18 @@ public class CustomerModel {
     public void createCustomer(Customer customer){
         customerManager.createCustomer(customer);
     }
+
+    public void updateCustomer(Customer customer)
+    {
+        customerManager.updateCustomer(customer);
+    }
+
+    public void deleteCustomer(Customer customer)
+    {
+        customerManager.deleteCustomer(customer);
+    }
+    public void getCustomer(Customer customer)
+    {
+        customerManager.getCustomer(customer);
+    }
 }
