@@ -47,7 +47,7 @@ public class EventCoordinatorDashboardController implements Initializable {
     @FXML
     private ComboBox comboBoxChoosePrinter;
     @FXML
-    private ComboBox<Event> comboBoxChooseEvent;
+    private ComboBox comboBoxChooseEvent;
 
     @FXML
     private CheckBox checkBoxTicketTypeStandard;

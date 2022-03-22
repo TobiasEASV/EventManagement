@@ -138,4 +138,9 @@ public class Event {
     public IntegerProperty getIdProperty() {
         return id;
     }
+
+    @Override
+    public String toString() {
+        return  title.get();
+    }
 }
