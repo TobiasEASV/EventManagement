@@ -4,25 +4,24 @@ import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.DBEmail;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class EmailManager {
 
         DBEmail dbEmail;
-        private List<String> cccc =  new ArrayList<>();
+        private HashMap<String,String> cache =  new HashMap<>();
 
     public EmailManager() throws IOException {
         dbEmail = new DBEmail();
     }
 
-    public List<String> getCredentials(){
-        if(cccc.isEmpty()){
-            cccc = dbEmail.getCredentials();
+    public HashMap<String,String> getCredentials(){
+        if(cache.isEmpty()){
+            cache = dbEmail.getCredentials();
         }
-        return cccc;
+        return cache;
     }
+
 
     public void updateCredentials(String email, String password) throws SQLServerException {
 

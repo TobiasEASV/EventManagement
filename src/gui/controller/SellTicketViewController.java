@@ -80,12 +80,12 @@ public class SellTicketViewController implements Initializable {
     public void vipClick(ActionEvent actionEvent) {
         if (checkVIP.isSelected())
         {
-            price = price + event.vipPriceProperty().get();
+            price = price + event.getVipPriceProperty().get();
             lblPrice.setText(String.valueOf(price));
         }
         else
         {
-            price = price - event.vipPriceProperty().get();
+            price = price - event.getVipPriceProperty().get();
             lblPrice.setText(String.valueOf(price));
         }
 
@@ -94,12 +94,12 @@ public class SellTicketViewController implements Initializable {
     public void foodClick(ActionEvent actionEvent) {
         if (checkFood.isSelected())
         {
-            price = price + event.foodPriceProperty().get();
+            price = price + event.getFoodPriceProperty().get();
             lblPrice.setText(String.valueOf(price));
         }
         else
         {
-            price = price - event.foodPriceProperty().get();
+            price = price - event.getFoodPriceProperty().get();
             lblPrice.setText(String.valueOf(price));
         }
     }
@@ -107,12 +107,12 @@ public class SellTicketViewController implements Initializable {
     public void drinksclick(ActionEvent actionEvent) {
         if (checkDrinks.isSelected())
         {
-            price = price + event.drinkPriceProperty().get();
+            price = price + event.getDrinkPriceProperty().get();
             lblPrice.setText(String.valueOf(price));
         }
         else
         {
-            price = price - event.drinkPriceProperty().get();
+            price = price - event.getDrinkPriceProperty().get();
             lblPrice.setText(String.valueOf(price));
         }
     }
@@ -123,7 +123,7 @@ public class SellTicketViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        price = event.priceProperty().get();
+        price = event.getPriceProperty().get();
         lblPrice.setText(String.valueOf(price));
     }
 }
