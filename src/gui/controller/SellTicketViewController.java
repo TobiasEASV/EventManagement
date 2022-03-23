@@ -117,7 +117,13 @@ public class SellTicketViewController implements Initializable {
     }
 
     public void seatedClick(ActionEvent actionEvent) {
-        //Hvis vi vil gemme og fjerne muligheden for at indtaste seat og rows.
+        if (!checkSeated.isSelected()){
+            txtSeat.setDisable(true);
+            txtRow.setDisable(true);
+        } else{
+            txtSeat.setDisable(false);
+            txtRow.setDisable(false);
+        }
     }
 
     @Override
@@ -125,5 +131,7 @@ public class SellTicketViewController implements Initializable {
         //price = event.getPriceProperty().get();
         price = 200;
         lblPrice.setText(String.valueOf(price));
+        txtRow.setDisable(true);
+        txtSeat.setDisable(true);
     }
 }

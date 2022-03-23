@@ -244,3 +244,12 @@ Combobox styling
     -fx-scale-y: 1.5;
     -fx-scale-x: 1.5;
 }
+
+.label{
+    -fx-font-weight: bold;
+}
+
+.check-box{
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+}
