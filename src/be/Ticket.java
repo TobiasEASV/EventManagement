@@ -12,6 +12,7 @@ public class Ticket {
 
     private StringProperty customerName= new SimpleStringProperty();
     private StringProperty customerEmail= new SimpleStringProperty();
+    private StringProperty paymentStatus= new SimpleStringProperty();
 
     private IntegerProperty id = new SimpleIntegerProperty();
     private IntegerProperty customerId= new SimpleIntegerProperty();
@@ -26,6 +27,9 @@ public class Ticket {
     private BooleanProperty drinks= new SimpleBooleanProperty();
     private BooleanProperty food= new SimpleBooleanProperty();
     private BooleanProperty seated= new SimpleBooleanProperty();
+
+    private final String paid = "Paid";
+    private final String notPaid = "Not Paid";
 
 
     public Ticket()
@@ -45,6 +49,10 @@ public class Ticket {
         this.drinks.set(drinks);
         this.food.set(food);
         this.seated.set(isSeated);
+
+        if(this.isPaid.get()){
+            this.paymentStatus.set(paid);
+        } else this.paymentStatus.set(notPaid);
     }
 
 
@@ -173,5 +181,15 @@ public class Ticket {
 
     public BooleanProperty getSeatedProperty() {
         return seated;
+    }
+
+    public StringProperty getPaymentStatusProperty() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(StringProperty paymentStatus) {
+        if(this.isPaid.get()){
+            this.paymentStatus.set(paid);
+        } else this.paymentStatus.set(notPaid);
     }
 }
