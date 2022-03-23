@@ -33,9 +33,5 @@ public class TicketManager {
     public List<Ticket> getTicketsFromEvent(Event event) {
         return ticketDAO.getTicketsFromEvent(event);
     }
-
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
+    
 }
