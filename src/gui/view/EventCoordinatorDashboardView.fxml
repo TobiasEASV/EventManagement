@@ -280,7 +280,7 @@
       </VBox>
       <Separator prefWidth="200.0" styleClass="TxtSeparator" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="4">
          <GridPane.margin>
-            <Insets left="29.0" right="29.0" />
+            <Insets left="25.0" right="25.0" />
          </GridPane.margin>
       </Separator>
       <TableView fx:id="tvTickets" editable="true" prefHeight="200.0" prefWidth="550.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="5">

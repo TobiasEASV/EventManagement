@@ -186,3 +186,61 @@
     -fx-opacity: 0;
     -fx-padding: 2;
 }
+
+
+/*
+Combobox styling
+ */
+
+.combo-box:focused {
+
+}
+.combo-box:focused * {
+    -fx-effect: none;
+}
+
+.combo-box > .arrow-button, .choice-box > .arrow-button {
+    -fx-border-width: 0;
+}
+
+.combo-box {
+    -fx-font-weight: bold;
+    -fx-border-width: 2;
+    -fx-background-insets: 0;
+    -fx-border-radius: 2;
+    -fx-border-color: black;
+    -fx-padding: -1;
+    -fx-background-color: rgba(106,106,166,1);
+}
+
+.combo-box:editable > .arrow-button {
+    -fx-background-color: transparent;
+}
+
+.combo-box:editable > .arrow-button:hover {
+    -fx-background-color: transparent;
+}
+
+.combo-box:editable > .arrow-button:pressed {
+    -fx-effect: innershadow(gaussian, #adadad, 10, 0, 0, 3);
+}
+
+.combo-box > .text-input  {
+    -fx-background-radius: 5 0 0 5;
+    -fx-border-width: 0;
+}
+
+/*hover state*/
+.combo-box:hover {
+    -fx-border-color: white;
+}
+/*pressed selected*/
+.combo-box:pressed, .combo-box:selected{
+    -fx-effect: innershadow(gaussian, #ffffff, 10, 0, 0, 1);
+}
+
+.arrow{
+    -fx-background-color: black;
+    -fx-scale-y: 1.5;
+    -fx-scale-x: 1.5;
+}
