@@ -23,19 +23,16 @@ public class TicketListModel {
     private ObservableList<Ticket> ticketList;
     private List<Ticket> ticketCache;
     private Isearcher ticketSearcher;
+    private EventCoordinatorDashboardController dashboardController;
 
     private TicketListModel() throws IOException {
-        EventCoordinatorDashboardController dashboardController = getDashboardController();
+        dashboardController = getDashboardController();
         ticketManager = new TicketManager();
         ticketCache = new ArrayList<>();
         ticketList = FXCollections.observableArrayList();
         ticketSearcher = new TicketSearcher();
 
-        ticketList.addAll(ticketManager.getTicketsFromEvent(dashboardController.getSelectionEvent())); // do this
-
-
         ticketCache.addAll(ticketList);
-
     }
 
     public static TicketListModel getInstance() throws IOException {
@@ -62,9 +59,9 @@ public class TicketListModel {
         ticketManager.updateTicket(ticket);
     }
 
-    public void updateTicketList(){
+    public void updateTicketList(Event event){
         ticketList.clear();
-        //ticketList.addAll(ticketManager.getTicketsFromEvent()); // do this
+        ticketList.addAll(ticketManager.getTicketsFromEvent(event)); // do this
     }
 
     public void searchTicket(String query){

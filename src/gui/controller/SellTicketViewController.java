@@ -5,7 +5,6 @@ import be.Event;
 import be.Ticket;
 import bll.TicketManager;
 import gui.model.CustomerModel;
-import gui.model.TicketListModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -50,7 +49,7 @@ public class SellTicketViewController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         EventCoordinatorDashboardController dashboardController = getDashboardController();
-        event = dashboardController.getSelectionEvent();
+        event = dashboardController.getSelectedEvent();
         if(event == null){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error: Something went wrong");

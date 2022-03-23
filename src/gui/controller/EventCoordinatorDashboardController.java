@@ -141,12 +141,6 @@ public class EventCoordinatorDashboardController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            ticketListModel = TicketListModel.getInstance();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
             //Model for handling the combobox with events in the view
             sceneSwapper = new SceneSwapper();
             //Utility class for switching scenes in javaFX
@@ -154,6 +148,7 @@ public class EventCoordinatorDashboardController implements Initializable {
             email = new EmailClient();
             //Ticket BE entity
             ticket = new Ticket();
+            ticketListModel = TicketListModel.getInstance();
         } catch (IOException IOe) {
             IOe.printStackTrace();
         }
@@ -233,11 +228,11 @@ public class EventCoordinatorDashboardController implements Initializable {
         }
     }
 
-    public Event getSelectionEvent(){
-
-            comboBoxChooseEvent.getSelectionModel().select(0);
-
+    public Event getSelectedEvent(){
         return comboBoxChooseEvent.getSelectionModel().getSelectedItem();
+    }
 
+    public void handleChooseEvent(ActionEvent actionEvent) {
+        ticketListModel.updateTicketList(getSelectedEvent());
     }
 }
