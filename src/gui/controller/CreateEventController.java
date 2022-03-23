@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -20,8 +21,10 @@ import java.util.ResourceBundle;
 
 import static utility.SceneSwapper.getDashboardController;
 
-public class CreateEventConstoller implements Initializable {
+public class CreateEventController implements Initializable {
 
+    @FXML
+    private TextArea txtAreaDescription;
     @FXML
     private GridPane PerentGridPane;
     @FXML
@@ -32,8 +35,6 @@ public class CreateEventConstoller implements Initializable {
     private TextField txDrinkPrice;
     @FXML
     private TextField txTitle;
-    @FXML
-    private TextField txDescription;
     @FXML
     private TextField txLocation;
     @FXML
@@ -61,12 +62,12 @@ public class CreateEventConstoller implements Initializable {
 
     public void handleButtonOK(ActionEvent actionEvent) {
         EventCoordinatorDashboardController dashboardController = getDashboardController();
-        if(!txTitle.getText().isBlank() && !txDescription.getText().isBlank() && !txLocation.getText().isBlank()
+        if(!txTitle.getText().isBlank() && !txtAreaDescription.getText().isBlank() && !txLocation.getText().isBlank()
                 && !txArtists.getText().isBlank() && !txContactEmail.getText().isBlank() && !(dpStartData.getValue() == null) && !(dpEndData.getValue() == null)){
 
             Event event = new Event(
                     txTitle.getText(),
-                    txDescription.getText(),
+                    txtAreaDescription.getText(),
                     txLocation.getText(),
                     txArtists.getText(),
                     txContactEmail.getText(),

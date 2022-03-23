@@ -4,6 +4,7 @@ import be.Customer;
 import be.Event;
 import be.Ticket;
 import gui.model.CustomerModel;
+import gui.model.TicketListModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -74,6 +75,7 @@ public class SellTicketViewController implements Initializable {
         customerModel.createCustomer(customer);
 
         Ticket ticket = new Ticket(customer,seat, row,Integer.parseInt(lblPrice.getText()), hasPaid, vip,drinks,food, isSeated);
+
     }
 
     public void vipClick(ActionEvent actionEvent) {

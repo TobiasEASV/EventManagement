@@ -198,25 +198,13 @@
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints minHeight="10.0" percentHeight="15.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints percentHeight="2.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" percentHeight="17.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" percentHeight="23.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" percentHeight="25.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" percentHeight="25.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <HBox GridPane.columnIndex="3" GridPane.rowSpan="2">
-                     <children>
-                        <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="100.0" spacing="10.0" />
-                        <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="8.0">
-                           <children>
-                              <Label fx:id="lblTicketRowNumber" alignment="CENTER" styleClass="informationLabels" text="Row: 0" />
-                              <Label fx:id="lblTicketSeatNumber" styleClass="informationLabels" text="Seat: 0" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </HBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="35.0" styleClass="sidebar" GridPane.rowSpan="2147483647">
                      <children>
                         <Label fx:id="lblCustomerName" styleClass="sidebarLabels" text="John Doe" />
@@ -233,16 +221,7 @@
                         <Insets left="10.0" top="5.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" layoutX="186.0" layoutY="12.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
-                     <children>
-                        <Label fx:id="lblTicketSubtitle" styleClass="subtitleLabels" text="Musik med gutterne" />
-                     </children>
-                     <padding>
-                        <Insets left="10.0" />
-                     </padding>
-                  </HBox>
-                  <Separator prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="2" />
-                  <GridPane styleClass="informationGrid" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="3" GridPane.rowSpan="2147483647">
+                  <GridPane styleClass="informationGrid" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="2" GridPane.rowSpan="2147483647">
                     <columnConstraints>
                         <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" percentWidth="34.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="33.0" prefWidth="100.0" />
@@ -274,6 +253,18 @@
                         <Insets top="15.0" />
                      </padding>
                   </GridPane>
+                  <Separator prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" />
+                  <HBox GridPane.columnIndex="3" GridPane.rowSpan="2">
+                     <children>
+                        <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="100.0" spacing="10.0" />
+                        <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="8.0">
+                           <children>
+                              <Label fx:id="lblTicketRowNumber" alignment="CENTER" styleClass="informationLabels" text="Row: 0" />
+                              <Label fx:id="lblTicketSeatNumber" styleClass="informationLabels" text="Seat: 0" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
                </children>
             </GridPane>
          </children>
