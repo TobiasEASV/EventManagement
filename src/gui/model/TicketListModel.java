@@ -27,7 +27,7 @@ public class TicketListModel {
         ticketList = FXCollections.observableArrayList();
         ticketSearcher = new TicketSearcher();
 
-        ticketList.addAll(ticketManager.getTicketsFromEvent()); // do this
+        //ticketList.addAll(ticketManager.getTicketsFromEvent()); // do this
 
         ticketCache.addAll(ticketList);
 
@@ -59,7 +59,7 @@ public class TicketListModel {
 
     public void updateTicketList(){
         ticketList.clear();
-        ticketList.addAll(ticketManager.getTicketsFromEvent()); // do this
+        //ticketList.addAll(ticketManager.getTicketsFromEvent()); // do this
     }
 
     public void searchTicket(String query){
