@@ -27,7 +27,7 @@ public class TicketListModel {
         ticketSearcher = new TicketSearcher();
 
 
-        for (int i = 0; i< 10; i++){
+        for (int i = 0; i< 20; i++){
             Ticket ticket = new Ticket();
             ticket.setCustomerEmail("Place@holder.dk");
             ticket.setPrice(200.0);

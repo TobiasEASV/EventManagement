@@ -16,12 +16,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane fx:id="parentGridPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1200.0" styleClass="backgroundPane" stylesheets="@../utility/SceneStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.EventCoordinatorDashboardController">
+<GridPane fx:id="parentGridPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1150.0" styleClass="backgroundPane" stylesheets="@../utility/SceneStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.EventCoordinatorDashboardController">
   <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="15.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="15.0" prefWidth="100.0" />
-      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="35.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="35.0" prefWidth="100.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="17.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="17.0" prefWidth="100.0" />
+      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="33.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="33.0" prefWidth="100.0" />
       <ColumnConstraints />
       <ColumnConstraints />
   </columnConstraints>
@@ -37,20 +37,10 @@
     <RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <TableView fx:id="tvTickets" editable="true" prefHeight="200.0" prefWidth="550.0" tableMenuButtonVisible="true" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="5">
-        <columns>
-          <TableColumn fx:id="tcName" prefWidth="75.0" text="Name" />
-            <TableColumn fx:id="tcEmail" prefWidth="75.0" text="Email" />
-          <TableColumn fx:id="tcTicketPrice" prefWidth="75.0" text="Ticket price" />
-            <TableColumn fx:id="tcPaymentStatus" prefWidth="75.0" text="Payment Status" />
-        </columns>
-         <columnResizePolicy>
-            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-         </columnResizePolicy>
+      <TextField fx:id="textFieldSearch" promptText="Search for an email or a name" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets left="25.0" right="25.0" />
-         </GridPane.margin>
-      </TableView>
+         </GridPane.margin></TextField>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
          <children>
             <Label text="Event Information">
@@ -69,10 +59,15 @@
             </Label>
          </children>
       </HBox>
-      <TextField fx:id="textFieldSearch" promptText="Search for an email or a name" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3">
-         <GridPane.margin>
-            <Insets left="25.0" right="25.0" />
-         </GridPane.margin></TextField>
+      <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="15.0" GridPane.columnSpan="2" GridPane.rowIndex="8">
+         <children>
+            <Button mnemonicParsing="false" onAction="#handleEditEventButton" text="Edit Event" />
+            <Button mnemonicParsing="false" onAction="#handleNewEventButton" text="New event" />
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </HBox>
       <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="15.0" GridPane.columnIndex="2" GridPane.rowIndex="8">
          <children>
             <Button mnemonicParsing="false" onAction="#handleSellTicketButton" text="Sell Ticket" />
@@ -82,14 +77,32 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
       </HBox>
-      <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="15.0" GridPane.columnSpan="2" GridPane.rowIndex="8">
+      <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="8">
          <children>
-            <Button mnemonicParsing="false" onAction="#handleEditEventButton" text="Edit Event" />
-            <Button mnemonicParsing="false" onAction="#handleNewEventButton" text="New event" />
+            <VBox alignment="BOTTOM_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="15.0" HBox.hgrow="SOMETIMES">
+               <children>
+                  <ComboBox fx:id="comboBoxChoosePrinter" prefWidth="150.0" promptText="Choose a printer" />
+                  <Button mnemonicParsing="false" onAction="#handlePrintTicketButton" prefWidth="150.0" text="Print Ticket" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="BOTTOM_LEFT" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="SOMETIMES">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <TextField fx:id="txtAlternativeEmail" alignment="CENTER" prefWidth="180.0" promptText="Alternative Email" />
+                        <Separator prefWidth="180.0" styleClass="TxtSeparator" />
+                     </children>
+                  </VBox>
+                  <Button mnemonicParsing="false" onAction="#handleMailTicketButton" prefWidth="186.0" text="Mail Ticket" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" />
+               </padding>
+            </VBox>
          </children>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
       </HBox>
       <HBox alignment="TOP_RIGHT" spacing="15.0" GridPane.columnIndex="3" GridPane.rowSpan="2">
          <children>
@@ -265,38 +278,25 @@
             </GridPane>
          </children>
       </VBox>
-      <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="8">
-         <children>
-            <VBox alignment="BOTTOM_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="15.0" HBox.hgrow="SOMETIMES">
-               <children>
-                  <ComboBox fx:id="comboBoxChoosePrinter" prefWidth="150.0" promptText="Choose a printer" />
-                  <Button mnemonicParsing="false" onAction="#handlePrintTicketButton" prefWidth="150.0" text="Print Ticket" />
-               </children>
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
-            </VBox>
-            <VBox alignment="BOTTOM_LEFT" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="SOMETIMES">
-               <children>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <TextField fx:id="txtAlternativeEmail" alignment="CENTER" prefWidth="180.0" promptText="Alternative Email" />
-                        <Separator prefWidth="180.0" styleClass="TxtSeparator" />
-                     </children>
-                  </VBox>
-                  <Button mnemonicParsing="false" onAction="#handleMailTicketButton" prefWidth="186.0" text="Mail Ticket" />
-               </children>
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" />
-               </padding>
-            </VBox>
-         </children>
-      </HBox>
       <Separator prefWidth="200.0" styleClass="TxtSeparator" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="4">
+         <GridPane.margin>
+            <Insets left="29.0" right="29.0" />
+         </GridPane.margin>
+      </Separator>
+      <TableView fx:id="tvTickets" editable="true" prefHeight="200.0" prefWidth="550.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="5">
+        <columns>
+          <TableColumn fx:id="tcName" prefWidth="75.0" text="Name" />
+            <TableColumn fx:id="tcEmail" prefWidth="75.0" text="Email" />
+          <TableColumn fx:id="tcTicketPrice" prefWidth="75.0" text="Ticket price" />
+            <TableColumn fx:id="tcPaymentStatus" prefWidth="75.0" text="Payment Status" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
          <GridPane.margin>
             <Insets left="25.0" right="25.0" />
          </GridPane.margin>
-      </Separator>
+      </TableView>
    </children>
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
