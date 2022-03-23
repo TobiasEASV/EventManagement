@@ -1,39 +1,42 @@
 package be;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class Customer {
-    private String customerEmail;
-    private String customerName;
-    private int id;
+    private StringProperty name = new SimpleStringProperty();
+    private StringProperty email= new SimpleStringProperty();
+    private IntegerProperty id  = new SimpleIntegerProperty();
 
 
-    public Customer(String customerEmail, String customerName)
-    {
-        this.customerEmail = customerEmail;
-        this.customerName = customerName;
-        this.id = id;
+    public Customer(String email, String name) {
+        this.name.set(name);
+        this.email.set(email);
     }
 
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
-    public String getCustomerEmail() {
-        return customerEmail;
-    }
-
-    public void setCustomerEmail(String customerEmail) {
-        this.customerEmail = customerEmail;
-    }
-
-    public int getId() {
+    public IntegerProperty getIdProperty(){
         return id;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.id.set(id);
+    }
+
+    public StringProperty getNameProperty() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name.set(name);
+    }
+
+    public StringProperty getEmailProperty() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email.set(email);
     }
 }

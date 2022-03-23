@@ -3,10 +3,12 @@ package gui.controller;
 import be.Customer;
 import be.Event;
 import be.Ticket;
+import bll.TicketManager;
 import gui.model.CustomerModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -14,6 +16,8 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static utility.SceneSwapper.getDashboardController;
 
 public class SellTicketViewController implements Initializable {
     @FXML
@@ -39,16 +43,37 @@ public class SellTicketViewController implements Initializable {
 
     private Event event;
     private double price;
-
+    private TicketManager ticketManager;
     private CustomerModel customerModel;
 
-    public SellTicketViewController() throws IOException {
-     customerModel = new CustomerModel();
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        EventCoordinatorDashboardController dashboardController = getDashboardController();
+        event = dashboardController.getSelectionEvent();
+        if(event == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error: Something went wrong");
+            alert.setHeaderText("Du skal vælge en Event først");
+            alert.show();
+        }
+        try {
+            ticketManager = new TicketManager();
+            customerModel = new CustomerModel();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        price = event.getPriceProperty().get();
+        lblPrice.setText(String.valueOf(price));
+        txtRow.setDisable(true);
+        txtSeat.setDisable(true);
     }
 
     public void btnSave(ActionEvent actionEvent) {
-        int seat = 0;
-        int row = 0;
+
+
+        String seat = "No Seat nr";
+        String row = "No Row nr";
 
         boolean vip = false;
         boolean food = false;
@@ -56,24 +81,31 @@ public class SellTicketViewController implements Initializable {
         boolean hasPaid = false;
         boolean isSeated = false;
         if (checkSeated.isSelected()) {
-            seat = Integer.parseInt(txtSeat.getText());
-            row = Integer.parseInt(txtRow.getText());
-        }
-        if (checkVIP.isSelected())
-            vip = true;
-        if(checkFood.isSelected())
-            food = true;
-        if (checkDrinks.isSelected())
-            drinks = true;
-        if (checkHasPaid.isSelected())
-            hasPaid = true;
-        if (checkSeated.isSelected())
+            seat = txtSeat.getText();
+            row = txtRow.getText();
             isSeated= true;
+        }
+        if (checkVIP.isSelected()){
+            vip = true;
+        }
+        if(checkFood.isSelected()){
+            food = true;
+        }
+        if (checkDrinks.isSelected()){
+            drinks = true;
+        }
+        if (checkHasPaid.isSelected()){
+            hasPaid = true;
+        }
 
         Customer customer = new Customer(txtCustomerEmail.getText(), txtCustomerName.getText());
-        customerModel.createCustomer(customer);
 
-        Ticket ticket = new Ticket(customer,seat, row,Integer.parseInt(lblPrice.getText()), hasPaid, vip,drinks,food, isSeated);
+        Ticket ticket = new Ticket(customerModel.createCustomer(customer), event, Double.parseDouble(lblPrice.getText()), hasPaid, vip, drinks, food, isSeated);
+        ticket.setRow(row);
+        ticket.setSeat(seat);
+        ticketManager.createTicket(ticket);
+
+
     }
 
     public void vipClick(ActionEvent actionEvent) {
@@ -126,12 +158,5 @@ public class SellTicketViewController implements Initializable {
         }
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        //price = event.getPriceProperty().get();
-        price = 200;
-        lblPrice.setText(String.valueOf(price));
-        txtRow.setDisable(true);
-        txtSeat.setDisable(true);
-    }
+
 }

@@ -30,7 +30,7 @@ public class TicketSearcher implements Isearcher{
      */
     @Override
     public boolean compareToCustomerName(Ticket ticket, String query) {
-       return ticket.getCustomerNameProperty().get().toLowerCase().contains(query.toLowerCase());
+       return ticket.getCustomer().getNameProperty().get().toLowerCase().contains(query.toLowerCase());
     }
 
     /**
@@ -41,6 +41,6 @@ public class TicketSearcher implements Isearcher{
      */
     @Override
     public boolean compareToCustomerEmail(Ticket ticket, String query) {
-        return ticket.getCustomerEmailProperty().get().toLowerCase().contains(query.toLowerCase());
+        return ticket.getCustomer().getEmailProperty().get().toLowerCase().contains(query.toLowerCase());
     }
 }

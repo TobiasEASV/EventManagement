@@ -10,15 +10,15 @@ import javafx.beans.property.*;
 public class Ticket {
 
 
-    private StringProperty customerName= new SimpleStringProperty();
-    private StringProperty customerEmail= new SimpleStringProperty();
+    //private StringProperty customerName= new SimpleStringProperty();
+    //private StringProperty customerEmail= new SimpleStringProperty();
     private StringProperty paymentStatus= new SimpleStringProperty();
 
     private IntegerProperty id = new SimpleIntegerProperty();
-    private IntegerProperty customerId= new SimpleIntegerProperty();
+    //private IntegerProperty customerId= new SimpleIntegerProperty();
     private IntegerProperty eventId= new SimpleIntegerProperty();
-    private IntegerProperty seat= new SimpleIntegerProperty();
-    private IntegerProperty row= new SimpleIntegerProperty();
+    private StringProperty seat= new SimpleStringProperty();
+    private StringProperty row= new SimpleStringProperty();
 
     private DoubleProperty price = new SimpleDoubleProperty();
 
@@ -29,6 +29,7 @@ public class Ticket {
     private BooleanProperty seated= new SimpleBooleanProperty();
 
     private Customer customer;
+    private Event event;
 
     private final String paid = "Paid";
     private final String notPaid = "Not Paid";
@@ -39,13 +40,10 @@ public class Ticket {
 
     }
 
-    public Ticket(Customer customer, int seat, int row, double price, boolean isPaid,boolean vip, boolean drinks, boolean food, boolean isSeated)
+    public Ticket(Customer customer, Event event, double price, boolean isPaid,boolean vip, boolean drinks, boolean food, boolean isSeated)
     {
         this.customer = customer;
-        this.customerName.set(customer.getCustomerName());
-        this.customerEmail.set(customer.getCustomerEmail());
-        this.seat.set(seat);
-        this.row.set(row);
+        this.event = event;
         this.price.set(price);
         this.isPaid.set(isPaid);
         this.vip.set(vip);
@@ -59,52 +57,32 @@ public class Ticket {
         return customer;
     }
 
+    public Event getEvent(){
+        return event;
+    }
+
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public void setEvent(Event event) {
+       this.event = event;
     }
 
     public void setPrice(double price) {
         this.price.set(price);
     }
 
-
-
-    public void setCustomerId(int customerId) {
-        this.customerId.set(customerId);
-    }
-
-
-    public void setEventId(int eventId) {
-        this.eventId.set(eventId);
-    }
-
-
-
     public void setId(int id) {
         this.id.set(id);
     }
 
-
-
-    public void setRow(int row) {
+    public void setRow(String row) {
         this.row.set(row);
     }
 
-
-
-    public void setSeat(int seat) {
+    public void setSeat(String seat) {
         this.seat.set(seat);
-    }
-
-
-    public void setCustomerEmail(String customerEmail) {
-        this.customerEmail.set(customerEmail);
-    }
-
-
-
-    public void setCustomerName(String customerName) {
-        this.customerName.set(customerName);
     }
 
     public boolean isVip() {
@@ -114,55 +92,37 @@ public class Ticket {
     public void setVip(boolean vip) {
         this.vip.set(vip);
     }
-    
 
     public void setIsPaid(boolean isPaid) {
         this.isPaid.set(isPaid);
         setPaymentStatus();
     }
 
-
-
     public void setSeated(boolean seated) {
         this.seated.set(seated);
     }
-
-
 
     public void setFood(boolean food) {
         this.food.set(food);
     }
 
-
     public void setDrinks(boolean drinks) {
         this.drinks.set(drinks);
-    }
-
-    public StringProperty getCustomerNameProperty() {
-        return customerName;
-    }
-
-    public StringProperty getCustomerEmailProperty() {
-        return customerEmail;
     }
 
     public IntegerProperty getIdProperty() {
         return id;
     }
 
-    public IntegerProperty getCustomerIdProperty() {
-        return customerId;
-    }
-
     public IntegerProperty getEventIdProperty() {
         return eventId;
     }
 
-    public IntegerProperty getSeatProperty() {
+    public StringProperty getSeatProperty() {
         return seat;
     }
 
-    public IntegerProperty getRowProperty() {
+    public StringProperty getRowProperty() {
         return row;
     }
 

@@ -10,9 +10,8 @@ public class CustomerManager {
     public CustomerManager() throws IOException {
         dbCustomer = new DBCustomer();
     }
-    public void createCustomer(Customer customer)
-    {
-        dbCustomer.createCustomer(customer);
+    public Customer createCustomer(Customer customer) {
+        return dbCustomer.createCustomer(customer);
     }
 
     public void updateCustomer(Customer customer)
