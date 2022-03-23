@@ -6,7 +6,6 @@ import gui.model.EventListModel;
 import gui.model.CustomerModel;
 import gui.model.PrintModel;
 import gui.model.TicketListModel;
-import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,9 +15,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import utility.EmailClient;
 import utility.SceneSwapper;
@@ -57,9 +57,9 @@ public class EventCoordinatorDashboardController implements Initializable {
     private TextField txtAlternativeEmail;
 
     @FXML
-    private ComboBox comboBoxChoosePrinter;
+    private ComboBox<PrintService> comboBoxChoosePrinter;
     @FXML
-    private static ComboBox<Event> comboBoxChooseEvent;
+    private ComboBox<Event> comboBoxChooseEvent;
 
     @FXML
     private CheckBox checkBoxTicketTypeStandard;
@@ -147,7 +147,13 @@ public class EventCoordinatorDashboardController implements Initializable {
         }
 
         try {
+            //Model for handling the combobox with events in the view
+            sceneSwapper = new SceneSwapper();
+            //Utility class for switching scenes in javaFX
+            eventListModel = new EventListModel();
             email = new EmailClient();
+            //Ticket BE entity
+            ticket = new Ticket();
         } catch (IOException IOe) {
             IOe.printStackTrace();
         }
@@ -155,12 +161,7 @@ public class EventCoordinatorDashboardController implements Initializable {
         //instantiate the singleton PrintModel
         printModel = PrintModel.getInstance();
 
-        //Ticket BE entity
-        ticket = new Ticket();
-        //Model for handling the combobox with events in the view
-        eventListModel = new EventListModel();
-        //Utility class for switching scenes in javaFX
-        sceneSwapper = new SceneSwapper();
+        comboBoxChooseEvent.getItems().addAll(eventListModel.getEventList());
 
         //Get print services
         printServices = PrintServiceLookup.lookupPrintServices(null, null);
@@ -182,7 +183,7 @@ public class EventCoordinatorDashboardController implements Initializable {
         tcEmail.setCellValueFactory(addTicket -> addTicket.getValue().getCustomerEmailProperty());
     }
 
-    public static void updateComboBoxChooseEvent(Event event){
+    public void updateComboBoxChooseEvent(Event event){
         comboBoxChooseEvent.getItems().add(event);
     }
 
@@ -211,8 +212,8 @@ public class EventCoordinatorDashboardController implements Initializable {
     public void handleEditEventButton(ActionEvent actionEvent) {
     }
 
-    public void handleNewEventButton(ActionEvent actionEvent) {
-        sceneSwapper.sceneSwitch(new Stage(), "CreateEventView.fxml");
+    public void handleNewEventButton(ActionEvent actionEvent) throws IOException {
+        sceneSwapper.instantiateCreateEventScene();
     }
 
 

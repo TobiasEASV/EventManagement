@@ -63,7 +63,7 @@
                   <Insets bottom="10.0" right="50.0" />
                </HBox.margin>
             </Button>
-            <Button minWidth="70.0" mnemonicParsing="false" onAction="#handleButtonCansel" text="Cansel">
+            <Button minWidth="70.0" mnemonicParsing="false" onAction="#handleButtonCancel" text="Cancel">
                <HBox.margin>
                   <Insets bottom="10.0" />
                </HBox.margin>
