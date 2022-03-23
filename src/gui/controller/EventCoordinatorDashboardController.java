@@ -45,9 +45,9 @@ public class EventCoordinatorDashboardController implements Initializable {
     private TextField txtAlternativeEmail;
 
     @FXML
-    private ComboBox comboBoxChoosePrinter;
+    private ComboBox<PrintService> comboBoxChoosePrinter;
     @FXML
-    private ComboBox comboBoxChooseEvent;
+    private ComboBox<Event> comboBoxChooseEvent;
 
     @FXML
     private CheckBox checkBoxTicketTypeStandard;
@@ -121,14 +121,15 @@ public class EventCoordinatorDashboardController implements Initializable {
         printModel = PrintModel.getInstance();
 
         try {
+            eventListModel = new EventListModel();
             email = new EmailClient();
         } catch (IOException IOe) {
             IOe.printStackTrace();
         }
         ticket = new Ticket();
-        eventListModel = new EventListModel();
+
         sceneSwapper = new SceneSwapper();
-        //comboBoxChooseEvent.getItems().add(new Event(null,null,null,null,null,0,0, 0,0,null,null));
+        comboBoxChooseEvent.getItems().addAll(eventListModel.getEventList());
 
         //Get print services
         printServices = PrintServiceLookup.lookupPrintServices(null, null);

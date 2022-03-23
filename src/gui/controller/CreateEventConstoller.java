@@ -7,6 +7,7 @@ import bll.EventManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -16,6 +17,8 @@ import utility.SceneSwapper;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static utility.SceneSwapper.getDashboardController;
 
 public class CreateEventConstoller implements Initializable {
 
@@ -45,7 +48,7 @@ public class CreateEventConstoller implements Initializable {
     private TextField txFoodPrice;
 
     private  EventManager eventManager;
-    
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
@@ -57,25 +60,34 @@ public class CreateEventConstoller implements Initializable {
     }
 
     public void handleButtonOK(ActionEvent actionEvent) {
-        EventCoordinatorDashboardController dashboardController = new SceneSwapper().getDashboardController();
+        EventCoordinatorDashboardController dashboardController = getDashboardController();
+        if(!txTitle.getText().isBlank() && !txDescription.getText().isBlank() && !txLocation.getText().isBlank()
+                && !txArtists.getText().isBlank() && !txContactEmail.getText().isBlank() && !(dpStartData.getValue() == null) && !(dpEndData.getValue() == null)){
 
-        Event event = new Event(
-                txTitle.getText(),
-                txDescription.getText(),
-                txLocation.getText(),
-                txArtists.getText(),
-                txContactEmail.getText(),
-                Double.parseDouble(txTicktePrice.getText()),
-                Double.parseDouble(txVIPPrice.getText()),
-                Double.parseDouble(txFoodPrice.getText()),
-                Double.parseDouble(txDrinkPrice.getText()),
-                dpStartData.getValue(),
-                dpEndData.getValue());
+            Event event = new Event(
+                    txTitle.getText(),
+                    txDescription.getText(),
+                    txLocation.getText(),
+                    txArtists.getText(),
+                    txContactEmail.getText(),
+                    Double.parseDouble(txTicktePrice.getText()),
+                    Double.parseDouble(txVIPPrice.getText()),
+                    Double.parseDouble(txFoodPrice.getText()),
+                    Double.parseDouble(txDrinkPrice.getText()),
+                    dpStartData.getValue(),
+                    dpEndData.getValue());
+
+            dashboardController.updateComboBoxChooseEvent(eventManager.createEvent(event));
+            EXITScene();
+
+        }else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error: Something went wrong");
+            alert.setHeaderText("BLBLBLBLBLBLBLBLB");
+            alert.show();
+        }
 
 
-        dashboardController.updateComboBoxChooseEvent(event);
-        dashboardController.updateComboBoxChooseEvent(eventManager.createEvent(event));
-        EXITScene();
 
     }
 

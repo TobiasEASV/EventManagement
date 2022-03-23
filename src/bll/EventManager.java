@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.IOException;
+import java.util.List;
 
 public class EventManager {
 
@@ -17,6 +18,10 @@ public class EventManager {
 
     public Event createEvent(Event event){
         return dbEvent.createEvent(event);
+    }
+
+    public List<Event> getAllEvents(){
+        return dbEvent.getAllEvents();
     }
 
 }

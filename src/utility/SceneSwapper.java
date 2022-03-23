@@ -63,7 +63,7 @@ public class SceneSwapper {
         stage.show();
     }
 
-    public EventCoordinatorDashboardController getDashboardController(){
+    public static EventCoordinatorDashboardController getDashboardController(){
         return dashboard.getController();
     }
 }
