@@ -5,12 +5,15 @@ import be.Ticket;
 import bll.TicketManager;
 import bll.util.Isearcher;
 import bll.util.TicketSearcher;
+import gui.controller.EventCoordinatorDashboardController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static utility.SceneSwapper.getDashboardController;
 
 
 public class TicketListModel {
@@ -28,6 +31,7 @@ public class TicketListModel {
         ticketSearcher = new TicketSearcher();
 
         //ticketList.addAll(ticketManager.getTicketsFromEvent()); // do this
+
 
         ticketCache.addAll(ticketList);
 
