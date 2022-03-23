@@ -1,5 +1,6 @@
 package gui.model;
 
+import be.Event;
 import be.Ticket;
 import bll.TicketManager;
 import bll.util.Isearcher;
@@ -26,22 +27,7 @@ public class TicketListModel {
         ticketList = FXCollections.observableArrayList();
         ticketSearcher = new TicketSearcher();
 
-
-        for (int i = 0; i< 10; i++){
-            Ticket ticket = new Ticket();
-            ticket.setCustomerEmail("Place@holder.dk");
-            ticket.setPrice(200.0);
-            ticket.setCustomerName("John Doe");
-            ticket.setIsPaid(true);
-            ticketList.add(ticket);
-        }
-
-        Ticket ticket = new Ticket();
-        ticket.setCustomerEmail("different@email.com");
-        ticket.setPrice(200.0);
-        ticket.setCustomerName("Tobias");
-        ticket.setIsPaid(true);
-        ticketList.add(ticket);
+        ticketList.addAll(ticketManager.getTicketsFromEvent()); // do this
 
         ticketCache.addAll(ticketList);
 
@@ -69,6 +55,11 @@ public class TicketListModel {
 
     public void updateTicket(Ticket ticket){
         ticketManager.updateTicket(ticket);
+    }
+
+    public void updateTicketList(){
+        ticketList.clear();
+        ticketList.addAll(ticketManager.getTicketsFromEvent()); // do this
     }
 
     public void searchTicket(String query){
