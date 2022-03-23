@@ -189,7 +189,6 @@ public class EventCoordinatorDashboardController implements Initializable {
 
     public void handleSellTicketButton(ActionEvent actionEvent) throws IOException {
         sceneSwapper.instantiateSellTicketScene();
-
     }
 
     public void handleRefundTicketButton(ActionEvent actionEvent) {
@@ -235,6 +234,10 @@ public class EventCoordinatorDashboardController implements Initializable {
     }
 
     public Event getSelectionEvent(){
+
+            comboBoxChooseEvent.getSelectionModel().select(0);
+
         return comboBoxChooseEvent.getSelectionModel().getSelectedItem();
+
     }
 }

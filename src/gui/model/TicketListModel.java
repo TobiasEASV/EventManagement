@@ -25,12 +25,13 @@ public class TicketListModel {
     private Isearcher ticketSearcher;
 
     private TicketListModel() throws IOException {
+        EventCoordinatorDashboardController dashboardController = getDashboardController();
         ticketManager = new TicketManager();
         ticketCache = new ArrayList<>();
         ticketList = FXCollections.observableArrayList();
         ticketSearcher = new TicketSearcher();
 
-        //ticketList.addAll(ticketManager.getTicketsFromEvent()); // do this
+        ticketList.addAll(ticketManager.getTicketsFromEvent(dashboardController.getSelectionEvent())); // do this
 
 
         ticketCache.addAll(ticketList);

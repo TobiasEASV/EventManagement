@@ -91,16 +91,16 @@ public class TicketDAO {
     public List<Ticket> getTicketsFromEvent(Event event) {
         List<Ticket> allTicketsFromEvent = new ArrayList<>();
         try (Connection c = dbc.getConnection()) {
-            String sql = "SELECT * FROM Ticket JOIN Customer ON Ticket.Event_ID = ?";
+            String sql = "SELECT * FROM Ticket JOIN Customer ON ticket.Customer_ID = Customer.ID WHERE Event_ID = ?";
             PreparedStatement ps = c.prepareStatement(sql);
             ps.setInt(1, event.getIdProperty().get());
             ps.execute();
 
             ResultSet rs = ps.getResultSet();
-            Ticket ticket = new Ticket();
-            Customer customer;
-            allTicketsFromEvent.add(ticket);
+
             while (rs.next()) {
+                Customer customer;
+                Ticket ticket = new Ticket();
                 ticket.setId(rs.getInt(1));
                 ticket.setCustomer(customer = new Customer(rs.getString("Email"), rs.getString("FullName")));
                 customer.setId(rs.getInt("Customer_ID"));
