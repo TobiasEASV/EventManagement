@@ -3,13 +3,17 @@ package gui.controller;
 import be.Event;
 import be.Ticket;
 import gui.model.EventListModel;
+import gui.model.CustomerModel;
 import gui.model.PrintModel;
 import gui.model.TicketListModel;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.*;
 import javafx.scene.image.WritableImage;
@@ -30,15 +34,22 @@ import java.util.ResourceBundle;
 public class EventCoordinatorDashboardController implements Initializable {
 
 
+
+
     @FXML
     private GridPane parentGridPane;
 
     @FXML
-    private TableColumn tcName;
+    private TableView<Ticket> tvTickets;
+
     @FXML
-    private TableColumn tcTicketPrice;
+    private TableColumn<Ticket, String> tcName;
     @FXML
-    private TableColumn tcPaymentStatus;
+    private TableColumn<Ticket, Double> tcTicketPrice;
+    @FXML
+    private TableColumn<Ticket, String> tcPaymentStatus;
+    @FXML
+    private TableColumn<Ticket, String> tcEmail;
 
     @FXML
     private TextField textFieldSearch;
@@ -99,9 +110,15 @@ public class EventCoordinatorDashboardController implements Initializable {
     private Label lblTicketStartDate;
     @FXML
     private Label lblTicketEndDate;
+    @FXML
+    private Label txtTicketPrice;
+    @FXML
+    private Label txtTicketType;
 
     @FXML
     private GridPane ticketPane;
+
+    private CustomerModel customerModel;
 
     //Array that holds printservices available on the PC.
     private PrintService[] printServices;
@@ -117,25 +134,32 @@ public class EventCoordinatorDashboardController implements Initializable {
 
     private final String TICKET_FILE = "src/gui/utility/temp/tempTicket.png";
 
+    public EventCoordinatorDashboardController() throws IOException {
+        customerModel = new CustomerModel();
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //instantiate the singleton PrintModel
-        printModel = PrintModel.getInstance();
         try {
             ticketListModel = TicketListModel.getInstance();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-
         try {
             email = new EmailClient();
         } catch (IOException IOe) {
             IOe.printStackTrace();
         }
+
+        //instantiate the singleton PrintModel
+        printModel = PrintModel.getInstance();
+
+        //Ticket BE entity
         ticket = new Ticket();
+        //Model for handling the combobox with events in the view
         eventListModel = new EventListModel();
+        //Utility class for switching scenes in javaFX
         sceneSwapper = new SceneSwapper();
 
         //Get print services
@@ -144,21 +168,31 @@ public class EventCoordinatorDashboardController implements Initializable {
         comboBoxChoosePrinter.getItems().setAll(printServices);
 
 
-        // Search in all Movies
+        // Search functionality in the list view
         textFieldSearch.textProperty().addListener((observableValue, oldValue, newValue) -> {
                 ticketListModel.searchTicket(newValue);
         });
 
+        //Set placeholder for tableview if it is empty
+        tvTickets.setPlaceholder(new Label("No tickets found for this event."));
+        tvTickets.setItems(ticketListModel.getTicketList());
+        tcName.setCellValueFactory(addTicket -> addTicket.getValue().getCustomerNameProperty());
+        tcTicketPrice.setCellValueFactory(addTicket -> addTicket.getValue().getPriceProperty().asObject());
+        tcPaymentStatus.setCellValueFactory(addTicket -> addTicket.getValue().getPaymentStatusProperty());
+        tcEmail.setCellValueFactory(addTicket -> addTicket.getValue().getCustomerEmailProperty());
     }
 
     public static void updateComboBoxChooseEvent(Event event){
         comboBoxChooseEvent.getItems().add(event);
     }
 
-    public void handleSellTicketButton(ActionEvent actionEvent) {
+    public void handleSellTicketButton(ActionEvent actionEvent) throws IOException {
+        sceneSwapper.sceneSwitch(new Stage(), "SellTicketView.fxml");
+
     }
 
     public void handleRefundTicketButton(ActionEvent actionEvent) {
+        customerModel.deleteCustomer(tvTickets.getSelectionModel().getSelectedItem().getCustomer());
     }
 
     public void handlePrintTicketButton(ActionEvent actionEvent) {

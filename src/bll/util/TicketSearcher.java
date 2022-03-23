@@ -19,12 +19,11 @@ public class TicketSearcher implements Isearcher{
                 searchResult.add(ticket);
             }
         }
-
         return searchResult;
     }
 
     /**
-     * If isTitleOn is true, it checks if the movie's name field contains the query and returns true if so.
+     * If isTitleOn is true, it checks if the ticket's customer name field contains the query and returns true if so.
      * @param ticket a Ticket object
      * @param query a search query
      * @return
@@ -35,7 +34,7 @@ public class TicketSearcher implements Isearcher{
     }
 
     /**
-     * If isTitleOn is true, it checks if the IMDBRating field is higher than the query and returns true if so.
+     * compares ticket customer emails to the query
      * @param ticket a Ticket object
      * @param query a search query
      * @return

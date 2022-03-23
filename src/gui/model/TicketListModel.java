@@ -17,14 +17,34 @@ public class TicketListModel {
     private static TicketListModel single_instance = null;
     private TicketManager ticketManager;
     private ObservableList<Ticket> ticketList;
-    private List<Ticket> ticketCache = new ArrayList<>();
+    private List<Ticket> ticketCache;
     private Isearcher ticketSearcher;
 
     private TicketListModel() throws IOException {
         ticketManager = new TicketManager();
-        ticketList = FXCollections.observableArrayList(ticketManager.getAllTicketToObservable().stream().map(ticket -> new Ticket()).toList());
-        ticketCache.addAll(ticketList);
+        ticketCache = new ArrayList<>();
+        ticketList = FXCollections.observableArrayList();
         ticketSearcher = new TicketSearcher();
+
+
+        for (int i = 0; i< 10; i++){
+            Ticket ticket = new Ticket();
+            ticket.setCustomerEmail("Place@holder.dk");
+            ticket.setPrice(200.0);
+            ticket.setCustomerName("John Doe");
+            ticket.setIsPaid(true);
+            ticketList.add(ticket);
+        }
+
+        Ticket ticket = new Ticket();
+        ticket.setCustomerEmail("different@email.com");
+        ticket.setPrice(200.0);
+        ticket.setCustomerName("Tobias");
+        ticket.setIsPaid(true);
+        ticketList.add(ticket);
+
+        ticketCache.addAll(ticketList);
+
     }
 
     public static TicketListModel getInstance() throws IOException {
@@ -52,11 +72,12 @@ public class TicketListModel {
     }
 
     public void searchTicket(String query){
-        ticketList.clear();
-        if (query.isBlank()) {
+        if (query.isBlank() || query.isEmpty()) {
+            ticketList.clear();
             ticketList.addAll(ticketCache);
         } else {
-            ticketList.addAll(ticketSearcher.search(ticketList, query));
+            ticketList.clear();
+            ticketList.addAll(ticketSearcher.search(ticketCache, query));
         }
 
     }
