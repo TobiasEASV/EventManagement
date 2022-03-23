@@ -44,9 +44,8 @@ public class CreateEventConstoller implements Initializable {
     @FXML
     private TextField txFoodPrice;
 
-    private Event event;
-    private EventManager eventManager;
-
+    private  EventManager eventManager;
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
@@ -58,15 +57,9 @@ public class CreateEventConstoller implements Initializable {
     }
 
     public void handleButtonOK(ActionEvent actionEvent) {
-        double ticketPrice = 0.0;
-        double VIPPrice = 0.0;
-        double foodPrice = 0.0;
-        double drinkPrice = 0.0;
-        if(txVIPPrice.getText().equals("0") || txVIPPrice.getText().isEmpty()){
+        EventCoordinatorDashboardController dashboardController = new SceneSwapper().getDashboardController();
 
-        }
-        System.out.println(dpStartData.getValue());
-        event = new Event(
+        Event event = new Event(
                 txTitle.getText(),
                 txDescription.getText(),
                 txLocation.getText(),
@@ -78,13 +71,19 @@ public class CreateEventConstoller implements Initializable {
                 Double.parseDouble(txDrinkPrice.getText()),
                 dpStartData.getValue(),
                 dpEndData.getValue());
-        EventCoordinatorDashboardController dashboardController = new SceneSwapper().getDashboardController();
+
+
         dashboardController.updateComboBoxChooseEvent(event);
-        //dashboardController.updateComboBoxChooseEvent(eventManager.createEvent(event));
+        dashboardController.updateComboBoxChooseEvent(eventManager.createEvent(event));
+        EXITScene();
 
     }
 
-    public void handleButtonCansel(ActionEvent actionEvent) {
+    public void handleButtonCancel(ActionEvent actionEvent) {
+        EXITScene();
+    }
+
+    public void EXITScene(){
         Stage stage = (Stage) PerentGridPane.getScene().getWindow();
         stage.close();
     }

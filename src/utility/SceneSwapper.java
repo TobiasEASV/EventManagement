@@ -16,6 +16,10 @@ public class SceneSwapper {
     private static FXMLLoader dashboard;
 
 
+    private final Image image = new Image("gui/images/Icons/ticket_2_icon.png");
+    private final String sceneTitle = "Event Manager";
+
+
 
     /**
      * switches the stage to a certain fxml file.
@@ -27,8 +31,7 @@ public class SceneSwapper {
             URL url = new File("src/gui/view/" + fxmlClassName).toURI().toURL();
             Parent scene = FXMLLoader.load(url);
             Scene ViewScene = new Scene(scene);
-            stage.setTitle("Event Manager");
-            Image image = new Image("gui/images/Icons/ticket_2_icon.png");
+            stage.setTitle(sceneTitle);
             stage.getIcons().add(image);
             stage.setScene(ViewScene);
             stage.show();
@@ -37,11 +40,25 @@ public class SceneSwapper {
         }
     }
 
+    public void defScene(Stage stage, String fxmlFile) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/view/" + fxmlFile));
+        stage.setScene(new Scene(loader.load()));
+        stage.show();
+    }
+
+    public void instantiateCreateEventScene() throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/view/CreateEventView.fxml"));
+        stage.setScene(new Scene(loader.load()));
+        stage.setTitle(sceneTitle + " - New Event");
+        stage.getIcons().add(image);
+        stage.show();
+    }
+
     public void instantiateMainScene(Stage stage, String fxmlFile) throws IOException {
         dashboard = new FXMLLoader(getClass().getResource("../gui/view/" + fxmlFile));
         stage.setScene(new Scene(dashboard.load()));
-        stage.setTitle("Event Management");
-        Image image = new Image("/gui/images/Icons/ticket_2_icon.png");
+        stage.setTitle(sceneTitle);
         stage.getIcons().add(image);
         stage.show();
     }

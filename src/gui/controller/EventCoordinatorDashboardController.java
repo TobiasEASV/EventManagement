@@ -163,8 +163,8 @@ public class EventCoordinatorDashboardController implements Initializable {
     public void handleEditEventButton(ActionEvent actionEvent) {
     }
 
-    public void handleNewEventButton(ActionEvent actionEvent) {
-        sceneSwapper.sceneSwitch(new Stage(), "CreateEventView.fxml");
+    public void handleNewEventButton(ActionEvent actionEvent) throws IOException {
+        sceneSwapper.instantiateCreateEventScene();
     }
 
 
