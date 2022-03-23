@@ -134,7 +134,7 @@ public class TicketDAO {
         try (Connection c = dbc.getConnection()) {
             String sql = "SELECT * FROM Ticket WHERE Event_ID = (?)";
             PreparedStatement ps = c.prepareStatement(sql);
-            ps.setInt(1, event.idProperty().get());
+            ps.setInt(1, event.getIdProperty().get());
             ps.execute();
 
             ResultSet rs = ps.getResultSet();
