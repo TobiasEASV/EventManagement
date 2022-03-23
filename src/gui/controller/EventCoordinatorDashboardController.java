@@ -41,11 +41,11 @@ public class EventCoordinatorDashboardController implements Initializable {
     private GridPane parentGridPane;
 
     @FXML
-    private TableColumn tcName;
+    private TableColumn<Ticket, String> tcName;
     @FXML
-    private TableColumn tcTicketPrice;
+    private TableColumn<Ticket, String> tcTicketPrice;
     @FXML
-    private TableColumn tcPaymentStatus;
+    private TableColumn<Ticket, String> tcPaymentStatus;
 
     @FXML
     private TextField textFieldSearch;
@@ -132,22 +132,26 @@ public class EventCoordinatorDashboardController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //instantiate the singleton PrintModel
-        printModel = PrintModel.getInstance();
         try {
             ticketListModel = TicketListModel.getInstance();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-
         try {
             email = new EmailClient();
         } catch (IOException IOe) {
             IOe.printStackTrace();
         }
+
+        //instantiate the singleton PrintModel
+        printModel = PrintModel.getInstance();
+
+        //Ticket BE entity
         ticket = new Ticket();
+        //Model for handling the combobox with events in the view
         eventListModel = new EventListModel();
+        //Utility class for switching scenes in javaFX
         sceneSwapper = new SceneSwapper();
 
         //Get print services
@@ -156,10 +160,12 @@ public class EventCoordinatorDashboardController implements Initializable {
         comboBoxChoosePrinter.getItems().setAll(printServices);
 
 
-        // Search in all Movies
+        // Search functionality in the list view
         textFieldSearch.textProperty().addListener((observableValue, oldValue, newValue) -> {
                 ticketListModel.searchTicket(newValue);
         });
+
+
 
     }
 
