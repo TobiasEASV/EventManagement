@@ -32,7 +32,7 @@ public class Ticket {
 
     private final String paid = "Paid";
     private final String notPaid = "Not Paid";
-    
+
 
     public Ticket()
     {
