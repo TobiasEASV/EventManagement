@@ -14,7 +14,7 @@
 }
 
 .headerBar{
-    -fx-background-color: linear-gradient(to left, transparent, red);
+    -fx-background-color: linear-gradient(to left, beige, red 50%);
 }
 
 .headerLabels{
@@ -34,12 +34,12 @@
 .separator *.line{
     -fx-border-style: solid;
     -fx-padding: 0 -50 0 0;
-    -fx-border-color: linear-gradient(to right, black, red, transparent);
+    -fx-border-color: linear-gradient(to right, black, red, beige);
     -fx-border-width: 2px;
 }
 
 .informationGrid{
-    -fx-background-color: linear-gradient(to left, transparent, red);
+    -fx-background-color: linear-gradient(to left, beige, red 50%);
 }
 
 .informationLabels{
