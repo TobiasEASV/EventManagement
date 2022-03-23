@@ -52,10 +52,6 @@ public class Ticket {
         this.drinks.set(drinks);
         this.food.set(food);
         this.seated.set(isSeated);
-
-        if(this.isPaid.get()){
-            this.paymentStatus.set(paid);
-        } else this.paymentStatus.set(notPaid);
     }
 
 
@@ -122,6 +118,7 @@ public class Ticket {
 
     public void setIsPaid(boolean isPaid) {
         this.isPaid.set(isPaid);
+        setPaymentStatus();
     }
 
 
@@ -197,7 +194,7 @@ public class Ticket {
         return paymentStatus;
     }
 
-    public void setPaymentStatus(StringProperty paymentStatus) {
+    public void setPaymentStatus() {
         if(this.isPaid.get()){
             this.paymentStatus.set(paid);
         } else this.paymentStatus.set(notPaid);

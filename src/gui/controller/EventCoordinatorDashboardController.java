@@ -34,18 +34,22 @@ import java.util.ResourceBundle;
 public class EventCoordinatorDashboardController implements Initializable {
 
 
-    @FXML
-    private TableView<Ticket> tvTickets;
+
 
     @FXML
     private GridPane parentGridPane;
 
     @FXML
+    private TableView<Ticket> tvTickets;
+
+    @FXML
     private TableColumn<Ticket, String> tcName;
     @FXML
-    private TableColumn<Ticket, String> tcTicketPrice;
+    private TableColumn<Ticket, Double> tcTicketPrice;
     @FXML
     private TableColumn<Ticket, String> tcPaymentStatus;
+    @FXML
+    private TableColumn<Ticket, String> tcEmail;
 
     @FXML
     private TextField textFieldSearch;
@@ -106,6 +110,10 @@ public class EventCoordinatorDashboardController implements Initializable {
     private Label lblTicketStartDate;
     @FXML
     private Label lblTicketEndDate;
+    @FXML
+    private Label txtTicketPrice;
+    @FXML
+    private Label txtTicketType;
 
     @FXML
     private GridPane ticketPane;
@@ -165,8 +173,13 @@ public class EventCoordinatorDashboardController implements Initializable {
                 ticketListModel.searchTicket(newValue);
         });
 
-
-
+        //Set placeholder for tableview if it is empty
+        tvTickets.setPlaceholder(new Label("No tickets found for this event."));
+        tvTickets.setItems(ticketListModel.getTicketList());
+        tcName.setCellValueFactory(addTicket -> addTicket.getValue().getCustomerNameProperty());
+        tcTicketPrice.setCellValueFactory(addTicket -> addTicket.getValue().getPriceProperty().asObject());
+        tcPaymentStatus.setCellValueFactory(addTicket -> addTicket.getValue().getPaymentStatusProperty());
+        tcEmail.setCellValueFactory(addTicket -> addTicket.getValue().getCustomerEmailProperty());
     }
 
     public static void updateComboBoxChooseEvent(Event event){
