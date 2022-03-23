@@ -1,11 +1,14 @@
 package bll;
 
+import be.Event;
 import be.Ticket;
 import dal.TicketDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TicketManager {
 
@@ -27,15 +30,12 @@ public class TicketManager {
         ticketDAO.deleteTicket(ticket);
     }
 
-    public ObservableList<Ticket> getAllTicketToObservable() {
-        ObservableList<Ticket> observableTickets = FXCollections.observableArrayList();
-        observableTickets.addAll(ticketDAO.getAllTickets());
-
-        for (Ticket t : observableTickets)
-        {
-
-        }
-        return observableTickets;
+    public List<Ticket> getTicketsFromEvent(Event event) {
+        return ticketDAO.getTicketsFromEvent(event);
     }
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 }

@@ -1,9 +1,14 @@
 package dal;
 
+import be.Event;
 import be.Ticket;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TicketDAO {
     private DBConnecting dbc = new DBConnecting();
@@ -47,8 +52,8 @@ public class TicketDAO {
             ps.setByte(8, isTicketFoodBit);
 
             if (ticket.getSeatedProperty().get()) {
-            ps.setInt(9, ticket.getRowProperty().get());
-            ps.setInt(10, ticket.getSeatProperty().get());
+                ps.setInt(9, ticket.getRowProperty().get());
+                ps.setInt(10, ticket.getSeatProperty().get());
             }
 
             int affectedRows = ps.executeUpdate();
@@ -67,8 +72,7 @@ public class TicketDAO {
 
 
     public Ticket updateTicket(Ticket ticket) {
-        try(Connection connection = dbc.getConnection())
-        {
+        try (Connection connection = dbc.getConnection()) {
             String sql = "UPDATE Ticket SET Price, IsPaid, IsSeated, IsVIP, IsDrink," +
                     "IsFood, Row, Seat = (?, ?, ?, ?, ?, ?, ?, ?) WHERE ID = (?);";
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -115,9 +119,8 @@ public class TicketDAO {
 
     public void deleteTicket(Ticket ticket) {
         String sql = "DELETE FROM Ticket WHERE ID = (?);";
-        try(Connection connection = dbc.getConnection())
-        {
-            PreparedStatement ps =connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        try (Connection connection = dbc.getConnection()) {
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, ticket.getIdProperty().get());
             ps.executeUpdate();
 
@@ -126,9 +129,41 @@ public class TicketDAO {
         }
     }
 
-    public Ticket getAllTickets() {
-        return null;
+    public List<Ticket> getTicketsFromEvent(Event event) {
+        List<Ticket> allTicketsFromEvent = new ArrayList<>();
+        try (Connection c = dbc.getConnection()) {
+            String sql = "SELECT * FROM Ticket WHERE Event_ID = (?)";
+            PreparedStatement ps = c.prepareStatement(sql);
+            ps.setInt(1, event.getIdProperty().get());
+            ps.execute();
+
+            ResultSet rs = ps.getResultSet();
+            Ticket ticket = new Ticket();
+            allTicketsFromEvent.add(ticket);
+            while (rs.next()) {
+                ticket.setId(rs.getInt("ID"));
+                ticket.setCustomerId(rs.getInt("Customer_ID"));
+                ticket.setEventId(rs.getInt("Event_ID"));
+                ticket.setPrice(rs.getInt("Price"));
+                ticket.setIsPaid(convertBitToBoolean(rs.getByte("IsPaid")));
+                ticket.setSeated(convertBitToBoolean(rs.getByte("IsSeated")));
+                ticket.setVip(convertBitToBoolean(rs.getByte("IsVIP")));
+                ticket.setDrinks(convertBitToBoolean(rs.getInt("IsDrink")));
+                ticket.setFood(convertBitToBoolean(rs.getInt("IsFood")));
+                ticket.setRow(rs.getInt("Row"));
+                ticket.setSeat(rs.getInt("Seat"));
+
+                allTicketsFromEvent.add(ticket);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return allTicketsFromEvent;
     }
 
+    public boolean convertBitToBoolean(int bit) {
+        if (bit == 1) return true;
+        else return false;
+    }
 
 }
