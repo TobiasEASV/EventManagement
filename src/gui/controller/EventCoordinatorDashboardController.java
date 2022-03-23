@@ -177,10 +177,10 @@ public class EventCoordinatorDashboardController implements Initializable {
         //Set placeholder for tableview if it is empty
         tvTickets.setPlaceholder(new Label("No tickets found for this event."));
         tvTickets.setItems(ticketListModel.getTicketList());
-        tcName.setCellValueFactory(addTicket -> addTicket.getValue().getCustomerNameProperty());
+        tcName.setCellValueFactory(addTicket -> addTicket.getValue().getCustomer().getNameProperty());
         tcTicketPrice.setCellValueFactory(addTicket -> addTicket.getValue().getPriceProperty().asObject());
         tcPaymentStatus.setCellValueFactory(addTicket -> addTicket.getValue().getPaymentStatusProperty());
-        tcEmail.setCellValueFactory(addTicket -> addTicket.getValue().getCustomerEmailProperty());
+        tcEmail.setCellValueFactory(addTicket -> addTicket.getValue().getCustomer().getEmailProperty());
     }
 
     public void updateComboBoxChooseEvent(Event event){
@@ -188,7 +188,7 @@ public class EventCoordinatorDashboardController implements Initializable {
     }
 
     public void handleSellTicketButton(ActionEvent actionEvent) throws IOException {
-        sceneSwapper.sceneSwitch(new Stage(), "SellTicketView.fxml");
+        sceneSwapper.instantiateSellTicketScene();
 
     }
 
@@ -206,7 +206,7 @@ public class EventCoordinatorDashboardController implements Initializable {
     public void handleMailTicketButton(ActionEvent actionEvent) throws IOException {
         generateTicket();
 
-        email.sendEmail(ticket.getCustomerEmailProperty().get(), "Your Ticket", "Congratulations on your ticket", TICKET_FILE);
+        email.sendEmail(ticket.getCustomer().getEmailProperty().get(), "Your Ticket", "Congratulations on your ticket", TICKET_FILE);
     }
 
     public void handleEditEventButton(ActionEvent actionEvent) {
@@ -232,5 +232,9 @@ public class EventCoordinatorDashboardController implements Initializable {
         } catch (IOException ioe){
             ioe.printStackTrace();
         }
+    }
+
+    public Event getSelectionEvent(){
+        return comboBoxChooseEvent.getSelectionModel().getSelectedItem();
     }
 }

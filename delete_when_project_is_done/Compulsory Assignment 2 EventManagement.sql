@@ -62,13 +62,13 @@ CREATE TABLE [Ticket]
     [Customer_ID] INT NOT NULL,
     [Event_ID] INT,
     [Price] INT NOT NULL,
-    [IsPaid] BIT,
-    [IsSeated] BIT,
-    [IsVIP] BIT,
-    [IsDrink] BIT,
-    [IsFood] BIT,
-    [Row] INT,
-    [Seat] INT
+    [IsPaid] BIT NULL,
+    [IsSeated] BIT NULL,
+    [IsVIP] BIT NULL,
+    [IsDrink] BIT NULL,
+    [IsFood] BIT NULL,
+    [Row] NVARCHAR(20),
+    [Seat] NVARCHAR(20)
 
    CONSTRAINT Ticket_ID PRIMARY KEY (Customer_ID, Event_ID),
    CONSTRAINT FK_Customer_ID FOREIGN KEY(Customer_ID) REFERENCES Customer(ID),

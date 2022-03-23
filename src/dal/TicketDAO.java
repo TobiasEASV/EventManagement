@@ -1,9 +1,8 @@
 package dal;
 
+import be.Customer;
 import be.Event;
 import be.Ticket;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 import java.io.IOException;
 import java.sql.*;
@@ -22,45 +21,30 @@ public class TicketDAO {
                     " IsSeated, IsVIP, IsDrink, IsFood, Row, Seat) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-            ps.setInt(1, ticket.getCustomerIdProperty().get());
-            ps.setInt(2, ticket.getEventIdProperty().get());
+            System.out.println(" customer id on Ticket " + ticket.getCustomer().getIdProperty());
+
+
+            ps.setInt(1, ticket.getCustomer().getIdProperty().get());
+            ps.setInt(2, ticket.getEvent().getIdProperty().get());
             ps.setDouble(3, ticket.getPriceProperty().get());
 
-            byte isTicketPaidBit = 0;
-            if (ticket.getIsPaidProperty().get())
-                isTicketPaidBit = 1;
-            ps.setByte(4, isTicketPaidBit);
 
-            byte isTicketSeatedBit = 0;
-            if (ticket.getSeatedProperty().get())
-                isTicketSeatedBit = 1;
-            ps.setByte(5, isTicketSeatedBit);
+            System.out.println(ticket.getRowProperty());
 
-            byte isTicketVIPBit = 0;
-            if (ticket.getVipProperty().get())
-                isTicketVIPBit = 1;
-            ps.setByte(6, isTicketVIPBit);
+            ps.setBoolean(4,ticket.getIsPaidProperty().get());
+            ps.setBoolean(5,ticket.getSeatedProperty().get());
+            ps.setBoolean(6,ticket.getVipProperty().get());
+            ps.setBoolean(7,ticket.getDrinksProperty().get());
+            ps.setBoolean(8,ticket.getFoodProperty().get());
 
-            byte isTicketDrinkBit = 0; //this variable might be drunk?
-            if (ticket.getDrinksProperty().get())
-                isTicketDrinkBit = 1;
-            ps.setByte(7, isTicketDrinkBit);
+            ps.setString(9, ticket.getRowProperty().get());
+            ps.setString(10, ticket.getSeatProperty().get());
 
-            byte isTicketFoodBit = 0;
-            if (ticket.getFoodProperty().get())
-                isTicketFoodBit = 1;
-            ps.setByte(8, isTicketFoodBit);
 
-            if (ticket.getSeatedProperty().get()) {
-                ps.setInt(9, ticket.getRowProperty().get());
-                ps.setInt(10, ticket.getSeatProperty().get());
-            }
-
-            int affectedRows = ps.executeUpdate();
-            if (affectedRows == 1) {
+            if ( ps.execute()) {
                 ResultSet rs = ps.getGeneratedKeys();
                 if (rs.next()) {
-                    int id = rs.getInt(1);
+                    int id = rs.getInt("ID");
                     ticket.setId(id);
                 }
             }
@@ -68,6 +52,12 @@ public class TicketDAO {
             throwables.printStackTrace();
         }
         return ticket;
+    }
+
+    private byte BITConverter(boolean isTrue){
+        if(isTrue){
+            return 1;
+        }else return 0;
     }
 
 
@@ -104,10 +94,9 @@ public class TicketDAO {
                 isTicketFoodBit = 1;
             ps.setByte(6, isTicketFoodBit);
 
-            if (ticket.getSeatedProperty().get()) {
-                ps.setInt(7, ticket.getRowProperty().get());
-                ps.setInt(8, ticket.getSeatProperty().get());
-            }
+            ps.setString(7, ticket.getRowProperty().get());
+            ps.setString(8, ticket.getSeatProperty().get());
+
 
             ps.setInt(9, ticket.getIdProperty().get());
             ps.executeUpdate();
@@ -132,26 +121,28 @@ public class TicketDAO {
     public List<Ticket> getTicketsFromEvent(Event event) {
         List<Ticket> allTicketsFromEvent = new ArrayList<>();
         try (Connection c = dbc.getConnection()) {
-            String sql = "SELECT * FROM Ticket WHERE Event_ID = (?)";
+            String sql = "SELECT * FROM Ticket JOIN Customer ON Ticket.Event_ID = ?";
             PreparedStatement ps = c.prepareStatement(sql);
             ps.setInt(1, event.getIdProperty().get());
             ps.execute();
 
             ResultSet rs = ps.getResultSet();
             Ticket ticket = new Ticket();
+            Customer customer;
             allTicketsFromEvent.add(ticket);
             while (rs.next()) {
-                ticket.setId(rs.getInt("ID"));
-                ticket.setCustomerId(rs.getInt("Customer_ID"));
-                ticket.setEventId(rs.getInt("Event_ID"));
+                ticket.setId(rs.getInt(1));
+                ticket.setCustomer(customer = new Customer(rs.getString("Email"), rs.getString("FullName")));
+                customer.setId(rs.getInt("Customer_ID"));
+                ticket.setEvent(event);
                 ticket.setPrice(rs.getInt("Price"));
                 ticket.setIsPaid(convertBitToBoolean(rs.getByte("IsPaid")));
                 ticket.setSeated(convertBitToBoolean(rs.getByte("IsSeated")));
                 ticket.setVip(convertBitToBoolean(rs.getByte("IsVIP")));
                 ticket.setDrinks(convertBitToBoolean(rs.getInt("IsDrink")));
                 ticket.setFood(convertBitToBoolean(rs.getInt("IsFood")));
-                ticket.setRow(rs.getInt("Row"));
-                ticket.setSeat(rs.getInt("Seat"));
+                ticket.setRow(rs.getString("Row"));
+                ticket.setSeat(rs.getString("Seat"));
 
                 allTicketsFromEvent.add(ticket);
             }
@@ -162,8 +153,7 @@ public class TicketDAO {
     }
 
     public boolean convertBitToBoolean(int bit) {
-        if (bit == 1) return true;
-        else return false;
+        return bit == 1;
     }
 
 }

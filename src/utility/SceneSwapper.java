@@ -1,5 +1,6 @@
 package utility;
 import gui.controller.EventCoordinatorDashboardController;
+import gui.controller.SellTicketViewController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,10 +15,12 @@ import java.net.URL;
 public class SceneSwapper {
 
     private static FXMLLoader dashboard;
+    private static FXMLLoader sellTicket;
 
 
     private final Image image = new Image("gui/images/Icons/ticket_2_icon.png");
     private final String sceneTitle = "Event Manager";
+    private Stage stage = new Stage();
 
 
 
@@ -47,7 +50,6 @@ public class SceneSwapper {
     }
 
     public void instantiateCreateEventScene() throws IOException {
-        Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/view/CreateEventView.fxml"));
         stage.setScene(new Scene(loader.load()));
         stage.setTitle(sceneTitle + " - New Event");
@@ -63,7 +65,19 @@ public class SceneSwapper {
         stage.show();
     }
 
+    public void instantiateSellTicketScene() throws IOException {
+        sellTicket = new FXMLLoader(getClass().getResource("../gui/view/SellTicketView.fxml"));
+        stage.setScene(new Scene(sellTicket.load()));
+        stage.setTitle(sceneTitle + " - Sell Ticket");
+        stage.getIcons().add(image);
+        stage.show();
+    }
+
     public static EventCoordinatorDashboardController getDashboardController(){
         return dashboard.getController();
+    }
+
+    public static SellTicketViewController getSellTicketController(){
+        return sellTicket.getController();
     }
 }

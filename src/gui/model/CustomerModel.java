@@ -13,8 +13,8 @@ public class CustomerModel {
         customerManager = new CustomerManager();
     }
 
-    public void createCustomer(Customer customer){
-        customerManager.createCustomer(customer);
+    public Customer createCustomer(Customer customer){
+        return customerManager.createCustomer(customer);
     }
 
     public void updateCustomer(Customer customer)

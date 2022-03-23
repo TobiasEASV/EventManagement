@@ -64,18 +64,18 @@ public class DBEvent {
             if(preparedStatement.execute()) {
                 ResultSet resultSet = preparedStatement.getResultSet();
                 while (resultSet.next()) {
-                    int id = resultSet.getInt(1);
-                    String title = resultSet.getString(2);
-                    String artist = resultSet.getString(3);
-                    String description = resultSet.getString(4);
-                    String location = resultSet.getString(5);
-                    double price = resultSet.getDouble(6);
-                    String contact_Mail = resultSet.getString(7);
-                    Date start_Data = resultSet.getDate(8);
-                    Date end_Data = resultSet.getDate(9);
-                    double VIPPrice = resultSet.getDouble(10);
-                    double drinkPrice = resultSet.getDouble(11);
-                    double foodPrice = resultSet.getDouble(12);
+                    int id = resultSet.getInt("ID");
+                    String title = resultSet.getString("Title");
+                    String artist = resultSet.getString("Artist");
+                    String description = resultSet.getString("Description");
+                    String location = resultSet.getString("Location");
+                    double price = resultSet.getDouble("Price");
+                    String contact_Mail = resultSet.getString("Contact_Mail");
+                    Date start_Data = resultSet.getDate("Start_Data");
+                    Date end_Data = resultSet.getDate("End_Data");
+                    double VIPPrice = resultSet.getDouble("VIP_Price");
+                    double drinkPrice = resultSet.getDouble("Drink_Price");
+                    double foodPrice = resultSet.getDouble("Food_Price");
 
                     Event event = new Event(title, description, location, artist, contact_Mail, price, VIPPrice, foodPrice, drinkPrice, LocalDate.parse(start_Data.toString()), LocalDate.parse(end_Data.toString()));
                     event.setId(id);
