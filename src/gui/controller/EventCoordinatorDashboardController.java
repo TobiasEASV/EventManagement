@@ -210,7 +210,6 @@ public class EventCoordinatorDashboardController implements Initializable {
 
     public void handleEditEventButton(ActionEvent actionEvent) throws IOException {
         sceneSwapper.instantiateEditEventScene();
-        eventListModel.removeEvent(comboBoxChooseEvent.getSelectionModel().getSelectedItem());
 
     }
 
