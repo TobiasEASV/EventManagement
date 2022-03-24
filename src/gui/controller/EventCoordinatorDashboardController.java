@@ -192,7 +192,8 @@ public class EventCoordinatorDashboardController implements Initializable {
     }
 
     public void handleRefundTicketButton(ActionEvent actionEvent) {
-        customerModel.deleteCustomer(tvTickets.getSelectionModel().getSelectedItem().getCustomer());
+        //customerModel.deleteCustomer(tvTickets.getSelectionModel().getSelectedItem().getCustomer());
+        ticketListModel.deleteTicketFromList(tvTickets.getSelectionModel().getSelectedItem());
     }
 
     public void handlePrintTicketButton(ActionEvent actionEvent) {
