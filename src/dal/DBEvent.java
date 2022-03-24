@@ -29,8 +29,8 @@ public class DBEvent {
             preparedStatement.setString(4, event.getLocationProperty().get());
             preparedStatement.setDouble(5, event.getPriceProperty().get());
             preparedStatement.setDouble(6, event.getVipPriceProperty().get());
-            preparedStatement.setDouble(7, event.getFoodPriceProperty().get());
-            preparedStatement.setDouble(8, event.getDrinkPriceProperty().get());
+            preparedStatement.setDouble(7, event.getDrinkPriceProperty().get());
+            preparedStatement.setDouble(8, event.getFoodPriceProperty().get());
             preparedStatement.setString(9, event.getContactEmailProperty().get());
             preparedStatement.setObject(10, event.getStartDateProperty().get());
             preparedStatement.setObject(11, event.getEndDateProperty().get());
