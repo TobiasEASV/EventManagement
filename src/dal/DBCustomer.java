@@ -64,7 +64,7 @@ public class DBCustomer {
 
     public void updateCustomer(Customer customer)
     {
-        String sql = "UPDATE Customer SET FullName, Email = (?,?) WHERE ID = (?);";
+        String sql = "UPDATE Customer SET FullName= (?), Email = (?) WHERE ID = (?);";
         try(Connection connection = dbConnecting.getConnection())
         {
             PreparedStatement ps = connection.prepareStatement(sql);

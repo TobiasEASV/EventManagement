@@ -24,4 +24,7 @@ public class EventManager {
         return dbEvent.getAllEvents();
     }
 
+    public Event updateEvent(Event event) {
+        return dbEvent.updateEvent(event);
+    }
 }

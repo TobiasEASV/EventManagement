@@ -48,6 +48,13 @@ public class SceneSwapper {
         stage.setScene(new Scene(loader.load()));
         stage.show();
     }
+    public void instantiateEditEventScene() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/view/EditEventView.fxml"));
+        stage.setScene(new Scene(loader.load()));
+        stage.setTitle(sceneTitle + " - Edit Event");
+        stage.getIcons().add(image);
+        stage.show();
+    }
 
     public void instantiateCreateEventScene() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/view/CreateEventView.fxml"));

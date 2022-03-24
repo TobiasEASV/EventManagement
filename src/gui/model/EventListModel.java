@@ -23,4 +23,9 @@ public class EventListModel {
     public ObservableList<Event> getEventList(){
         return eventList;
     }
+
+    public void removeEvent(Event event)
+    {
+        eventList.remove(event);
+    }
 }
