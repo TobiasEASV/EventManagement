@@ -5,6 +5,7 @@ import be.Event;
 import be.Ticket;
 import bll.TicketManager;
 import gui.model.CustomerModel;
+import gui.model.TicketListModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -45,6 +46,7 @@ public class SellTicketViewController implements Initializable {
     private double price;
     private TicketManager ticketManager;
     private CustomerModel customerModel;
+    private TicketListModel ticketListModel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -57,6 +59,7 @@ public class SellTicketViewController implements Initializable {
             alert.show();
         }
         try {
+            ticketListModel = TicketListModel.getInstance();
             ticketManager = new TicketManager();
             customerModel = new CustomerModel();
         } catch (IOException e) {
@@ -103,7 +106,7 @@ public class SellTicketViewController implements Initializable {
         Ticket ticket = new Ticket(customerModel.createCustomer(customer), event, Double.parseDouble(lblPrice.getText()), hasPaid, vip, drinks, food, isSeated);
         ticket.setRow(row);
         ticket.setSeat(seat);
-        ticketManager.createTicket(ticket);
+        ticketListModel.addTicketToList(ticketManager.createTicket(ticket));
     }
 
     public void vipClick(ActionEvent actionEvent) {

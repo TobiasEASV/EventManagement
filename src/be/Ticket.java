@@ -37,11 +37,10 @@ public class Ticket {
 
     public Ticket()
     {
-
+        setPaymentStatus();
     }
 
-    public Ticket(Customer customer, Event event, double price, boolean isPaid,boolean vip, boolean drinks, boolean food, boolean isSeated)
-    {
+    public Ticket(Customer customer, Event event, double price, boolean isPaid,boolean vip, boolean drinks, boolean food, boolean isSeated) {
         this.customer = customer;
         this.event = event;
         this.price.set(price);
@@ -50,6 +49,8 @@ public class Ticket {
         this.drinks.set(drinks);
         this.food.set(food);
         this.seated.set(isSeated);
+
+        setPaymentStatus();
     }
 
 
