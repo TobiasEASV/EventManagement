@@ -65,16 +65,26 @@ public class CreateEventController implements Initializable {
         if(!txTitle.getText().isBlank() && !txtAreaDescription.getText().isBlank() && !txLocation.getText().isBlank()
                 && !txArtists.getText().isBlank() && !txContactEmail.getText().isBlank() && !(dpStartData.getValue() == null) && !(dpEndData.getValue() == null)){
 
+            String ticketPrice = "0", VIPPrice = "0", foodPrice = "0", drinkPrice = "0";
+            if (!txTicktePrice.getText().isEmpty())
+                ticketPrice = txTicktePrice.getText();
+            if (!txVIPPrice.getText().isEmpty())
+                VIPPrice = txVIPPrice.getText();
+            if (!txFoodPrice.getText().isEmpty())
+                foodPrice = txTicktePrice.getText();
+            if (!txDrinkPrice.getText().isEmpty())
+                drinkPrice = txTicktePrice.getText();
+
             Event event = new Event(
                     txTitle.getText(),
                     txtAreaDescription.getText(),
                     txLocation.getText(),
                     txArtists.getText(),
                     txContactEmail.getText(),
-                    Double.parseDouble(txTicktePrice.getText()),
-                    Double.parseDouble(txVIPPrice.getText()),
-                    Double.parseDouble(txFoodPrice.getText()),
-                    Double.parseDouble(txDrinkPrice.getText()),
+                    Double.parseDouble(ticketPrice),
+                    Double.parseDouble(VIPPrice),
+                    Double.parseDouble(foodPrice),
+                    Double.parseDouble(drinkPrice),
                     dpStartData.getValue(),
                     dpEndData.getValue());
 
