@@ -91,7 +91,7 @@ create table [Email]
     [PasswordCredentials] VARCHAR(30) NULL
 )
 
-INSERT INTO Email (EmailCredentials, PasswordCredentials) VALUES ('event_easv@outlook.com', 'EasvEvent2022'
+INSERT INTO Email (EmailCredentials, PasswordCredentials) VALUES ('event_easv@outlook.com', 'EasvEvent2022')
 
 ALTER TABLE [Ticket] ADD CONSTRAINT [FK_Event] FOREIGN KEY([Event_ID])
 REFERENCES [Event] ([ID])
