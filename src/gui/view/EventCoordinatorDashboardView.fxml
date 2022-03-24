@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane fx:id="parentGridPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1150.0" styleClass="backgroundPane" stylesheets="@../utility/SceneStylesheet.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.EventCoordinatorDashboardController">
+<GridPane fx:id="parentGridPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1150.0" styleClass="backgroundPane" stylesheets="@../utility/SceneStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.EventCoordinatorDashboardController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="17.0" prefWidth="100.0" />
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="17.0" prefWidth="100.0" />
@@ -61,7 +61,7 @@
       </HBox>
       <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="15.0" GridPane.columnSpan="2" GridPane.rowIndex="8">
          <children>
-            <Button mnemonicParsing="false" onAction="#handleEditEventButton" text="Edit Event" />
+            <Button disable="true" mnemonicParsing="false" onAction="#handleEditEventButton" text="Edit Event" />
             <Button mnemonicParsing="false" onAction="#handleNewEventButton" text="New event" />
          </children>
          <padding>
@@ -160,10 +160,10 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <CheckBox fx:id="checkBoxTicketTypeStandard" contentDisplay="TOP" mnemonicParsing="false" selected="true" text="Standard" GridPane.rowIndex="16" />
-            <CheckBox fx:id="checkBoxTicketTypeVIP" mnemonicParsing="false" text="VIP" GridPane.columnIndex="1" GridPane.rowIndex="16" />
-            <CheckBox fx:id="checkBoxTicketTypeFoodIncl" mnemonicParsing="false" text="Food incl" GridPane.columnIndex="2" GridPane.rowIndex="16" />
-            <CheckBox fx:id="checkBoxTicketTypeDrinksIncl" mnemonicParsing="false" text="Drinks incl" GridPane.columnIndex="3" GridPane.rowIndex="16" />
+            <CheckBox fx:id="checkBoxTicketTypeStandard" contentDisplay="TOP" disable="true" mnemonicParsing="false" selected="true" text="Standard" GridPane.rowIndex="16" />
+            <CheckBox fx:id="checkBoxTicketTypeVIP" disable="true" mnemonicParsing="false" text="VIP" GridPane.columnIndex="1" GridPane.rowIndex="16" />
+            <CheckBox fx:id="checkBoxTicketTypeFoodIncl" disable="true" mnemonicParsing="false" text="Food incl" GridPane.columnIndex="2" GridPane.rowIndex="16" />
+            <CheckBox fx:id="checkBoxTicketTypeDrinksIncl" disable="true" mnemonicParsing="false" text="Drinks incl" GridPane.columnIndex="3" GridPane.rowIndex="16" />
             <Separator prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="2" />
             <Separator prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="4" />
             <Separator prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="6" />
@@ -171,13 +171,13 @@
             <Separator prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="10" />
             <Separator prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="12" />
             <Separator prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="14" />
-            <Label fx:id="lblEventLocation" text="Musikhuset, Esbjerg, 6700 - Der hvor alting vigtigt sker, hvis man er nede med de unge" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" />
-            <Label fx:id="lblEventDescription" text="Det her er en lang tekst for at vise, hvordan tekst opfører sig, hvis teksten bliver så lang at den ikke kan være inde i det pane den har som forældre." wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="3" />
-            <Label fx:id="lblEventArtists" text="MØ, Simon Nielsen, Tobias Rasmussen, JanMedEnPlan" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="5" />
-            <Label fx:id="lblEventStartDate" text="19-03-2022 19:00" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="7" />
-            <Label fx:id="lblEventEndDate" text="19-03-2022 23:00" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="9" />
-            <Label fx:id="lblEventPrice" layoutX="104.0" layoutY="333.0" text="350 .-" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="11" />
-            <Label fx:id="lblEventContactEmail" layoutX="104.0" layoutY="391.0" text="Simon@nielsen.dk" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="13" />
+            <Label fx:id="lblEventLocation" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" />
+            <Label fx:id="lblEventDescription" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="3" />
+            <Label fx:id="lblEventArtists" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="5" />
+            <Label fx:id="lblEventStartDate" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="7" />
+            <Label fx:id="lblEventEndDate" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="9" />
+            <Label fx:id="lblEventPrice" layoutX="104.0" layoutY="333.0" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="11" />
+            <Label fx:id="lblEventContactEmail" layoutX="104.0" layoutY="391.0" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="13" />
          </children>
       </GridPane>
       <ComboBox fx:id="comboBoxChooseEvent" onAction="#handleChooseEvent" prefWidth="150.0" promptText="Choose an event" GridPane.rowIndex="3" />
@@ -209,8 +209,8 @@
                      <children>
                         <Label fx:id="lblCustomerName" styleClass="sidebarLabels" text="John Doe" />
                         <Label fx:id="lblCustomerEmail" styleClass="sidebarLabels" text="John@doe.dk" textAlignment="CENTER" wrapText="true" />
-                        <Label fx:id="txtTicketPrice" styleClass="sidebarLabels" text="350 .-" />
-                        <Label fx:id="txtTicketType" styleClass="sidebarLabels" text="VIP" />
+                        <Label fx:id="lblTicketPrice" styleClass="sidebarLabels" text="350 .-" />
+                        <Label fx:id="lblTicketType" styleClass="sidebarLabels" text="VIP" />
                      </children>
                   </VBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" styleClass="headerBar" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowSpan="2">

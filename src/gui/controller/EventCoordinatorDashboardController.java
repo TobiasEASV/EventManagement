@@ -9,17 +9,13 @@ import gui.model.TicketListModel;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 import utility.EmailClient;
 import utility.SceneSwapper;
 
@@ -111,9 +107,9 @@ public class EventCoordinatorDashboardController implements Initializable {
     @FXML
     private Label lblTicketEndDate;
     @FXML
-    private Label txtTicketPrice;
+    private Label lblTicketPrice;
     @FXML
-    private Label txtTicketType;
+    private Label lblTicketType;
 
     @FXML
     private GridPane ticketPane;
@@ -176,7 +172,16 @@ public class EventCoordinatorDashboardController implements Initializable {
         tcTicketPrice.setCellValueFactory(addTicket -> addTicket.getValue().getPriceProperty().asObject());
         tcPaymentStatus.setCellValueFactory(addTicket -> addTicket.getValue().getPaymentStatusProperty());
         tcEmail.setCellValueFactory(addTicket -> addTicket.getValue().getCustomer().getEmailProperty());
+
+        tvTickets.getSelectionModel().selectedItemProperty().addListener((observable, oldTicket, newTicket) -> {
+            if(newTicket != null)
+                updateTicketLabels(newTicket);
+            }
+        );
+
+
     }
+
 
     public void updateComboBoxChooseEvent(Event event){
         comboBoxChooseEvent.getItems().add(event);
@@ -234,5 +239,46 @@ public class EventCoordinatorDashboardController implements Initializable {
 
     public void handleChooseEvent(ActionEvent actionEvent) {
         ticketListModel.updateTicketList(getSelectedEvent());
+        updateEventLabels(getSelectedEvent());
+    }
+
+    private void updateEventLabels(Event event) {
+        lblEventTitle.setText(event.getTitleProperty().get());
+        lblEventLocation.setText(event.getLocationProperty().get());
+        lblEventDescription.setText(event.getDescriptionProperty().get());
+        lblEventArtists.setText(event.getArtistsProperty().get());
+        lblEventStartDate.setText(String.valueOf(event.getStartDateProperty().get()));
+        lblEventEndDate.setText(String.valueOf(event.getEndDateProperty().get()));
+        lblEventPrice.setText(String.valueOf(event.getPriceProperty().get()));
+        lblEventContactEmail.setText(event.getContactEmailProperty().get());
+        setCheckBoxesOnEvent(event);
+    }
+
+    private void setCheckBoxesOnEvent(Event event) {
+        checkBoxTicketTypeVIP.setSelected(event.getVipPriceProperty().get() != 0);
+        checkBoxTicketTypeDrinksIncl.setSelected(event.getDrinkPriceProperty().get() != 0);
+        checkBoxTicketTypeFoodIncl.setSelected(event.getFoodPriceProperty().get() != 0);
+    }
+
+    private void updateTicketLabels(Ticket ticket) {
+        String ticketType = "Standard";
+
+        if (ticket.getDrinksProperty().get()) ticketType = "Drinks Incl";
+        if (ticket.getFoodProperty().get()) ticketType = "Food Incl";
+        if (ticket.getVipProperty().get()) ticketType = "VIP";
+
+
+        lblTicketTitle.setText(ticket.getEvent().getTitleProperty().get());
+        lblCustomerName.setText(ticket.getCustomer().getNameProperty().get());
+        lblCustomerEmail.setText(ticket.getCustomer().getEmailProperty().get());
+        lblTicketPrice.setText(String.valueOf(ticket.getPriceProperty().get()));
+        lblTicketType.setText(ticketType);
+        lblTicketLocation.setText(ticket.getEvent().getLocationProperty().get());
+        lblTicketStartDate.setText(String.valueOf(ticket.getEvent().getStartDateProperty().get()));
+        lblTicketEndDate.setText(String.valueOf(ticket.getEvent().getEndDateProperty().get()));
+        lblTicketRowNumber.setText(ticket.getRowProperty().get());
+        lblTicketSeatNumber.setText(ticket.getSeatProperty().get());
+        lblTicketContactEmail.setText(ticket.getEvent().getContactEmailProperty().get());
+        lblTicketDescription.setText(ticket.getEvent().getDescriptionProperty().get());
     }
 }
