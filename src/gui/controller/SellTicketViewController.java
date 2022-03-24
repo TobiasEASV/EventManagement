@@ -106,7 +106,7 @@ public class SellTicketViewController implements Initializable {
         Ticket ticket = new Ticket(customerModel.createCustomer(customer), event, Double.parseDouble(lblPrice.getText()), hasPaid, vip, drinks, food, isSeated);
         ticket.setRow(row);
         ticket.setSeat(seat);
-        ticketListModel.addTicketToList(ticketManager.createTicket(ticket));
+        ticketListModel.addTicketToList(ticket);
     }
 
     public void vipClick(ActionEvent actionEvent) {
