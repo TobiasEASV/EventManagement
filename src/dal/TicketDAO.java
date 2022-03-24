@@ -21,9 +21,7 @@ public class TicketDAO {
                     " IsSeated, IsVIP, IsDrink, IsFood, Row, Seat) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-            System.out.println(" customer id on Ticket " + ticket.getCustomer().getIdProperty());
-
-
+            
             ps.setInt(1, ticket.getCustomer().getIdProperty().get());
             ps.setInt(2, ticket.getEvent().getIdProperty().get());
             ps.setDouble(3, ticket.getPriceProperty().get());
