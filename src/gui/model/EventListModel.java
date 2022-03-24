@@ -26,8 +26,8 @@ public class EventListModel {
     }
 
     public void deleteEventFromList(Event event){
-        eventList.remove(event);
         eventManager.deleteEvent(event);
+        eventList.remove(event);
     }
 
 }

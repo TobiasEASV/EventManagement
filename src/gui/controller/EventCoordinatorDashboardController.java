@@ -238,8 +238,10 @@ public class EventCoordinatorDashboardController implements Initializable {
     }
 
     public void handleChooseEvent(ActionEvent actionEvent) {
-        ticketListModel.updateTicketList(getSelectedEvent());
-        updateEventLabels(getSelectedEvent());
+        if (getSelectedEvent() != null){
+            ticketListModel.updateTicketList(getSelectedEvent());
+            updateEventLabels(getSelectedEvent());
+        }
     }
 
     private void updateEventLabels(Event event) {
