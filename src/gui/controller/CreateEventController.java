@@ -71,9 +71,9 @@ public class CreateEventController implements Initializable {
             if (!txVIPPrice.getText().isEmpty())
                 VIPPrice = txVIPPrice.getText();
             if (!txFoodPrice.getText().isEmpty())
-                foodPrice = txTicktePrice.getText();
+                foodPrice = txFoodPrice.getText();
             if (!txDrinkPrice.getText().isEmpty())
-                drinkPrice = txTicktePrice.getText();
+                drinkPrice = txDrinkPrice.getText();
 
             Event event = new Event(
                     txTitle.getText(),

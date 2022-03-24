@@ -284,5 +284,7 @@ public class EventCoordinatorDashboardController implements Initializable {
 
     public void handleDeleteEventButton(ActionEvent actionEvent) {
         eventListModel.deleteEventFromList(getSelectedEvent());
+        comboBoxChooseEvent.getItems().clear();
+        comboBoxChooseEvent.getItems().addAll(eventListModel.getEventList());
     }
 }
