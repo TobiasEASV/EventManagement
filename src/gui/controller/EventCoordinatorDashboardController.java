@@ -281,4 +281,8 @@ public class EventCoordinatorDashboardController implements Initializable {
         lblTicketContactEmail.setText(ticket.getEvent().getContactEmailProperty().get());
         lblTicketDescription.setText(ticket.getEvent().getDescriptionProperty().get());
     }
+
+    public void handleDeleteEventButton(ActionEvent actionEvent) {
+        eventListModel.deleteEventFromList(getSelectedEvent());
+    }
 }

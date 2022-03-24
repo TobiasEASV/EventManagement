@@ -1,6 +1,7 @@
 package gui.model;
 
 import be.Event;
+import be.Ticket;
 import bll.EventManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableArray;
@@ -23,4 +24,10 @@ public class EventListModel {
     public ObservableList<Event> getEventList(){
         return eventList;
     }
+
+    public void deleteEventFromList(Event event){
+        eventList.remove(event);
+        eventManager.deleteEvent(event);
+    }
+
 }

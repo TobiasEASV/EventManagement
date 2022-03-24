@@ -1,6 +1,7 @@
 package bll;
 
 import be.Event;
+import be.Ticket;
 import dal.DBEvent;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,6 +23,10 @@ public class EventManager {
 
     public List<Event> getAllEvents(){
         return dbEvent.getAllEvents();
+    }
+
+    public void deleteEvent(Event event) {
+        dbEvent.deleteEvent(event);
     }
 
 }

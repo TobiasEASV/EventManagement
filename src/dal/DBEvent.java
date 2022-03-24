@@ -1,6 +1,7 @@
 package dal;
 
 import be.Event;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import java.io.IOException;
 import java.sql.*;
@@ -89,4 +90,18 @@ public class DBEvent {
         return allEvents;
 
     }
+
+    public void deleteEvent(Event event) {
+        String sql = "DELETE FROM Event WHERE ID = (?);";
+        try (Connection connection = dbConnecting.getConnection()) {
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, event.getIdProperty().get());
+            ps.executeUpdate();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+
 }
