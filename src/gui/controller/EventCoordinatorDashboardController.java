@@ -208,7 +208,10 @@ public class EventCoordinatorDashboardController implements Initializable {
         email.sendEmail(ticket.getCustomer().getEmailProperty().get(), "Your Ticket", "Congratulations on your ticket", TICKET_FILE);
     }
 
-    public void handleEditEventButton(ActionEvent actionEvent) {
+    public void handleEditEventButton(ActionEvent actionEvent) throws IOException {
+        sceneSwapper.instantiateEditEventScene();
+        eventListModel.removeEvent(comboBoxChooseEvent.getSelectionModel().getSelectedItem());
+
     }
 
     public void handleNewEventButton(ActionEvent actionEvent) throws IOException {

@@ -25,8 +25,13 @@ public class EventManager {
         return dbEvent.getAllEvents();
     }
 
+
     public void deleteEvent(Event event) {
         dbEvent.deleteEvent(event);
     }
 
+
+    public Event updateEvent(Event event) {
+        return dbEvent.updateEvent(event);
+    }
 }
