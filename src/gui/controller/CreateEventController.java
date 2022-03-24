@@ -13,7 +13,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import utility.SceneSwapper;
 
 import java.io.IOException;
 import java.net.URL;
@@ -26,7 +25,7 @@ public class CreateEventController implements Initializable {
     @FXML
     private TextArea txtAreaDescription;
     @FXML
-    private GridPane PerentGridPane;
+    private GridPane parentGridPane;
     @FXML
     private DatePicker dpStartData;
     @FXML
@@ -107,7 +106,7 @@ public class CreateEventController implements Initializable {
     }
 
     public void EXITScene(){
-        Stage stage = (Stage) PerentGridPane.getScene().getWindow();
+        Stage stage = (Stage) parentGridPane.getScene().getWindow();
         stage.close();
     }
 }

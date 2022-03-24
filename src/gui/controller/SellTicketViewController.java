@@ -13,6 +13,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -21,6 +23,9 @@ import java.util.ResourceBundle;
 import static utility.SceneSwapper.getDashboardController;
 
 public class SellTicketViewController implements Initializable {
+
+    @FXML
+    private  GridPane parentPane;
     @FXML
     private Label lblPrice;
     @FXML
@@ -77,8 +82,6 @@ public class SellTicketViewController implements Initializable {
     }
 
     public void btnSave(ActionEvent actionEvent) {
-
-
         String seat = "No Seat nr";
         String row = "No Row nr";
 
@@ -111,6 +114,7 @@ public class SellTicketViewController implements Initializable {
         ticket.setRow(row);
         ticket.setSeat(seat);
         ticketListModel.addTicketToList(ticket);
+        EXITScene();
     }
 
     public void vipClick(ActionEvent actionEvent) {
@@ -163,5 +167,12 @@ public class SellTicketViewController implements Initializable {
         }
     }
 
+    public void EXITScene(){
+        Stage stage = (Stage) parentPane.getScene().getWindow();
+        stage.close();
+    }
 
+    public void handleButtonCancel(ActionEvent actionEvent) {
+        EXITScene();
+    }
 }

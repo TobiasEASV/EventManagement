@@ -14,7 +14,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import static utility.SceneSwapper.getDashboardController;
@@ -23,7 +22,7 @@ public class EditEventController implements Initializable {
     @FXML
     private TextArea txtAreaDescription;
     @FXML
-    private GridPane PerentGridPane;
+    private GridPane parentGridPane;
     @FXML
     private DatePicker dpStartData;
     @FXML
@@ -78,21 +77,20 @@ public class EditEventController implements Initializable {
         if(!txTitle.getText().isBlank() && !txtAreaDescription.getText().isBlank() && !txLocation.getText().isBlank()
                 && !txArtists.getText().isBlank() && !txContactEmail.getText().isBlank() && !(dpStartData.getValue() == null) && !(dpEndData.getValue() == null)){
 
-            Event event = new Event(
-                    txTitle.getText(),
-                    txtAreaDescription.getText(),
-                    txLocation.getText(),
-                    txArtists.getText(),
-                    txContactEmail.getText(),
-                    Double.parseDouble(txTicktePrice.getText()),
-                    Double.parseDouble(txVIPPrice.getText()),
-                    Double.parseDouble(txFoodPrice.getText()),
-                    Double.parseDouble(txDrinkPrice.getText()),
-                    dpStartData.getValue(),
-                    dpEndData.getValue());
-                    event.setId(eventToEdit.getIdProperty().get());
+            eventToEdit.setTitle(txTitle.getText());
+            eventToEdit.setDescription(txtAreaDescription.getText());
+            eventToEdit.setLocation(txLocation.getText());
+            eventToEdit.setArtists(txArtists.getText());
+            eventToEdit.setContactEmail(txContactEmail.getText());
+            eventToEdit.setPrice(Double.parseDouble(txTicktePrice.getText()));
+            eventToEdit.setVipPrice(Double.parseDouble(txVIPPrice.getText()));
+            eventToEdit.setFoodPrice(Double.parseDouble(txFoodPrice.getText()));
+            eventToEdit.setDrinkPrice(Double.parseDouble(txDrinkPrice.getText()));
+            eventToEdit.setStartDate(dpStartData.getValue());
+                    eventToEdit.setEndDate(dpEndData.getValue());
 
-            dashboardController.updateComboBoxChooseEvent(eventManager.updateEvent(event));
+            eventManager.updateEvent(eventToEdit);
+            dashboardController.updateComboBoxView();
             EXITScene();
 
         }else{
@@ -111,7 +109,7 @@ public class EditEventController implements Initializable {
     }
 
     public void EXITScene(){
-        Stage stage = (Stage) PerentGridPane.getScene().getWindow();
+        Stage stage = (Stage) parentGridPane.getScene().getWindow();
         stage.close();
     }
 }

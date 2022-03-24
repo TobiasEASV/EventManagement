@@ -215,6 +215,7 @@ public class EventCoordinatorDashboardController implements Initializable {
 
     public void handleNewEventButton(ActionEvent actionEvent) throws IOException {
         sceneSwapper.instantiateCreateEventScene();
+
     }
 
 
@@ -288,6 +289,10 @@ public class EventCoordinatorDashboardController implements Initializable {
 
     public void handleDeleteEventButton(ActionEvent actionEvent) {
         eventListModel.deleteEventFromList(getSelectedEvent());
+        updateComboBoxView();
+    }
+
+    public void updateComboBoxView() {
         comboBoxChooseEvent.getItems().clear();
         comboBoxChooseEvent.getItems().addAll(eventListModel.getEventList());
     }

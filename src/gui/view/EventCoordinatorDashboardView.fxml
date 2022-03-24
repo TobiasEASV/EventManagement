@@ -61,7 +61,7 @@
       </HBox>
       <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="15.0" GridPane.columnSpan="2" GridPane.rowIndex="8">
          <children>
-            <Button disable="true" mnemonicParsing="false" onAction="#handleEditEventButton" text="Edit Event" />
+            <Button mnemonicParsing="false" onAction="#handleEditEventButton" text="Edit Event" />
             <Button mnemonicParsing="false" onAction="#handleNewEventButton" text="New Event" />
             <Button layoutX="114.0" layoutY="57.0" mnemonicParsing="false" onAction="#handleDeleteEventButton" text="Delete Event" />
          </children>
