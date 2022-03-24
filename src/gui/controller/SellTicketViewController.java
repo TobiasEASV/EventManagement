@@ -77,8 +77,8 @@ public class SellTicketViewController implements Initializable {
         txtSeat.setDisable(true);
 
         checkVIP.setDisable(event.getVipPriceProperty().get() == 0);
-        checkFood.setDisable(event.getDrinkPriceProperty().get() == 0);
-        checkDrinks.setDisable(event.getFoodPriceProperty().get() == 0);
+        checkFood.setDisable(event.getFoodPriceProperty().get() == 0);
+        checkDrinks.setDisable(event.getDrinkPriceProperty().get() == 0);
     }
 
     public void btnSave(ActionEvent actionEvent) {
@@ -132,6 +132,7 @@ public class SellTicketViewController implements Initializable {
     }
 
     public void foodClick(ActionEvent actionEvent) {
+        System.out.println(event.getFoodPriceProperty().get());
         if (checkFood.isSelected())
         {
             price = price + event.getFoodPriceProperty().get();

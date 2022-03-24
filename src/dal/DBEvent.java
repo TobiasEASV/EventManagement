@@ -21,7 +21,7 @@ public class DBEvent {
     public Event createEvent(Event event) {
 
         try (Connection connection = dbConnecting.getConnection()) {
-            String sql = "INSERT INTO [Event](Title, Artist, Description, Location, Price, VIP_Price, Food_Price, Drink_Price, Contact_Mail, Start_Data, End_Data) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO [Event](Title, Artist, Description, Location, Price, VIP_Price, Drink_Price, Food_Price, Contact_Mail, Start_Data, End_Data) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, event.getTitleProperty().get());
             preparedStatement.setString(2, event.getArtistsProperty().get());
