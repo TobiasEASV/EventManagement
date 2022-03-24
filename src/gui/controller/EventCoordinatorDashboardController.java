@@ -281,8 +281,8 @@ public class EventCoordinatorDashboardController implements Initializable {
         lblTicketLocation.setText(ticket.getEvent().getLocationProperty().get());
         lblTicketStartDate.setText(String.valueOf(ticket.getEvent().getStartDateProperty().get()));
         lblTicketEndDate.setText(String.valueOf(ticket.getEvent().getEndDateProperty().get()));
-        lblTicketRowNumber.setText(ticket.getRowProperty().get());
-        lblTicketSeatNumber.setText(ticket.getSeatProperty().get());
+        lblTicketRowNumber.setText("Row: "+ticket.getRowProperty().get());
+        lblTicketSeatNumber.setText("Seat: "+ticket.getSeatProperty().get());
         lblTicketContactEmail.setText(ticket.getEvent().getContactEmailProperty().get());
         lblTicketDescription.setText(ticket.getEvent().getDescriptionProperty().get());
     }
