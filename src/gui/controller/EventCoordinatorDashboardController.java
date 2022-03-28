@@ -165,6 +165,7 @@ public class EventCoordinatorDashboardController implements Initializable {
 
         //Set placeholder for tableview if it is empty
         tvTickets.setPlaceholder(new Label("No tickets found for this event."));
+        tvTickets.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         tvTickets.setItems(ticketListModel.getTicketList());
         tcName.setCellValueFactory(addTicket -> addTicket.getValue().getCustomer().getNameProperty());
         tcTicketPrice.setCellValueFactory(addTicket -> addTicket.getValue().getPriceProperty().asObject());
