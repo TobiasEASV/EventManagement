@@ -22,7 +22,6 @@ public class Ticket {
 
     private DoubleProperty price = new SimpleDoubleProperty();
 
-    private BooleanProperty isPaid = new SimpleBooleanProperty();
     private BooleanProperty vip= new SimpleBooleanProperty();
     private BooleanProperty drinks= new SimpleBooleanProperty();
     private BooleanProperty food= new SimpleBooleanProperty();
@@ -35,22 +34,19 @@ public class Ticket {
     private final String notPaid = "Not Paid";
 
 
-    public Ticket()
-    {
-        setPaymentStatus();
-    }
+    public Ticket() {}
 
-    public Ticket(Customer customer, Event event, double price, boolean isPaid,boolean vip, boolean drinks, boolean food, boolean isSeated) {
+    public Ticket(Customer customer, Event event, double price,boolean vip, boolean drinks, boolean food, boolean isSeated) {
         this.customer = customer;
         this.event = event;
         this.price.set(price);
-        this.isPaid.set(isPaid);
+
         this.vip.set(vip);
         this.drinks.set(drinks);
         this.food.set(food);
         this.seated.set(isSeated);
 
-        setPaymentStatus();
+
     }
 
 
@@ -94,10 +90,7 @@ public class Ticket {
         this.vip.set(vip);
     }
 
-    public void setIsPaid(boolean isPaid) {
-        this.isPaid.set(isPaid);
-        setPaymentStatus();
-    }
+
 
     public void setSeated(boolean seated) {
         this.seated.set(seated);
@@ -131,9 +124,7 @@ public class Ticket {
         return price;
     }
 
-    public BooleanProperty getIsPaidProperty() {
-        return isPaid;
-    }
+
 
     public BooleanProperty getVipProperty() {
         return vip;
@@ -155,9 +146,4 @@ public class Ticket {
         return paymentStatus;
     }
 
-    public void setPaymentStatus() {
-        if(this.isPaid.get()){
-            this.paymentStatus.set(paid);
-        } else this.paymentStatus.set(notPaid);
-    }
 }

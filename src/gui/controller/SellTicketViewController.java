@@ -44,8 +44,6 @@ public class SellTicketViewController implements Initializable {
     private CheckBox checkDrinks;
     @FXML
     private CheckBox checkSeated;
-    @FXML
-    private CheckBox checkHasPaid;
 
     private Event event;
     private double price;
@@ -88,7 +86,7 @@ public class SellTicketViewController implements Initializable {
         boolean vip = false;
         boolean food = false;
         boolean drinks = false;
-        boolean hasPaid = false;
+
         boolean isSeated = false;
         if (checkSeated.isSelected()) {
             seat = txtSeat.getText();
@@ -104,13 +102,11 @@ public class SellTicketViewController implements Initializable {
         if (checkDrinks.isSelected()){
             drinks = true;
         }
-        if (checkHasPaid.isSelected()){
-            hasPaid = true;
-        }
+
 
         Customer customer = new Customer(txtCustomerEmail.getText(), txtCustomerName.getText());
 
-        Ticket ticket = new Ticket(customerModel.createCustomer(customer), event, Double.parseDouble(lblPrice.getText()), hasPaid, vip, drinks, food, isSeated);
+        Ticket ticket = new Ticket(customerModel.createCustomer(customer), event, Double.parseDouble(lblPrice.getText()), vip, drinks, food, isSeated);
         ticket.setRow(row);
         ticket.setSeat(seat);
         ticketListModel.addTicketToList(ticket);

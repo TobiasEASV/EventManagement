@@ -43,8 +43,6 @@ public class EventCoordinatorDashboardController implements Initializable {
     @FXML
     private TableColumn<Ticket, Double> tcTicketPrice;
     @FXML
-    private TableColumn<Ticket, String> tcPaymentStatus;
-    @FXML
     private TableColumn<Ticket, String> tcEmail;
 
     @FXML
@@ -170,7 +168,7 @@ public class EventCoordinatorDashboardController implements Initializable {
         tvTickets.setItems(ticketListModel.getTicketList());
         tcName.setCellValueFactory(addTicket -> addTicket.getValue().getCustomer().getNameProperty());
         tcTicketPrice.setCellValueFactory(addTicket -> addTicket.getValue().getPriceProperty().asObject());
-        tcPaymentStatus.setCellValueFactory(addTicket -> addTicket.getValue().getPaymentStatusProperty());
+
         tcEmail.setCellValueFactory(addTicket -> addTicket.getValue().getCustomer().getEmailProperty());
 
         tvTickets.getSelectionModel().selectedItemProperty().addListener((observable, oldTicket, newTicket) -> {

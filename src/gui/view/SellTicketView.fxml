@@ -100,7 +100,6 @@
                   <Insets left="10.0" />
                </padding>
             </Label>
-            <CheckBox fx:id="checkHasPaid" mnemonicParsing="false" text="Paid" GridPane.columnIndex="4" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <Separator prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="6" />

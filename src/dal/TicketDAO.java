@@ -17,8 +17,8 @@ public class TicketDAO {
 
     public Ticket createTicket(Ticket ticket) {
         try (Connection connection = dbc.getConnection()) {
-            String sql = "INSERT INTO Ticket(Customer_ID, Event_ID, Price, IsPaid," +
-                    " IsSeated, IsVIP, IsDrink, IsFood, Row, Seat) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+            String sql = "INSERT INTO Ticket(Customer_ID, Event_ID, Price, " +
+                    " IsSeated, IsVIP, IsDrink, IsFood, Row, Seat) VALUES (?, ?, ?, ?, ?, ?, ?, ?,  ?);";
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             
@@ -26,14 +26,13 @@ public class TicketDAO {
             ps.setInt(2, ticket.getEvent().getIdProperty().get());
             ps.setDouble(3, ticket.getPriceProperty().get());
 
-            ps.setBoolean(4,ticket.getIsPaidProperty().get());
-            ps.setBoolean(5,ticket.getSeatedProperty().get());
-            ps.setBoolean(6,ticket.getVipProperty().get());
-            ps.setBoolean(7,ticket.getDrinksProperty().get());
-            ps.setBoolean(8,ticket.getFoodProperty().get());
+            ps.setBoolean(4,ticket.getSeatedProperty().get());
+            ps.setBoolean(5,ticket.getVipProperty().get());
+            ps.setBoolean(6,ticket.getDrinksProperty().get());
+            ps.setBoolean(7,ticket.getFoodProperty().get());
 
-            ps.setString(9, ticket.getRowProperty().get());
-            ps.setString(10, ticket.getSeatProperty().get());
+            ps.setString(8, ticket.getRowProperty().get());
+            ps.setString(9, ticket.getSeatProperty().get());
 
 
             if ( ps.execute()) {
@@ -57,7 +56,7 @@ public class TicketDAO {
 
             ps.setDouble(1, ticket.getPriceProperty().get());
 
-            ps.setBoolean(2,ticket.getIsPaidProperty().get());
+
             ps.setBoolean(3,ticket.getSeatedProperty().get());
             ps.setBoolean(4,ticket.getVipProperty().get());
             ps.setBoolean(5,ticket.getDrinksProperty().get());
@@ -104,7 +103,7 @@ public class TicketDAO {
                 customer.setId(rs.getInt("Customer_ID"));
                 ticket.setEvent(event);
                 ticket.setPrice(rs.getInt("Price"));
-                ticket.setIsPaid(rs.getBoolean("IsPaid"));
+
                 ticket.setSeated(rs.getBoolean("IsSeated"));
                 ticket.setVip(rs.getBoolean("IsVIP"));
                 ticket.setDrinks(rs.getBoolean("IsDrink"));

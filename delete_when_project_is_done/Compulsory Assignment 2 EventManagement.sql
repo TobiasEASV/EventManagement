@@ -62,7 +62,6 @@ CREATE TABLE [Ticket]
     [Customer_ID] INT NOT NULL,
     [Event_ID] INT,
     [Price] INT NOT NULL,
-    [IsPaid] BIT NULL,
     [IsSeated] BIT NULL,
     [IsVIP] BIT NULL,
     [IsDrink] BIT NULL,
