@@ -26,16 +26,23 @@ public class SellTicketViewController implements Initializable {
 
     @FXML
     private  GridPane parentPane;
+
     @FXML
     private Label lblPrice;
+
     @FXML
     private TextField txtCustomerName;
     @FXML
     private TextField txtCustomerEmail;
     @FXML
+    private TextField txtCustomerTelephoneNumber;
+    @FXML
+    private TextField txtTelephoneCountryCode;
+    @FXML
     private TextField txtSeat;
     @FXML
     private TextField txtRow;
+
     @FXML
     private CheckBox checkVIP;
     @FXML
@@ -50,6 +57,7 @@ public class SellTicketViewController implements Initializable {
     private TicketManager ticketManager;
     private CustomerModel customerModel;
     private TicketListModel ticketListModel;
+    private final String DEFAULT_COUNTRY_CODE_DK = "+45";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -103,8 +111,26 @@ public class SellTicketViewController implements Initializable {
             drinks = true;
         }
 
+        String telephoneNumber = "";
 
-        Customer customer = new Customer(txtCustomerEmail.getText(), txtCustomerName.getText());
+        //if a country code is not specified, default to +45
+        if (txtTelephoneCountryCode.getText().isEmpty())
+            txtTelephoneCountryCode.setText(DEFAULT_COUNTRY_CODE_DK);
+
+        // if the telephone number field is not empty or blank, set telephone number to the user input from the textfield(s)
+        if (!txtCustomerTelephoneNumber.getText().isEmpty() && !txtCustomerTelephoneNumber.getText().isBlank()){
+            telephoneNumber = txtTelephoneCountryCode.getText() + " ";
+            String tempPhoneNumber = txtCustomerTelephoneNumber.getText().replaceAll("\\s+",""); //replaces white spaces and non-visible characters
+            for (int i = 0; i < tempPhoneNumber.length(); i++) {
+                if (i % 2 == 0)
+                    telephoneNumber = telephoneNumber + " " + tempPhoneNumber.charAt(i);
+                else telephoneNumber = telephoneNumber + tempPhoneNumber.charAt(i);
+            }
+        }
+
+
+
+        Customer customer = new Customer(txtCustomerEmail.getText(), txtCustomerName.getText(), telephoneNumber);
 
         Ticket ticket = new Ticket(customerModel.createCustomer(customer), event, Double.parseDouble(lblPrice.getText()), vip, drinks, food, isSeated);
         ticket.setRow(row);

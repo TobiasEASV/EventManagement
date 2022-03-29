@@ -31,7 +31,6 @@ public class EventCoordinatorDashboardController implements Initializable {
 
 
 
-
     @FXML
     private GridPane parentGridPane;
 
@@ -44,6 +43,8 @@ public class EventCoordinatorDashboardController implements Initializable {
     private TableColumn<Ticket, Double> tcTicketPrice;
     @FXML
     private TableColumn<Ticket, String> tcEmail;
+    @FXML
+    private TableColumn<Ticket, String> tcTelephoneNumber;
 
     @FXML
     private TextField textFieldSearch;
@@ -168,9 +169,9 @@ public class EventCoordinatorDashboardController implements Initializable {
         tvTickets.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         tvTickets.setItems(ticketListModel.getTicketList());
         tcName.setCellValueFactory(addTicket -> addTicket.getValue().getCustomer().getNameProperty());
-        tcTicketPrice.setCellValueFactory(addTicket -> addTicket.getValue().getPriceProperty().asObject());
-
+        tcTelephoneNumber.setCellValueFactory(addTicket -> addTicket.getValue().getCustomer().getTelephoneNumberProperty());
         tcEmail.setCellValueFactory(addTicket -> addTicket.getValue().getCustomer().getEmailProperty());
+        tcTicketPrice.setCellValueFactory(addTicket -> addTicket.getValue().getPriceProperty().asObject());
 
         tvTickets.getSelectionModel().selectedItemProperty().addListener((observable, oldTicket, newTicket) -> {
             if(newTicket != null)
@@ -191,8 +192,8 @@ public class EventCoordinatorDashboardController implements Initializable {
     }
 
     public void handleRefundTicketButton(ActionEvent actionEvent) {
-        //customerModel.deleteCustomer(tvTickets.getSelectionModel().getSelectedItem().getCustomer());
-        ticketListModel.deleteTicketFromList(tvTickets.getSelectionModel().getSelectedItem());
+        if (tvTickets.getSelectionModel().getSelectedItem() != null)
+            ticketListModel.deleteTicketFromList(tvTickets.getSelectionModel().getSelectedItem());
     }
 
     public void handlePrintTicketButton(ActionEvent actionEvent) {

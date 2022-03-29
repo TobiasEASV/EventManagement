@@ -32,6 +32,7 @@ CREATE TABLE [Customer]
     [ID] int IDENTITY,
     [FullName] NVARCHAR(30) NULL,
     [Email] NVARCHAR(70) NULL,
+    [Telephone_Number] NVARCHAR (20) NULL,
 
     CONSTRAINT PK_Customer_ID PRIMARY KEY (ID)
 

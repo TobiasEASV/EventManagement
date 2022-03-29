@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane fx:id="parentGridPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1150.0" styleClass="backgroundPane" stylesheets="@../utility/SceneStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.EventCoordinatorDashboardController">
+<GridPane fx:id="parentGridPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1150.0" styleClass="backgroundPane" stylesheets="@../utility/SceneStylesheet.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.EventCoordinatorDashboardController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="17.0" prefWidth="100.0" />
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="17.0" prefWidth="100.0" />
@@ -275,10 +275,11 @@
             <Insets left="25.0" right="25.0" />
          </GridPane.margin>
       </Separator>
-      <TableView fx:id="tvTickets" editable="true" prefHeight="200.0" prefWidth="550.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="5">
+      <TableView fx:id="tvTickets" editable="true" prefHeight="200.0" prefWidth="550.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="5">
         <columns>
           <TableColumn fx:id="tcName" prefWidth="75.0" text="Name" />
             <TableColumn fx:id="tcEmail" prefWidth="75.0" text="Email" />
+            <TableColumn fx:id="tcTelephoneNumber" prefWidth="75.0" text="Telephone Number" />
           <TableColumn fx:id="tcTicketPrice" prefWidth="75.0" text="Ticket price" />
         </columns>
          <columnResizePolicy>

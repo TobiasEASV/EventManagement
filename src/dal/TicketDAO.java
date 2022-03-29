@@ -75,6 +75,7 @@ public class TicketDAO {
 
     public void deleteTicket(Ticket ticket) {
         String sql = "DELETE FROM Ticket WHERE ID = (?);";
+        System.out.println(ticket.getIdProperty().get());
         try (Connection connection = dbc.getConnection()) {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, ticket.getIdProperty().get());
@@ -99,7 +100,7 @@ public class TicketDAO {
                 Customer customer;
                 Ticket ticket = new Ticket();
                 ticket.setId(rs.getInt(1));
-                ticket.setCustomer(customer = new Customer(rs.getString("Email"), rs.getString("FullName")));
+                ticket.setCustomer(customer = new Customer(rs.getString("Email"), rs.getString("FullName"), rs.getString("Telephone_Number")));
                 customer.setId(rs.getInt("Customer_ID"));
                 ticket.setEvent(event);
                 ticket.setPrice(rs.getInt("Price"));

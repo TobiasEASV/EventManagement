@@ -16,11 +16,12 @@ public class DBCustomer {
 
     public Customer createCustomer(Customer customer)
     {
-        String sql= "INSERT INTO [Customer] (FullName, Email) VALUES (?,?);";
+        String sql= "INSERT INTO [Customer] (FullName, Email, Telephone_Number) VALUES (?,?,?);";
         try (Connection connection = dbConnecting.getConnection()){
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, customer.getNameProperty().get());
             ps.setString(2, customer.getEmailProperty().get());
+            ps.setString(3, customer.getTelephoneNumberProperty().get());
             if(ps.executeUpdate() == 1)
             {
                 ResultSet resultSet = ps.getGeneratedKeys();
@@ -50,7 +51,8 @@ public class DBCustomer {
             int id = rs.getInt(1);
             String customerName = rs.getString(2);
             String customerEmail = rs.getString(3);
-            Customer customer1 = new Customer(customerEmail, customerName);
+            String customerTelephoneNumber = rs.getString(4);
+            Customer customer1 = new Customer(customerEmail, customerName, customerTelephoneNumber);
             customer1.setId(id);
             return customer1;
 
@@ -64,13 +66,14 @@ public class DBCustomer {
 
     public void updateCustomer(Customer customer)
     {
-        String sql = "UPDATE Customer SET FullName= (?), Email = (?) WHERE ID = (?);";
+        String sql = "UPDATE Customer SET FullName= (?), Email = (?), Telephone_Number =(?) WHERE ID = (?);";
         try(Connection connection = dbConnecting.getConnection())
         {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, customer.getNameProperty().get());
             ps.setString(2, customer.getEmailProperty().get());
             ps.setInt(3, customer.getIdProperty().get());
+            ps.setString(4, customer.getTelephoneNumberProperty().get());
             ps.executeUpdate();
         } catch (SQLServerException throwables) {
             throwables.printStackTrace();

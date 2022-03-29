@@ -143,9 +143,11 @@
 
 /* TABLES */
 .table-view,
+.table-view .table-column,
 .table-view .column-header,
 .table-view .column-header-background .filler,
 .table-view .corner {
+    -fx-alignment: CENTER;
     -fx-background-color: transparent;
     -fx-font-weight: bold;
 }

@@ -9,11 +9,12 @@ public class Customer {
     private StringProperty name = new SimpleStringProperty();
     private StringProperty email= new SimpleStringProperty();
     private IntegerProperty id  = new SimpleIntegerProperty();
+    private StringProperty telephoneNumber= new SimpleStringProperty();
 
-
-    public Customer(String email, String name) {
+    public Customer(String email, String name, String telephoneNumber) {
         this.name.set(name);
         this.email.set(email);
+        this.telephoneNumber.set(telephoneNumber);
     }
 
     public IntegerProperty getIdProperty(){
@@ -38,5 +39,14 @@ public class Customer {
 
     public void setEmail(String email) {
         this.email.set(email);
+    }
+
+
+    public StringProperty getTelephoneNumberProperty() {
+        return telephoneNumber;
+    }
+
+    public void setTelephoneNumber(String telephoneNumber) {
+        this.telephoneNumber.set(telephoneNumber);
     }
 }
