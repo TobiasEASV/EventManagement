@@ -25,7 +25,7 @@ import static utility.SceneSwapper.getDashboardController;
 public class SellTicketViewController implements Initializable {
 
     @FXML
-    private  GridPane parentPane;
+    private GridPane parentPane;
 
     @FXML
     private Label lblPrice;
@@ -60,7 +60,7 @@ public class SellTicketViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         EventCoordinatorDashboardController dashboardController = getDashboardController();
         event = dashboardController.getSelectedEvent();
-        if(event == null){
+        if (event == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error: Something went wrong");
             alert.setHeaderText("Du skal vælge en Event først");
@@ -80,8 +80,7 @@ public class SellTicketViewController implements Initializable {
         txtSeat.setDisable(true);
 
         checkVIP.setDisable(event.getVipPriceProperty().get() == 0);
-        checkFood.setDisable(event.getFoodPriceProperty().get() == 0);
-        checkDrinks.setDisable(event.getDrinkPriceProperty().get() == 0);
+
     }
 
     public void btnSave(ActionEvent actionEvent) {
@@ -89,25 +88,17 @@ public class SellTicketViewController implements Initializable {
         String row = "No Row nr";
 
         boolean vip = false;
-        boolean food = false;
-        boolean drinks = false;
+
 
         boolean isSeated = false;
         if (checkSeated.isSelected()) {
             seat = txtSeat.getText();
             row = txtRow.getText();
-            isSeated= true;
+            isSeated = true;
         }
-        if (checkVIP.isSelected()){
+        if (checkVIP.isSelected())
             vip = true;
-<<<<<<< Updated upstream
-        }
-        if(checkFood.isSelected()){
-            food = true;
-        }
-        if (checkDrinks.isSelected()){
-            drinks = true;
-        }
+
 
         String telephoneNumber = "";
 
@@ -116,81 +107,51 @@ public class SellTicketViewController implements Initializable {
             txtTelephoneCountryCode.setText(DEFAULT_COUNTRY_CODE_DK);
 
         // if the telephone number field is not empty or blank, set telephone number to the user input from the textfield(s)
-        if (!txtCustomerTelephoneNumber.getText().isEmpty() && !txtCustomerTelephoneNumber.getText().isBlank()){
+        if (!txtCustomerTelephoneNumber.getText().isEmpty() && !txtCustomerTelephoneNumber.getText().isBlank()) {
             telephoneNumber = txtTelephoneCountryCode.getText() + " ";
-            String tempPhoneNumber = txtCustomerTelephoneNumber.getText().replaceAll("\\s+",""); //replaces white spaces and non-visible characters
+            String tempPhoneNumber = txtCustomerTelephoneNumber.getText().replaceAll("\\s+", ""); //replaces white spaces and non-visible characters
             for (int i = 0; i < tempPhoneNumber.length(); i++) {
                 if (i % 2 == 0)
                     telephoneNumber = telephoneNumber + " " + tempPhoneNumber.charAt(i);
                 else telephoneNumber = telephoneNumber + tempPhoneNumber.charAt(i);
             }
         }
-=======
 
-        if (checkHasPaid.isSelected())
-            hasPaid = true;
         if (checkSeated.isSelected())
-            isSeated= true;
->>>>>>> Stashed changes
+            isSeated = true;
 
-
-<<<<<<< Updated upstream
 
         Customer customer = new Customer(txtCustomerEmail.getText(), txtCustomerName.getText(), telephoneNumber);
 
-        Ticket ticket = new Ticket(customerModel.createCustomer(customer), event, Double.parseDouble(lblPrice.getText()), vip, drinks, food, isSeated);
+        Ticket ticket = new Ticket(customerModel.createCustomer(customer), event, Double.parseDouble(lblPrice.getText()), vip, isSeated);
         ticket.setRow(row);
         ticket.setSeat(seat);
         ticketListModel.addTicketToList(ticket);
         EXITScene();
-=======
-        Ticket ticket = new Ticket(customer,seat, row,Integer.parseInt(lblPrice.getText()), hasPaid, vip, isSeated);
->>>>>>> Stashed changes
     }
 
+
     public void vipClick(ActionEvent actionEvent) {
-        if (checkVIP.isSelected())
-        {
+        if (checkVIP.isSelected()) {
             price = price + event.getVipPriceProperty().get();
             lblPrice.setText(String.valueOf(price));
-        }
-        else
-        {
+        } else {
             price = price - event.getVipPriceProperty().get();
             lblPrice.setText(String.valueOf(price));
         }
-
     }
-
-<<<<<<< Updated upstream
-    public void foodClick(ActionEvent actionEvent) {
-        System.out.println(event.getFoodPriceProperty().get());
-        if (checkFood.isSelected())
-        {
-            price = price + event.getFoodPriceProperty().get();
-            lblPrice.setText(String.valueOf(price));
-        }
-        else
-        {
-            price = price - event.getFoodPriceProperty().get();
-            lblPrice.setText(String.valueOf(price));
-        }
-    }
-=======
->>>>>>> Stashed changes
-
 
     public void seatedClick(ActionEvent actionEvent) {
-        if (!checkSeated.isSelected()){
+        if (!checkSeated.isSelected()) {
             txtSeat.setDisable(true);
             txtRow.setDisable(true);
-        } else{
+        } else {
             txtSeat.setDisable(false);
             txtRow.setDisable(false);
         }
     }
 
-    public void EXITScene(){
+    public void EXITScene() {
         Stage stage = (Stage) parentPane.getScene().getWindow();
         stage.close();
     }

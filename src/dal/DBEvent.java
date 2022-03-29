@@ -21,7 +21,7 @@ public class DBEvent {
     public Event createEvent(Event event) {
 
         try (Connection connection = dbConnecting.getConnection()) {
-            String sql = "INSERT INTO [Event](Title, Artist, Description, Location, Price, VIP_Price, Drink_Price, Food_Price, Contact_Mail, Start_Data, End_Data) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO [Event](Title, Artist, Description, Location, Price, VIP_Price, Contact_Mail, Start_Data, End_Data) VALUES (?,?,?,?,?,?,?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, event.getTitleProperty().get());
             preparedStatement.setString(2, event.getArtistsProperty().get());
@@ -29,11 +29,9 @@ public class DBEvent {
             preparedStatement.setString(4, event.getLocationProperty().get());
             preparedStatement.setDouble(5, event.getPriceProperty().get());
             preparedStatement.setDouble(6, event.getVipPriceProperty().get());
-            preparedStatement.setDouble(7, event.getDrinkPriceProperty().get());
-            preparedStatement.setDouble(8, event.getFoodPriceProperty().get());
-            preparedStatement.setString(9, event.getContactEmailProperty().get());
-            preparedStatement.setObject(10, event.getStartDateProperty().get());
-            preparedStatement.setObject(11, event.getEndDateProperty().get());
+            preparedStatement.setString(7, event.getContactEmailProperty().get());
+            preparedStatement.setObject(8, event.getStartDateProperty().get());
+            preparedStatement.setObject(9, event.getEndDateProperty().get());
 
 
             //Extract data from DB
@@ -74,10 +72,9 @@ public class DBEvent {
                     Date start_Data = resultSet.getDate("Start_Data");
                     Date end_Data = resultSet.getDate("End_Data");
                     double VIPPrice = resultSet.getDouble("VIP_Price");
-                    double drinkPrice = resultSet.getDouble("Drink_Price");
-                    double foodPrice = resultSet.getDouble("Food_Price");
 
-                    Event event = new Event(title, description, location, artist, contact_Mail, price, VIPPrice, foodPrice, drinkPrice, LocalDate.parse(start_Data.toString()), LocalDate.parse(end_Data.toString()));
+
+                    Event event = new Event(title, description, location, artist, contact_Mail, price, VIPPrice, LocalDate.parse(start_Data.toString()), LocalDate.parse(end_Data.toString()));
                     event.setId(id);
                     allEvents.add(event);
                 }
@@ -105,7 +102,7 @@ public class DBEvent {
 
     public Event updateEvent(Event event) {
         try (Connection connection = dbConnecting.getConnection()) {
-            String sql = "UPDATE [Event] SET Title =(?), Artist =(?), Description=(?), Location=(?), Price=(?), VIP_Price=(?), Food_Price=(?), Drink_Price=(?), Contact_Mail=(?), Start_Data=(?), End_Data=(?) WHERE Id = (?)";
+            String sql = "UPDATE [Event] SET Title =(?), Artist =(?), Description=(?), Location=(?), Price=(?), VIP_Price=(?),  Contact_Mail=(?), Start_Data=(?), End_Data=(?) WHERE Id = (?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, event.getTitleProperty().get());
             preparedStatement.setString(2, event.getArtistsProperty().get());
@@ -113,12 +110,10 @@ public class DBEvent {
             preparedStatement.setString(4, event.getLocationProperty().get());
             preparedStatement.setDouble(5, event.getPriceProperty().get());
             preparedStatement.setDouble(6, event.getVipPriceProperty().get());
-            preparedStatement.setDouble(7, event.getFoodPriceProperty().get());
-            preparedStatement.setDouble(8, event.getDrinkPriceProperty().get());
-            preparedStatement.setString(9, event.getContactEmailProperty().get());
-            preparedStatement.setObject(10, event.getStartDateProperty().get());
-            preparedStatement.setObject(11, event.getEndDateProperty().get());
-            preparedStatement.setInt(12, event.getIdProperty().get());
+            preparedStatement.setString(7, event.getContactEmailProperty().get());
+            preparedStatement.setObject(8, event.getStartDateProperty().get());
+            preparedStatement.setObject(9, event.getEndDateProperty().get());
+            preparedStatement.setInt(10, event.getIdProperty().get());
 
 
             //Extract data from DB

@@ -48,8 +48,6 @@ CREATE TABLE [Event]
     [Location] NVARCHAR(255) NULL,
     [Price] DECIMAL(7,2) NULL,
     [VIP_Price] DECIMAL(7,2) NULL,
-    [Drink_Price] DECIMAL(7,2) NULL,
-    [Food_Price] DECIMAL(7,2) NULL,
     [Contact_Mail] NVARCHAR(70) NULL,
     [Start_Data] DATETIME2 NOT NULL ,
     [End_Data] DATETIME2 NOT NULL,
@@ -65,8 +63,6 @@ CREATE TABLE [Ticket]
     [Price] INT NOT NULL,
     [IsSeated] BIT NULL,
     [IsVIP] BIT NULL,
-    [IsDrink] BIT NULL,
-    [IsFood] BIT NULL,
     [Row] NVARCHAR(20),
     [Seat] NVARCHAR(20)
 

@@ -32,24 +32,12 @@ public class Ticket {
     private final String notPaid = "Not Paid";
 
 
-<<<<<<< Updated upstream
-    public Ticket() {}
-
-    public Ticket(Customer customer, Event event, double price,boolean vip, boolean drinks, boolean food, boolean isSeated) {
+    public Ticket(){}
+    public Ticket(Customer customer, Event event, double price,boolean vip,boolean isSeated) {
         this.customer = customer;
         this.event = event;
-=======
-    public Ticket(Customer customer, int seat, int row, double price, boolean isPaid,boolean vip, boolean isSeated)
-    {
-        this.customerName.set(customer.getCustomerName());
-        this.customerEmail.set(customer.getCustomerEmail());
-        this.seat.set(seat);
-        this.row.set(row);
->>>>>>> Stashed changes
         this.price.set(price);
-
         this.vip.set(vip);
-
         this.seated.set(isSeated);
 
 
@@ -102,22 +90,9 @@ public class Ticket {
         this.seated.set(seated);
     }
 
-<<<<<<< Updated upstream
-    public void setFood(boolean food) {
-        this.food.set(food);
-    }
-
-    public void setDrinks(boolean drinks) {
-        this.drinks.set(drinks);
-    }
-=======
 
 
 
-
-
-
->>>>>>> Stashed changes
 
     public IntegerProperty getIdProperty() {
         return id;
