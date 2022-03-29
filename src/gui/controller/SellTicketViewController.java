@@ -46,10 +46,7 @@ public class SellTicketViewController implements Initializable {
     @FXML
     private CheckBox checkVIP;
     @FXML
-    private CheckBox checkFood;
-    @FXML
-    private CheckBox checkDrinks;
-    @FXML
+
     private CheckBox checkSeated;
 
     private Event event;
@@ -103,6 +100,7 @@ public class SellTicketViewController implements Initializable {
         }
         if (checkVIP.isSelected()){
             vip = true;
+<<<<<<< Updated upstream
         }
         if(checkFood.isSelected()){
             food = true;
@@ -127,8 +125,16 @@ public class SellTicketViewController implements Initializable {
                 else telephoneNumber = telephoneNumber + tempPhoneNumber.charAt(i);
             }
         }
+=======
+
+        if (checkHasPaid.isSelected())
+            hasPaid = true;
+        if (checkSeated.isSelected())
+            isSeated= true;
+>>>>>>> Stashed changes
 
 
+<<<<<<< Updated upstream
 
         Customer customer = new Customer(txtCustomerEmail.getText(), txtCustomerName.getText(), telephoneNumber);
 
@@ -137,6 +143,9 @@ public class SellTicketViewController implements Initializable {
         ticket.setSeat(seat);
         ticketListModel.addTicketToList(ticket);
         EXITScene();
+=======
+        Ticket ticket = new Ticket(customer,seat, row,Integer.parseInt(lblPrice.getText()), hasPaid, vip, isSeated);
+>>>>>>> Stashed changes
     }
 
     public void vipClick(ActionEvent actionEvent) {
@@ -153,6 +162,7 @@ public class SellTicketViewController implements Initializable {
 
     }
 
+<<<<<<< Updated upstream
     public void foodClick(ActionEvent actionEvent) {
         System.out.println(event.getFoodPriceProperty().get());
         if (checkFood.isSelected())
@@ -166,19 +176,9 @@ public class SellTicketViewController implements Initializable {
             lblPrice.setText(String.valueOf(price));
         }
     }
+=======
+>>>>>>> Stashed changes
 
-    public void drinksclick(ActionEvent actionEvent) {
-        if (checkDrinks.isSelected())
-        {
-            price = price + event.getDrinkPriceProperty().get();
-            lblPrice.setText(String.valueOf(price));
-        }
-        else
-        {
-            price = price - event.getDrinkPriceProperty().get();
-            lblPrice.setText(String.valueOf(price));
-        }
-    }
 
     public void seatedClick(ActionEvent actionEvent) {
         if (!checkSeated.isSelected()){
