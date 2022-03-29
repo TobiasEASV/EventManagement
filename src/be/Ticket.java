@@ -14,7 +14,7 @@ public class Ticket {
     //private StringProperty customerEmail= new SimpleStringProperty();
     private StringProperty paymentStatus= new SimpleStringProperty();
 
-    private IntegerProperty id = new SimpleIntegerProperty();
+    private StringProperty id = new SimpleStringProperty();
     //private IntegerProperty customerId= new SimpleIntegerProperty();
     private IntegerProperty eventId= new SimpleIntegerProperty();
     private StringProperty seat= new SimpleStringProperty();
@@ -70,7 +70,7 @@ public class Ticket {
         this.price.set(price);
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id.set(id);
     }
 
@@ -104,7 +104,7 @@ public class Ticket {
         this.drinks.set(drinks);
     }
 
-    public IntegerProperty getIdProperty() {
+    public StringProperty getIdProperty() {
         return id;
     }
 

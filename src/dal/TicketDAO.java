@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class TicketDAO {
     private DBConnecting dbc = new DBConnecting();
@@ -17,31 +18,24 @@ public class TicketDAO {
 
     public Ticket createTicket(Ticket ticket) {
         try (Connection connection = dbc.getConnection()) {
-            String sql = "INSERT INTO Ticket(Customer_ID, Event_ID, Price, " +
-                    " IsSeated, IsVIP, IsDrink, IsFood, Row, Seat) VALUES (?, ?, ?, ?, ?, ?, ?, ?,  ?);";
+            String sql = "INSERT INTO Ticket(ID, Customer_ID, Event_ID, Price, " +
+                    " IsSeated, IsVIP, IsDrink, IsFood, Row, Seat) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,  ?);";
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-            
-            ps.setInt(1, ticket.getCustomer().getIdProperty().get());
-            ps.setInt(2, ticket.getEvent().getIdProperty().get());
-            ps.setDouble(3, ticket.getPriceProperty().get());
+            ps.setString(1, ticket.getIdProperty().get());
+            ps.setInt(2, ticket.getCustomer().getIdProperty().get());
+            ps.setInt(3, ticket.getEvent().getIdProperty().get());
+            ps.setDouble(4, ticket.getPriceProperty().get());
 
-            ps.setBoolean(4,ticket.getSeatedProperty().get());
-            ps.setBoolean(5,ticket.getVipProperty().get());
-            ps.setBoolean(6,ticket.getDrinksProperty().get());
-            ps.setBoolean(7,ticket.getFoodProperty().get());
+            ps.setBoolean(5,ticket.getSeatedProperty().get());
+            ps.setBoolean(6,ticket.getVipProperty().get());
+            ps.setBoolean(7,ticket.getDrinksProperty().get());
+            ps.setBoolean(8,ticket.getFoodProperty().get());
 
-            ps.setString(8, ticket.getRowProperty().get());
-            ps.setString(9, ticket.getSeatProperty().get());
+            ps.setString(9, ticket.getRowProperty().get());
+            ps.setString(10, ticket.getSeatProperty().get());
 
-
-            if ( ps.execute()) {
-                ResultSet rs = ps.getGeneratedKeys();
-                if (rs.next()) {
-                    int id = rs.getInt("ID");
-                    ticket.setId(id);
-                }
-            }
+            ps.execute();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -50,7 +44,7 @@ public class TicketDAO {
 
     public Ticket updateTicket(Ticket ticket) {
         try (Connection connection = dbc.getConnection()) {
-            String sql = "UPDATE Ticket SET Price, IsPaid, IsSeated, IsVIP, IsDrink," +
+            String sql = "UPDATE Ticket SET Price, IsSeated, IsVIP, IsDrink," +
                     "IsFood, Row, Seat = (?, ?, ?, ?, ?, ?, ?, ?) WHERE ID = (?);";
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
@@ -65,7 +59,7 @@ public class TicketDAO {
             ps.setString(7, ticket.getRowProperty().get());
             ps.setString(8, ticket.getSeatProperty().get());
 
-            ps.setInt(9, ticket.getIdProperty().get());
+            ps.setString(9, ticket.getIdProperty().get());
             ps.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -75,10 +69,9 @@ public class TicketDAO {
 
     public void deleteTicket(Ticket ticket) {
         String sql = "DELETE FROM Ticket WHERE ID = (?);";
-        System.out.println(ticket.getIdProperty().get());
         try (Connection connection = dbc.getConnection()) {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, ticket.getIdProperty().get());
+            ps.setString(1, ticket.getIdProperty().get());
             ps.executeUpdate();
 
         } catch (SQLException throwables) {
@@ -99,7 +92,7 @@ public class TicketDAO {
             while (rs.next()) {
                 Customer customer;
                 Ticket ticket = new Ticket();
-                ticket.setId(rs.getInt(1));
+                ticket.setId(rs.getString("ID"));
                 ticket.setCustomer(customer = new Customer(rs.getString("Email"), rs.getString("FullName"), rs.getString("Telephone_Number")));
                 customer.setId(rs.getInt("Customer_ID"));
                 ticket.setEvent(event);
@@ -118,6 +111,27 @@ public class TicketDAO {
             throwables.printStackTrace();
         }
         return allTicketsFromEvent;
+    }
+
+    public boolean foundTicketID(String id) {
+        String sql = "Select ID FROM Ticket WHERE ID = (?)";
+        try (Connection connection = dbc.getConnection()) {
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, id);
+            ps.execute();
+
+            ResultSet resultSet = ps.getResultSet();
+            if(resultSet.next()){
+                return Objects.equals(id, resultSet.getString("ID"));
+            }else {
+
+                return false;
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return true;
     }
 
 }

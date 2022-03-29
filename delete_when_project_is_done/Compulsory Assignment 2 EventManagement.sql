@@ -59,7 +59,7 @@ CREATE TABLE [Event]
 
 CREATE TABLE [Ticket]
 (
-    [ID] INT IDENTITY(69,1) NOT NULL,
+    [ID] NVARCHAR(10) NOT NULL,
     [Customer_ID] INT NOT NULL,
     [Event_ID] INT,
     [Price] INT NOT NULL,
@@ -71,6 +71,7 @@ CREATE TABLE [Ticket]
     [Seat] NVARCHAR(20)
 
    CONSTRAINT Ticket_ID PRIMARY KEY (Customer_ID, Event_ID),
+   CONSTRAINT UC_Ticket UNIQUE (ID),
    CONSTRAINT FK_Customer_ID FOREIGN KEY(Customer_ID) REFERENCES Customer(ID),
    CONSTRAINT FK_EventID FOREIGN KEY(Event_ID) REFERENCES [Event](ID)
 )

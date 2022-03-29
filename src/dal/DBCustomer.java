@@ -29,7 +29,6 @@ public class DBCustomer {
                 {
                     int id = resultSet.getInt(1);
                     customer.setId(id);
-                    System.out.println("new Customer " + id);
                 }
             }
         } catch (SQLServerException throwables) {
