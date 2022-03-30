@@ -42,7 +42,7 @@ public class TicketManager {
         StringBuilder newValueID = new StringBuilder();
 
         for (int i = 0; i < idSize; i++) {
-            int value = random.nextInt(36);
+            int value = random.nextInt(arrayOfCharacter.length);
             char nextChar = arrayOfCharacter[value];
             newValueID.append(nextChar);
         }

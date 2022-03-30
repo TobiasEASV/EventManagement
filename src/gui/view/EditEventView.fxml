@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -10,10 +11,12 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<GridPane fx:id="parentGridPane" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="500.0" styleClass="backgroundPane" stylesheets="@../utility/SceneStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.EditEventController">
+<GridPane fx:id="parentGridPane" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="600.0" styleClass="backgroundPane" stylesheets="@../utility/SceneStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.EditEventController">
   <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="100.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="45.0" prefWidth="100.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="155.0" prefWidth="100.0" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -35,32 +38,32 @@
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <TextField fx:id="txTitle" alignment="TOP_LEFT" promptText="Title" GridPane.rowIndex="1">
+      <TextField fx:id="txTitle" alignment="TOP_LEFT" promptText="Title" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets />
          </GridPane.margin></TextField>
-      <TextArea fx:id="txtAreaDescription" prefWidth="200.0" promptText="Description" styleClass="text-area" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-      <TextField fx:id="txLocation" alignment="TOP_LEFT" promptText="Location" GridPane.rowIndex="5">
+      <TextArea fx:id="txtAreaDescription" prefWidth="200.0" promptText="Description" styleClass="text-area" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+      <TextField fx:id="txLocation" alignment="TOP_LEFT" promptText="Location" GridPane.columnIndex="1" GridPane.rowIndex="5">
          <GridPane.margin>
             <Insets />
          </GridPane.margin></TextField>
-      <TextField fx:id="txArtists" alignment="TOP_LEFT" promptText="Artists" GridPane.rowIndex="7">
+      <TextField fx:id="txArtists" alignment="TOP_LEFT" promptText="Artists" GridPane.columnIndex="1" GridPane.rowIndex="7">
          <GridPane.margin>
             <Insets />
          </GridPane.margin></TextField>
-      <TextField fx:id="txContactEmail" alignment="TOP_LEFT" promptText="Concact Email" GridPane.rowIndex="9">
+      <TextField fx:id="txContactEmail" alignment="TOP_LEFT" promptText="Concact Email" GridPane.columnIndex="1" GridPane.rowIndex="9">
          <GridPane.margin>
             <Insets />
          </GridPane.margin></TextField>
-      <TextField fx:id="txTicktePrice" alignment="TOP_LEFT" promptText="Ticket Price" GridPane.rowIndex="11">
+      <TextField fx:id="txTicktePrice" alignment="TOP_LEFT" promptText="Ticket Price" GridPane.columnIndex="1" GridPane.rowIndex="11">
          <GridPane.margin>
             <Insets />
          </GridPane.margin></TextField>
-      <TextField fx:id="txVIPPrice" alignment="TOP_LEFT" promptText="VIP Price" GridPane.rowIndex="13">
+      <TextField fx:id="txVIPPrice" alignment="TOP_LEFT" promptText="VIP Price" GridPane.columnIndex="1" GridPane.rowIndex="13">
          <GridPane.margin>
             <Insets />
          </GridPane.margin></TextField>
-      <HBox alignment="BOTTOM_CENTER" spacing="30.0" GridPane.rowIndex="16">
+      <HBox alignment="BOTTOM_CENTER" spacing="30.0" GridPane.columnIndex="1" GridPane.rowIndex="16">
          <children>
             <Button minWidth="70.0" mnemonicParsing="false" onAction="#handleButtonOK" prefWidth="205.0" text="OK">
                <HBox.margin>
@@ -77,20 +80,55 @@
             <Insets />
          </GridPane.margin>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="15">
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="15">
          <children>
             <DatePicker fx:id="dpStartData" promptText="Start Date" />
             <DatePicker fx:id="dpEndData" promptText="End Date" />
          </children>
       </HBox>
-      <Separator prefWidth="200.0" styleClass="TxtSeparator" GridPane.rowIndex="2" />
-      <Separator prefWidth="200.0" styleClass="TxtSeparator" GridPane.rowIndex="4" />
-      <Separator prefWidth="200.0" styleClass="TxtSeparator" GridPane.rowIndex="6" />
-      <Separator prefWidth="200.0" styleClass="TxtSeparator" GridPane.rowIndex="8" />
-      <Separator prefWidth="200.0" styleClass="TxtSeparator" GridPane.rowIndex="10" />
-      <Separator prefWidth="200.0" styleClass="TxtSeparator" GridPane.rowIndex="12" />
-      <Separator prefWidth="200.0" styleClass="TxtSeparator" GridPane.rowIndex="14" />
-      <TextField alignment="CENTER" layoutX="40.0" layoutY="122.0" promptText="Title" text="Create Event" />
+      <Separator prefWidth="200.0" styleClass="TxtSeparator" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <Separator prefWidth="200.0" styleClass="TxtSeparator" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <Separator prefWidth="200.0" styleClass="TxtSeparator" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+      <Separator prefWidth="200.0" styleClass="TxtSeparator" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+      <Separator prefWidth="200.0" styleClass="TxtSeparator" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+      <Separator prefWidth="200.0" styleClass="TxtSeparator" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+      <Separator prefWidth="200.0" styleClass="TxtSeparator" GridPane.columnIndex="1" GridPane.rowIndex="14" />
+      <TextField alignment="CENTER" layoutX="40.0" layoutY="122.0" prefHeight="35.0" prefWidth="396.0" promptText="Title" text="Create Event" GridPane.columnIndex="1" />
+      <Label text="Title" GridPane.rowIndex="1">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="40.0" layoutY="150.0" text="Description" GridPane.rowIndex="3" GridPane.valignment="TOP">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="40.0" layoutY="294.0" text="Location" GridPane.rowIndex="5">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="40.0" layoutY="377.0" text="Artist" GridPane.rowIndex="7">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="40.0" layoutY="461.0" text="Contact Email" GridPane.rowIndex="9">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="40.0" layoutY="545.0" text="Ticket Price" GridPane.rowIndex="11">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="40.0" layoutY="629.0" text="VIP Price" GridPane.rowIndex="13">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
    </children>
    <padding>
       <Insets bottom="15.0" left="30.0" right="30.0" top="15.0" />
