@@ -1,12 +1,13 @@
 package utility.Scenes;
 
+import gui.controller.EditEventController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 
 import java.io.IOException;
 
-public class EditEventScene implements ILoadScene{
+public class EditEventScene implements ILoadScene<EditEventController>{
 
     private final Image image = new Image("gui/images/Icons/ticket_2_icon.png");
 
@@ -18,4 +19,10 @@ public class EditEventScene implements ILoadScene{
         stage.getIcons().add(image);
         stage.show();
     }
+
+    @Override
+    public <T> void getController() {
+
+    }
+
 }
