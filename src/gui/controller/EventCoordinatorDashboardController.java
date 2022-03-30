@@ -17,7 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.GridPane;
 import utility.EmailClient;
-import utility.SceneSwapper;
+import utility.Scenes.SceneSwapper;
 
 import javax.imageio.ImageIO;
 import javax.print.PrintService;
@@ -218,7 +218,6 @@ public class EventCoordinatorDashboardController implements Initializable {
         sceneSwapper.instantiateCreateEventScene();
 
     }
-
 
     public void handleLogoutButton(ActionEvent actionEvent) {
         System.exit(1);

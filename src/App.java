@@ -1,6 +1,6 @@
 import javafx.application.Application;
 import javafx.stage.Stage;
-import utility.SceneSwapper;
+import utility.Scenes.SceneSwapper;
 
 import java.io.IOException;
 

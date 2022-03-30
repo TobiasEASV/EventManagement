@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static utility.SceneSwapper.getDashboardController;
+import static utility.Scenes.SceneSwapper.getDashboardController;
 
 
 public class TicketListModel {

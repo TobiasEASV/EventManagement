@@ -1,4 +1,4 @@
-package utility;
+package utility.Scenes;
 import gui.controller.EventCoordinatorDashboardController;
 import gui.controller.SellTicketViewController;
 import javafx.fxml.FXMLLoader;

@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static utility.SceneSwapper.getDashboardController;
+import static utility.Scenes.SceneSwapper.getDashboardController;
 
 public class SellTicketViewController implements Initializable {
 
