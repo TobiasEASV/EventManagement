@@ -23,8 +23,6 @@ public class Ticket {
     private DoubleProperty price = new SimpleDoubleProperty();
 
     private BooleanProperty vip= new SimpleBooleanProperty();
-    private BooleanProperty drinks= new SimpleBooleanProperty();
-    private BooleanProperty food= new SimpleBooleanProperty();
     private BooleanProperty seated= new SimpleBooleanProperty();
 
     private Customer customer;
@@ -34,16 +32,12 @@ public class Ticket {
     private final String notPaid = "Not Paid";
 
 
-    public Ticket() {}
-
-    public Ticket(Customer customer, Event event, double price,boolean vip, boolean drinks, boolean food, boolean isSeated) {
+    public Ticket(){}
+    public Ticket(Customer customer, Event event, double price,boolean vip,boolean isSeated) {
         this.customer = customer;
         this.event = event;
         this.price.set(price);
-
         this.vip.set(vip);
-        this.drinks.set(drinks);
-        this.food.set(food);
         this.seated.set(isSeated);
 
 
@@ -96,13 +90,9 @@ public class Ticket {
         this.seated.set(seated);
     }
 
-    public void setFood(boolean food) {
-        this.food.set(food);
-    }
 
-    public void setDrinks(boolean drinks) {
-        this.drinks.set(drinks);
-    }
+
+
 
     public StringProperty getIdProperty() {
         return id;
@@ -128,14 +118,6 @@ public class Ticket {
 
     public BooleanProperty getVipProperty() {
         return vip;
-    }
-
-    public BooleanProperty getDrinksProperty() {
-        return drinks;
-    }
-
-    public BooleanProperty getFoodProperty() {
-        return food;
     }
 
     public BooleanProperty getSeatedProperty() {

@@ -15,8 +15,7 @@ public class Event {
 
     private DoubleProperty price = new SimpleDoubleProperty();
     private DoubleProperty vipPrice = new SimpleDoubleProperty();
-    private DoubleProperty foodPrice = new SimpleDoubleProperty();
-    private DoubleProperty drinkPrice = new SimpleDoubleProperty();
+
 
     private IntegerProperty id = new SimpleIntegerProperty();
 
@@ -24,7 +23,7 @@ public class Event {
     private ObjectProperty<LocalDate> endDate = new SimpleObjectProperty<>();
 
 
-    public Event (String title, String description, String location, String artist, String contactEmail, double price, double vipPrice, double foodPrice, double drinkPrice, LocalDate startDate, LocalDate endDate)
+    public Event (String title, String description, String location, String artist, String contactEmail, double price, double vipPrice,  LocalDate startDate, LocalDate endDate)
     {
         this.title.set(title);
         this.description.set(description);
@@ -33,8 +32,7 @@ public class Event {
         this.contactEmail.set(contactEmail);
         this.price.set(price);
         this.vipPrice.set(vipPrice);
-        this.foodPrice.set(foodPrice);
-        this.drinkPrice.set(drinkPrice);
+
         this.startDate.set(startDate);
         this.endDate.set(endDate);
     }
@@ -72,14 +70,6 @@ public class Event {
     }
 
 
-    public void setDrinkPrice(double drinkPrice) {
-        this.drinkPrice.set(drinkPrice);
-    }
-
-
-    public void setFoodPrice(double foodPrice) {
-        this.foodPrice.set(foodPrice);
-    }
 
 
     public void setArtists(String artists) {
@@ -125,14 +115,6 @@ public class Event {
 
     public DoubleProperty getVipPriceProperty() {
         return vipPrice;
-    }
-
-    public DoubleProperty getFoodPriceProperty() {
-        return foodPrice;
-    }
-
-    public DoubleProperty getDrinkPriceProperty() {
-        return drinkPrice;
     }
 
     public IntegerProperty getIdProperty() {

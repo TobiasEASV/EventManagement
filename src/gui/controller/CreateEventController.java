@@ -31,8 +31,6 @@ public class CreateEventController implements Initializable {
     @FXML
     private DatePicker dpEndData;
     @FXML
-    private TextField txDrinkPrice;
-    @FXML
     private TextField txTitle;
     @FXML
     private TextField txLocation;
@@ -44,8 +42,6 @@ public class CreateEventController implements Initializable {
     private TextField txTicktePrice;
     @FXML
     private TextField txVIPPrice;
-    @FXML
-    private TextField txFoodPrice;
 
     private  EventManager eventManager;
 
@@ -64,15 +60,12 @@ public class CreateEventController implements Initializable {
         if(!txTitle.getText().isBlank() && !txtAreaDescription.getText().isBlank() && !txLocation.getText().isBlank()
                 && !txArtists.getText().isBlank() && !txContactEmail.getText().isBlank() && !(dpStartData.getValue() == null) && !(dpEndData.getValue() == null)){
 
-            String ticketPrice = "0", VIPPrice = "0", foodPrice = "0", drinkPrice = "0";
+            String ticketPrice = "0", VIPPrice = "0";
             if (!txTicktePrice.getText().isEmpty())
                 ticketPrice = txTicktePrice.getText();
             if (!txVIPPrice.getText().isEmpty())
                 VIPPrice = txVIPPrice.getText();
-            if (!txFoodPrice.getText().isEmpty())
-                foodPrice = txFoodPrice.getText();
-            if (!txDrinkPrice.getText().isEmpty())
-                drinkPrice = txDrinkPrice.getText();
+
 
             Event event = new Event(
                     txTitle.getText(),
@@ -82,8 +75,6 @@ public class CreateEventController implements Initializable {
                     txContactEmail.getText(),
                     Double.parseDouble(ticketPrice),
                     Double.parseDouble(VIPPrice),
-                    Double.parseDouble(foodPrice),
-                    Double.parseDouble(drinkPrice),
                     dpStartData.getValue(),
                     dpEndData.getValue());
 

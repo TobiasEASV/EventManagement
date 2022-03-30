@@ -28,8 +28,6 @@ public class EditEventController implements Initializable {
     @FXML
     private DatePicker dpEndData;
     @FXML
-    private TextField txDrinkPrice;
-    @FXML
     private TextField txTitle;
     @FXML
     private TextField txLocation;
@@ -41,8 +39,6 @@ public class EditEventController implements Initializable {
     private TextField txTicktePrice;
     @FXML
     private TextField txVIPPrice;
-    @FXML
-    private TextField txFoodPrice;
 
     private EventManager eventManager;
 
@@ -61,8 +57,6 @@ public class EditEventController implements Initializable {
             txContactEmail.setText(eventToEdit.getContactEmailProperty().get());
             txTicktePrice.setText(String.valueOf(eventToEdit.getPriceProperty().get()));
             txVIPPrice.setText(String.valueOf(eventToEdit.getVipPriceProperty().get()));
-            txFoodPrice.setText(String.valueOf(eventToEdit.getFoodPriceProperty().get()));
-            txDrinkPrice.setText(String.valueOf(eventToEdit.getDrinkPriceProperty().get()));
 
             dpStartData.setValue(eventToEdit.getStartDateProperty().getValue());
             dpEndData.setValue(eventToEdit.getEndDateProperty().getValue());
@@ -84,8 +78,6 @@ public class EditEventController implements Initializable {
             eventToEdit.setContactEmail(txContactEmail.getText());
             eventToEdit.setPrice(Double.parseDouble(txTicktePrice.getText()));
             eventToEdit.setVipPrice(Double.parseDouble(txVIPPrice.getText()));
-            eventToEdit.setFoodPrice(Double.parseDouble(txFoodPrice.getText()));
-            eventToEdit.setDrinkPrice(Double.parseDouble(txDrinkPrice.getText()));
             eventToEdit.setStartDate(dpStartData.getValue());
                     eventToEdit.setEndDate(dpEndData.getValue());
 

@@ -262,15 +262,13 @@ public class EventCoordinatorDashboardController implements Initializable {
 
     private void setCheckBoxesOnEvent(Event event) {
         checkBoxTicketTypeVIP.setSelected(event.getVipPriceProperty().get() != 0);
-        checkBoxTicketTypeDrinksIncl.setSelected(event.getDrinkPriceProperty().get() != 0);
-        checkBoxTicketTypeFoodIncl.setSelected(event.getFoodPriceProperty().get() != 0);
+
     }
 
     private void updateTicketLabels(Ticket ticket) {
         String ticketType = "Standard";
 
-        if (ticket.getDrinksProperty().get()) ticketType = "Drinks Incl";
-        if (ticket.getFoodProperty().get()) ticketType = "Food Incl";
+
         if (ticket.getVipProperty().get()) ticketType = "VIP";
 
 
