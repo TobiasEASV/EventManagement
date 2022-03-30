@@ -18,18 +18,17 @@ public class TicketDAO {
 
     public Ticket createTicket(Ticket ticket) {
         try (Connection connection = dbc.getConnection()) {
-            String sql = "INSERT INTO Ticket(Customer_ID, Event_ID, Price, " +
-                    " IsSeated, IsVIP, Row, Seat) VALUES (?, ?, ?, ?, ?, ?, ?);";
+            String sql = "INSERT INTO Ticket(ID, Customer_ID, Event_ID, Price, " +
+                    " IsSeated, IsVIP, Row, Seat) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-
-            
-            ps.setInt(1, ticket.getCustomer().getIdProperty().get());
-            ps.setInt(2, ticket.getEvent().getIdProperty().get());
-            ps.setDouble(3, ticket.getPriceProperty().get());
-            ps.setBoolean(4,ticket.getSeatedProperty().get());
-            ps.setBoolean(5,ticket.getVipProperty().get());
-            ps.setString(6, ticket.getRowProperty().get());
-            ps.setString(7, ticket.getSeatProperty().get());
+            ps.setString(1, ticket.getIdProperty().get());
+            ps.setInt(2, ticket.getCustomer().getIdProperty().get());
+            ps.setInt(3, ticket.getEvent().getIdProperty().get());
+            ps.setDouble(4, ticket.getPriceProperty().get());
+            ps.setBoolean(5,ticket.getSeatedProperty().get());
+            ps.setBoolean(6,ticket.getVipProperty().get());
+            ps.setString(7, ticket.getRowProperty().get());
+            ps.setString(8, ticket.getSeatProperty().get());
 
 
             ps.execute();
