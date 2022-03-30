@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import utility.Scenes.DashboardScene;
 
 import java.io.IOException;
 import java.net.URL;
@@ -58,8 +59,8 @@ public class SellTicketViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        EventCoordinatorDashboardController dashboardController = getDashboardController();
-        event = dashboardController.getSelectedEvent();
+        //EventCoordinatorDashboardController dashboardController = getDashboardController();
+        event = new DashboardScene().getController().getSelectedEvent();
         if (event == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error: Something went wrong");

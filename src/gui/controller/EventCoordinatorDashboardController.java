@@ -16,10 +16,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import utility.EmailClient;
-import utility.Scenes.EditEventScene;
-import utility.Scenes.ILoadScene;
-import utility.Scenes.SceneSwapper;
+import utility.Scenes.*;
 
 import javax.imageio.ImageIO;
 import javax.print.PrintService;
@@ -190,7 +189,9 @@ public class EventCoordinatorDashboardController implements Initializable {
     }
 
     public void handleSellTicketButton(ActionEvent actionEvent) throws IOException {
-        sceneSwapper.instantiateSellTicketScene();
+
+        new SellTicketScene().loadNewScene(new Stage());
+        //sceneSwapper.instantiateSellTicketScene();
     }
 
     public void handleRefundTicketButton(ActionEvent actionEvent) {
@@ -212,14 +213,15 @@ public class EventCoordinatorDashboardController implements Initializable {
     }
 
     public void handleEditEventButton(ActionEvent actionEvent) throws IOException {
-        ILoadScene<EditEventController> test  = new EditEventScene();
-        test.load();
+        new EditEventScene().loadNewScene(new Stage());
+
         //sceneSwapper.instantiateEditEventScene();
 
     }
 
     public void handleNewEventButton(ActionEvent actionEvent) throws IOException {
-        sceneSwapper.instantiateCreateEventScene();
+        new CreateEventScene().loadNewScene(new Stage());
+        //sceneSwapper.instantiateCreateEventScene();
 
     }
 

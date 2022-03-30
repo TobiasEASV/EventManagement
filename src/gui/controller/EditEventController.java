@@ -11,6 +11,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import utility.Scenes.DashboardScene;
 
 import java.io.IOException;
 import java.net.URL;
@@ -48,8 +49,9 @@ public class EditEventController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             eventManager = new EventManager();
-            EventCoordinatorDashboardController dashboardController = getDashboardController();
-            eventToEdit = dashboardController.getSelectedEvent();
+
+            //EventCoordinatorDashboardController dashboardController = getDashboardController();
+            eventToEdit = new DashboardScene().getController().getSelectedEvent();
             txTitle.setText(eventToEdit.getTitleProperty().get());
             txtAreaDescription.setText(eventToEdit.getDescriptionProperty().get());
             txLocation.setText(eventToEdit.getLocationProperty().get());
@@ -67,7 +69,7 @@ public class EditEventController implements Initializable {
     }
 
     public void handleButtonOK(ActionEvent actionEvent) {
-        EventCoordinatorDashboardController dashboardController = getDashboardController();
+        //EventCoordinatorDashboardController dashboardController = getDashboardController();
         if(!txTitle.getText().isBlank() && !txtAreaDescription.getText().isBlank() && !txLocation.getText().isBlank()
                 && !txArtists.getText().isBlank() && !txContactEmail.getText().isBlank() && !(dpStartData.getValue() == null) && !(dpEndData.getValue() == null)){
 
@@ -82,7 +84,7 @@ public class EditEventController implements Initializable {
                     eventToEdit.setEndDate(dpEndData.getValue());
 
             eventManager.updateEvent(eventToEdit);
-            dashboardController.updateComboBoxView();
+            new DashboardScene().getController().updateComboBoxView();
             EXITScene();
 
         }else{

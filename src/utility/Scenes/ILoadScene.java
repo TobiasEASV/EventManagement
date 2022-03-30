@@ -5,10 +5,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public interface ILoadScene<T> {
+    void loadNewScene(Stage stage) throws IOException;
 
-    public Stage stage = new Stage();
+    T getController();
 
-    public void load() throws IOException;
-
-    public T getController();
 }
