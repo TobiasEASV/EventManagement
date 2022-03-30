@@ -1,9 +1,9 @@
 .backgroundPane{
-    -fx-background-color: linear-gradient(to right, rgba(0,255,239,1) 0%, rgba(106,106,166,1) 25%, rgba(0,212,255,1) 100%);
+    -fx-background-color: linear-gradient(to right, rgba(190, 145, 86, 1) 0%, rgba(215,182,140,1) 87%, rgba(215, 164, 140, 1) 100%);
 }
 
 .button{
-    -fx-background-color: rgba(0, 0, 0, 0.10);
+    -fx-background-color: rgba(190, 145, 86, 1);
     -fx-border-width: 3;
     -fx-border-color: black;
     -fx-border-radius: 2;
@@ -153,7 +153,7 @@
 }
 
 .table-view .column-header-background{
-    -fx-background-color: rgba(106,106,166,1);
+    -fx-background-color: rgba(190, 145, 86, 1);
     -fx-background-radius: 0px 0px 0px 0px;
     -fx-padding: 0 0 0px 0;
     -fx-text-background-color: black;
@@ -170,26 +170,26 @@
 }
 
 .table-row-cell:odd{
-    -fx-background-color: rgba(0,255,239,0.5);
+    -fx-background-color: rgba(190, 145, 86, 0.5);
     -fx-background-insets: 0, 0 0 1 0;
     -fx-padding: 0.0em;
 }
 
 .table-row-cell:even{
-    -fx-background-color: rgba(0,212,255,0.5);
+    -fx-background-color: rgba(190, 145, 86, 0.5);
     -fx-background-insets: 0, 0 0 1 0;
     -fx-padding: 0.0em;
 }
 
 .table-row-cell:focused {
-    -fx-background-color: linear-gradient(to right, black, red, beige);
+    -fx-background-color: #a8844f;
     -fx-text-background-color: white;
     -fx-background-radius: 5px;
     -fx-background-insets: 0px;
 }
 
 .table-row-cell:selected {
-    -fx-background-color: linear-gradient(to right, black, red, beige);
+    -fx-background-color: #a8844f;
     -fx-text-background-color: white;
     -fx-background-radius: 5px;
     -fx-background-insets: 0px;
@@ -205,11 +205,11 @@
 }
 
 .table-view .virtual-flow .scroll-bar:vertical .thumb{
-    -fx-background-color:  rgba(106,106,166,1);
+    -fx-background-color:  white;
 }
 
 .table-view .virtual-flow .scroll-bar:horizontal .thumb {
-    -fx-background-color:  linear-gradient(to right, #1dbbdd44, #93f9b944);
+    -fx-background-color:  rgba(190, 145, 86, 1);
 }
 
 .table-view .virtual-flow .scroll-bar .increment-button,
@@ -241,7 +241,7 @@ Combobox styling
     -fx-border-radius: 2;
     -fx-border-color: black;
     -fx-padding: -1;
-    -fx-background-color: rgba(106,106,166,1);
+    -fx-background-color: rgba(190, 145, 86, 1);
 }
 
 .combo-box:editable > .arrow-button {

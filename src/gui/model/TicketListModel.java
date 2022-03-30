@@ -61,7 +61,9 @@ public class TicketListModel {
 
     public void updateTicketList(Event event){
         ticketList.clear();
+        ticketCache.clear();
         ticketList.addAll(ticketManager.getTicketsFromEvent(event)); // do this
+        ticketCache.addAll(ticketList);
     }
 
     public void searchTicket(String query){
