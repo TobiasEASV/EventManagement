@@ -10,7 +10,7 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
 
-        new SceneSwapper().instantiateMainScene(primaryStage, "EventCoordinatorDashboardView.fxml");
+        new SceneSwapper().instantiateCreateEventScene();
 
         /**
         mainController = new FXMLLoader((getClass().getResource("gui/view/EventCoordinatorDashboardView.fxml")));

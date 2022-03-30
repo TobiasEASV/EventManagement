@@ -10,5 +10,5 @@ public interface ILoadScene<T> {
 
     public void load() throws IOException;
 
-    public <T> void getController();
+    public T getController();
 }

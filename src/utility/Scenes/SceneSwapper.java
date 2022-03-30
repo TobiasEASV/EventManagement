@@ -65,7 +65,8 @@ public class SceneSwapper {
     }
 
     public void instantiateMainScene(Stage stage, String fxmlFile) throws IOException {
-        dashboard = new FXMLLoader(getClass().getResource("../gui/view/" + fxmlFile));
+        dashboard = new FXMLLoader(getClass().getResource("../gui/view/CreateEventView.fxml"));
+        System.out.println(dashboard.getLocation());
         stage.setScene(new Scene(dashboard.load()));
         stage.setTitle(sceneTitle);
         stage.getIcons().add(image);

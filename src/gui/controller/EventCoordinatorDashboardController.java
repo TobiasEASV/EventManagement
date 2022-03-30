@@ -17,6 +17,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.GridPane;
 import utility.EmailClient;
+import utility.Scenes.EditEventScene;
+import utility.Scenes.ILoadScene;
 import utility.Scenes.SceneSwapper;
 
 import javax.imageio.ImageIO;
@@ -210,7 +212,9 @@ public class EventCoordinatorDashboardController implements Initializable {
     }
 
     public void handleEditEventButton(ActionEvent actionEvent) throws IOException {
-        sceneSwapper.instantiateEditEventScene();
+        ILoadScene<EditEventController> test  = new EditEventScene();
+        test.load();
+        //sceneSwapper.instantiateEditEventScene();
 
     }
 

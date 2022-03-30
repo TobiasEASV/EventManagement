@@ -10,6 +10,7 @@ import java.io.IOException;
 public class EditEventScene implements ILoadScene<EditEventController>{
 
     private final Image image = new Image("gui/images/Icons/ticket_2_icon.png");
+    FXMLLoader loader;
 
     @Override
     public void load() throws IOException {
@@ -21,8 +22,8 @@ public class EditEventScene implements ILoadScene<EditEventController>{
     }
 
     @Override
-    public <T> void getController() {
-
+    public EditEventController getController() {
+        return null;
     }
 
 }
