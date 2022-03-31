@@ -21,8 +21,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static utility.Scenes.SceneSwapper.getDashboardController;
-
 public class SellTicketViewController implements Initializable {
 
     @FXML
@@ -59,7 +57,6 @@ public class SellTicketViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //EventCoordinatorDashboardController dashboardController = getDashboardController();
         event = new DashboardScene().getController().getSelectedEvent();
         if (event == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);

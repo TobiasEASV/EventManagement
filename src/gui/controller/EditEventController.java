@@ -12,12 +12,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import utility.Scenes.DashboardScene;
+import utility.Scenes.ILoadScene;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import static utility.Scenes.SceneSwapper.getDashboardController;
 
 public class EditEventController implements Initializable {
     @FXML
@@ -50,8 +49,8 @@ public class EditEventController implements Initializable {
         try {
             eventManager = new EventManager();
 
-            //EventCoordinatorDashboardController dashboardController = getDashboardController();
-            eventToEdit = new DashboardScene().getController().getSelectedEvent();
+            ILoadScene<EventCoordinatorDashboardController> dashboardController = new DashboardScene();
+            eventToEdit = dashboardController.getController().getSelectedEvent();
             txTitle.setText(eventToEdit.getTitleProperty().get());
             txtAreaDescription.setText(eventToEdit.getDescriptionProperty().get());
             txLocation.setText(eventToEdit.getLocationProperty().get());
