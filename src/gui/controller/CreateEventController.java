@@ -14,14 +14,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import utility.Scenes.DashboardScene;
-import utility.Scenes.ILoadScene;
-import utility.Scenes.LoadScene;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import static utility.Scenes.SceneSwapper.getDashboardController;
 
 public class CreateEventController implements Initializable {
 
@@ -59,8 +54,6 @@ public class CreateEventController implements Initializable {
     }
 
     public void handleButtonOK(ActionEvent actionEvent) {
-        //EventCoordinatorDashboardController dashboardController = getDashboardController();
-
         if(!txTitle.getText().isBlank() && !txtAreaDescription.getText().isBlank() && !txLocation.getText().isBlank()
                 && !txArtists.getText().isBlank() && !txContactEmail.getText().isBlank() && !(dpStartData.getValue() == null) && !(dpEndData.getValue() == null)){
 
@@ -82,9 +75,7 @@ public class CreateEventController implements Initializable {
                     dpStartData.getValue(),
                     dpEndData.getValue());
 
-            //dashboardController.updateComboBoxChooseEvent(eventManager.createEvent(event));
-            ILoadScene<EventCoordinatorDashboardController> dashboardScene = new DashboardScene();
-            dashboardScene.getController().updateComboBoxChooseEvent(eventManager.createEvent(event));
+            new DashboardScene().getController().updateComboBoxChooseEvent(eventManager.createEvent(event));
             EXITScene();
 
         }else{
@@ -93,9 +84,6 @@ public class CreateEventController implements Initializable {
             alert.setHeaderText("BLBLBLBLBLBLBLBLB");
             alert.show();
         }
-
-
-
     }
 
     public void handleButtonCancel(ActionEvent actionEvent) {

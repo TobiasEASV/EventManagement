@@ -5,12 +5,9 @@ import be.Ticket;
 import bll.TicketManager;
 import bll.util.Isearcher;
 import bll.util.TicketSearcher;
-import gui.controller.EventCoordinatorDashboardController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import utility.Scenes.DashboardScene;
-import utility.Scenes.ILoadScene;
-import utility.Scenes.LoadScene;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,12 +21,8 @@ public class TicketListModel {
     private ObservableList<Ticket> ticketList;
     private List<Ticket> ticketCache;
     private Isearcher ticketSearcher;
-    private EventCoordinatorDashboardController dashboardController;
 
     private TicketListModel() throws IOException {
-        ILoadScene<EventCoordinatorDashboardController> dashboardScene = new DashboardScene();
-
-        dashboardController = dashboardScene.getController();
         ticketManager = new TicketManager();
         ticketCache = new ArrayList<>();
         ticketList = FXCollections.observableArrayList();

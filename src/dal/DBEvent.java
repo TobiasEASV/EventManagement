@@ -119,8 +119,6 @@ public class DBEvent {
             //Extract data from DB
             preparedStatement.executeUpdate();
 
-        } catch (SQLServerException throwables) {
-            throwables.printStackTrace();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
