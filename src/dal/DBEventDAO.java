@@ -11,11 +11,11 @@ import java.util.List;
 
 public class DBEventDAO implements IDBEventDAO{
 
-    private final DBConnecting dbConnecting;
+    private DBConnecting dbConnecting;
 
 
-    public DBEventDAO() throws IOException {
-        dbConnecting = new DBConnecting();
+    public DBEventDAO(DBConnecting dbConnecting) throws IOException {
+        this.dbConnecting = dbConnecting;
     }
 
     public Event createEvent(Event event) {

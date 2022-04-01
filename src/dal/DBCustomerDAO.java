@@ -10,8 +10,8 @@ public class DBCustomerDAO implements IDBCustomerDAO{
 
     private DBConnecting dbConnecting;
 
-    public DBCustomerDAO() throws IOException {
-        dbConnecting = new DBConnecting();
+    public DBCustomerDAO(DBConnecting DBconnection) throws IOException {
+        this.dbConnecting = DBconnection;
     }
 
     public Customer createCustomer(Customer customer)

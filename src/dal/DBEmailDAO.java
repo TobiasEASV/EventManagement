@@ -14,12 +14,12 @@ import java.util.List;
 
 public class DBEmailDAO implements IDBEmailDAO {
 
-    DBConnecting dbConnecting;
+    private DBConnecting dbConnecting;
 
 
 
-    public DBEmailDAO() throws IOException {
-        dbConnecting = new DBConnecting();
+    public DBEmailDAO(DBConnecting dbConnecting) throws IOException {
+        this.dbConnecting = dbConnecting;
     }
 
     public HashMap<String,String> getCredentials(){
