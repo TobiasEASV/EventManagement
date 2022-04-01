@@ -48,9 +48,10 @@ public class SellTicketViewController implements Initializable {
 
     private CheckBox checkSeated;
 
+
+    private EventCoordinatorDashboardController dashboardController;
     private Event event;
     private double price;
-    private TicketManager ticketManager;
     private CustomerModel customerModel;
     private TicketListModel ticketListModel;
     private final String DEFAULT_COUNTRY_CODE_DK = "+45";
@@ -64,13 +65,6 @@ public class SellTicketViewController implements Initializable {
             alert.setHeaderText("Du skal vælge en Event først");
             alert.show();
         }
-        try {
-            ticketListModel = TicketListModel.getInstance();
-            ticketManager = new TicketManager();
-            customerModel = new CustomerModel();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
         price = event.getPriceProperty().get();
         lblPrice.setText(String.valueOf(price + " DK"));
@@ -79,6 +73,18 @@ public class SellTicketViewController implements Initializable {
 
         checkVIP.setDisable(event.getVipPriceProperty().get() == 0);
 
+    }
+
+    public void setController(EventCoordinatorDashboardController dashboardController){
+        this.dashboardController = dashboardController;
+    }
+
+    public void setCustomerModel(CustomerModel customerModel){
+        this.customerModel = customerModel;
+    }
+
+    public void setTicketListModel(TicketListModel ticketListModel){
+        this.ticketListModel = ticketListModel;
     }
 
     public void btnSave(ActionEvent actionEvent) {
@@ -124,7 +130,7 @@ public class SellTicketViewController implements Initializable {
         Ticket ticket = new Ticket(customerModel.createCustomer(customer), event, Double.parseDouble(lblPrice.getText()), vip, isSeated);
         ticket.setRow(row);
         ticket.setSeat(seat);
-        ticketListModel.addTicketToList(ticket);
+        this.ticketListModel.addTicketToList(ticket);
         EXITScene();
     }
 

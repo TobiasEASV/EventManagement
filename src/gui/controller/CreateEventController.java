@@ -4,6 +4,7 @@ import be.Event;
 import bll.EventManager;
 
 
+import gui.model.EventListModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -41,16 +42,20 @@ public class CreateEventController implements Initializable {
     @FXML
     private TextField txVIPPrice;
 
-    private  EventManager eventManager;
+    private EventCoordinatorDashboardController dashboardController;
+    private EventListModel eventListModel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            eventManager = new EventManager();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
+    }
+
+    public void setController(EventCoordinatorDashboardController dashboardController) {
+        this.dashboardController = dashboardController;
+    }
+
+    public void setEventListModel(EventListModel eventListModel) {
+        this.eventListModel = eventListModel;
     }
 
     public void handleButtonOK(ActionEvent actionEvent) {
@@ -75,7 +80,8 @@ public class CreateEventController implements Initializable {
                     dpStartData.getValue(),
                     dpEndData.getValue());
 
-            new DashboardScene().getController().updateComboBoxChooseEvent(eventManager.createEvent(event));
+            eventListModel.createEvent(event);
+            //dashboardController.updateComboBoxChooseEvent();
             EXITScene();
 
         }else{

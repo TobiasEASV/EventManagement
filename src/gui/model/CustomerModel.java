@@ -2,14 +2,15 @@ package gui.model;
 
 import be.Customer;
 import bll.CustomerManager;
+import bll.interfaces.ICustomerManager;
 
 import java.io.IOException;
 
 public class CustomerModel {
-    private CustomerManager customerManager;
+    private ICustomerManager customerManager;
 
-    public CustomerModel() throws IOException {
-        customerManager = new CustomerManager();
+    public CustomerModel(ICustomerManager customerManager) throws IOException {
+        this.customerManager = customerManager;
     }
 
     public Customer createCustomer(Customer customer){

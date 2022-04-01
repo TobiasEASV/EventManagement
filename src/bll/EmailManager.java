@@ -1,35 +1,44 @@
 package bll;
 
-import com.microsoft.sqlserver.jdbc.SQLServerException;
-import dal.DBEmailDAO;
-
+import be.Email;
+import bll.interfaces.IEmailManager;
+import dal.IDatabaseFacade;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Properties;
 
-public class EmailManager {
+public class EmailManager implements IEmailManager {
 
-        DBEmailDAO dbEmailDAO;
-        private HashMap<String,String> cache =  new HashMap<>();
+    private IDatabaseFacade iDatabaseFacade;
 
-    public EmailManager() throws IOException {
-        dbEmailDAO = new DBEmailDAO();
+    private final String PROP_FILE = ".data/email.settings";
+
+    private HashMap<String,String> cache =  new HashMap<>();
+
+    public EmailManager(IDatabaseFacade iDatabaseFacade){
+        this.iDatabaseFacade = iDatabaseFacade;
     }
 
-    public HashMap<String,String> getCredentials(){
-        if(cache.isEmpty()){
-            cache = dbEmailDAO.getCredentials();
-        }
-        return cache;
+    @Override
+    public Email getCredentials() throws IOException {
+        Properties emailCredentials = new Properties();
+        emailCredentials.load(new FileInputStream(PROP_FILE));
+        final String emailName = emailCredentials.getProperty("Email");
+        final String password = emailCredentials.getProperty("Password");
+
+        return new Email(emailName,password);
     }
 
+    @Override
+    public boolean checkCredentials(Email email) throws IOException {
+        Email emailFromFile = getCredentials();
 
-    public void updateCredentials(String email, String password) throws SQLServerException {
-
-        dbEmailDAO.setCredentials(email, hashString(password));
+        return email.getEmailNameProperty().get().equals(emailFromFile.getEmailNameProperty().get()) &&
+                email.getPasswordProperty().get().equals(emailFromFile.getPasswordProperty().get());
     }
 
-    public String hashString(String textToHash){
-        return textToHash;
+    @Override
+    public void updateCredentials(Email email) {
     }
-
 }

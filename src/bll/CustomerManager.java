@@ -1,31 +1,39 @@
 package bll;
 
 import be.Customer;
+import bll.interfaces.ICustomerManager;
 import dal.DBCustomerDAO;
+import dal.IDatabaseFacade;
 
 import java.io.IOException;
 
-public class CustomerManager {
-    private DBCustomerDAO dbCustomerDAO;
-    public CustomerManager() throws IOException {
-        dbCustomerDAO = new DBCustomerDAO();
+public class CustomerManager implements ICustomerManager {
+
+
+    private IDatabaseFacade iDatabaseFacade;
+
+    public CustomerManager(IDatabaseFacade iDatabaseFacade) {
+        this.iDatabaseFacade = iDatabaseFacade;
     }
+
+    @Override
     public Customer createCustomer(Customer customer) {
-        return dbCustomerDAO.createCustomer(customer);
+        return iDatabaseFacade.createCustomer(customer);
     }
 
-    public void updateCustomer(Customer customer)
-    {
-        dbCustomerDAO.updateCustomer(customer);
+    @Override
+    public void updateCustomer(Customer customer){
+        iDatabaseFacade.updateCustomer(customer);
     }
 
-    public void deleteCustomer(Customer customer)
-    {
-        dbCustomerDAO.deleteCustomer(customer);
+    @Override
+    public void deleteCustomer(Customer customer){
+        iDatabaseFacade.deleteCustomer(customer);
     }
-    public void getCustomer(Customer customer)
-    {
-        dbCustomerDAO.getCustomer(customer);
+
+    @Override
+    public void getCustomer(Customer customer) {
+        iDatabaseFacade.getCustomer(customer);
     }
 
 }

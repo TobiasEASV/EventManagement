@@ -1,5 +1,6 @@
 package utility.Scenes;
 
+import gui.controller.CreateEventController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -8,7 +9,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 
-public class CreateEventScene implements ILoadScene<CreateEventScene> {
+public class CreateEventScene implements ILoadScene<CreateEventController> {
     private final Image image = new Image("gui/images/Icons/ticket_2_icon.png");
     private static FXMLLoader loader;
 
@@ -22,7 +23,7 @@ public class CreateEventScene implements ILoadScene<CreateEventScene> {
     }
 
     @Override
-    public CreateEventScene getController() {
+    public CreateEventController getController() {
         return loader.getController();
     }
 }

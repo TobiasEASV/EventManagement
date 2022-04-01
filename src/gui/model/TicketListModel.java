@@ -2,14 +2,12 @@ package gui.model;
 
 import be.Event;
 import be.Ticket;
-import bll.TicketManager;
+import bll.interfaces.ITicketManager;
 import bll.util.Isearcher;
 import bll.util.TicketSearcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,25 +15,18 @@ import java.util.List;
 public class TicketListModel {
 
     private static TicketListModel single_instance = null;
-    private TicketManager ticketManager;
+    private ITicketManager ticketManager;
     private ObservableList<Ticket> ticketList;
     private List<Ticket> ticketCache;
     private Isearcher ticketSearcher;
 
-    private TicketListModel() throws IOException {
-        ticketManager = new TicketManager();
+    public TicketListModel(ITicketManager ticketManager) {
+        this.ticketManager = ticketManager;
         ticketCache = new ArrayList<>();
         ticketList = FXCollections.observableArrayList();
         ticketSearcher = new TicketSearcher();
 
         ticketCache.addAll(ticketList);
-    }
-
-    public static TicketListModel getInstance() throws IOException {
-        if (single_instance == null)
-            single_instance = new TicketListModel();
-
-        return single_instance;
     }
 
     public ObservableList<Ticket> getTicketList(){

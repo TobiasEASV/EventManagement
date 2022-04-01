@@ -14,14 +14,13 @@ public class DatabaseFacade implements IDatabaseFacade {
     private final IDBEventDAO DBEventDAO;
     private final IDBCustomerDAO DBCustomerDAO;
     private final IDBEmailDAO DBEmailDAO;
-    private final Connection connection;
 
-    public DatabaseFacade(IDBTicketDAO DBTicketDAO, IDBEventDAO DBEventDAO, IDBCustomerDAO DBCustomerDAO, IDBEmailDAO DBEmailDAO, Connection connection){
+
+    public DatabaseFacade(IDBTicketDAO DBTicketDAO, IDBEventDAO DBEventDAO, IDBCustomerDAO DBCustomerDAO, IDBEmailDAO DBEmailDAO){
         this.DBTicketDAO = DBTicketDAO;
         this.DBEventDAO = DBEventDAO;
         this.DBCustomerDAO = DBCustomerDAO;
         this.DBEmailDAO = DBEmailDAO;
-        this.connection = connection;
     }
 
 
