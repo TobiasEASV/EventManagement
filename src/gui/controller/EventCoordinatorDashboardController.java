@@ -170,6 +170,7 @@ public class EventCoordinatorDashboardController implements Initializable {
         tcName.setCellValueFactory(addTicket -> addTicket.getValue().getCustomer().getNameProperty());
         tcTelephoneNumber.setCellValueFactory(addTicket -> addTicket.getValue().getCustomer().getTelephoneNumberProperty());
         tcTicketPrice.setCellValueFactory(addTicket -> addTicket.getValue().getPriceProperty().asObject());
+        tcEmail.setCellValueFactory(addTicket -> addTicket.getValue().getCustomer().getEmailProperty());
 
         tvTickets.getSelectionModel().selectedItemProperty().addListener((observable, oldTicket, newTicket) -> {
             if(newTicket != null)
