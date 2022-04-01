@@ -206,9 +206,9 @@ public class EventCoordinatorDashboardController implements Initializable {
     }
 
     public void handleEditEventButton(ActionEvent actionEvent) throws IOException {
-        int placeHolder = comboBoxChooseEvent.getSelectionModel().getSelectedIndex();
+        int selectedIndex = comboBoxChooseEvent.getSelectionModel().getSelectedIndex();
         new EditEventScene().loadNewScene(new Stage());
-        comboBoxChooseEvent.getSelectionModel().select(placeHolder);
+        comboBoxChooseEvent.getSelectionModel().select(selectedIndex);
         updateEventLabels(getSelectedEvent());
     }
 
@@ -287,12 +287,12 @@ public class EventCoordinatorDashboardController implements Initializable {
     }
 
     public void handleSetInactiveButton(ActionEvent actionEvent) {
-        int placeholder = comboBoxChooseEvent.getSelectionModel().getSelectedIndex();
+        int selectedIndex = comboBoxChooseEvent.getSelectionModel().getSelectedIndex();
         getSelectedEvent().setIsActive(false);
         getSelectedEvent().setTitle("INACTIVE " + getSelectedEvent().getTitleProperty().get());
         eventListModel.setEventInactive(getSelectedEvent());
         updateComboBoxView();
-        comboBoxChooseEvent.getSelectionModel().select(placeholder);
+        comboBoxChooseEvent.getSelectionModel().select(selectedIndex);
         updateEventLabels(getSelectedEvent());
     }
 
