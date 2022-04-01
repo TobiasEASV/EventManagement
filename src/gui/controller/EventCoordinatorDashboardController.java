@@ -227,7 +227,6 @@ public class EventCoordinatorDashboardController implements Initializable {
     public void handleNewEventButton(ActionEvent actionEvent) throws IOException {
         ILoadScene<CreateEventController> createEventController = new CreateEventScene();
         createEventController.loadNewScene(new Stage());
-        createEventController.getController().setController(dashboardController);
         createEventController.getController().setEventListModel(eventListModel);
     }
 

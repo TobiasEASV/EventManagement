@@ -42,16 +42,11 @@ public class CreateEventController implements Initializable {
     @FXML
     private TextField txVIPPrice;
 
-    private EventCoordinatorDashboardController dashboardController;
     private EventListModel eventListModel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-    }
-
-    public void setController(EventCoordinatorDashboardController dashboardController) {
-        this.dashboardController = dashboardController;
     }
 
     public void setEventListModel(EventListModel eventListModel) {

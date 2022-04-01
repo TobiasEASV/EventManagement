@@ -6,6 +6,7 @@ import be.Ticket;
 import bll.TicketManager;
 import gui.model.CustomerModel;
 import gui.model.TicketListModel;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -58,20 +59,22 @@ public class SellTicketViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        event = new DashboardScene().getController().getSelectedEvent();
-        if (event == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error: Something went wrong");
-            alert.setHeaderText("Du skal vælge en Event først");
-            alert.show();
-        }
+        Platform.runLater(() -> {
+            event = dashboardController.getSelectedEvent();
+            if (event == null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error: Something went wrong");
+                alert.setHeaderText("Du skal vælge en Event først");
+                alert.show();
+            }
 
-        price = event.getPriceProperty().get();
-        lblPrice.setText(String.valueOf(price + " DK"));
-        txtRow.setDisable(true);
-        txtSeat.setDisable(true);
+            price = event.getPriceProperty().get();
+            lblPrice.setText(price + " DKK");
+            txtRow.setDisable(true);
+            txtSeat.setDisable(true);
 
-        checkVIP.setDisable(event.getVipPriceProperty().get() == 0);
+            checkVIP.setDisable(event.getVipPriceProperty().get() == 0);
+        });
 
     }
 

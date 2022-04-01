@@ -2,6 +2,7 @@ package gui.controller;
 
 import be.Event;
 import gui.model.EventListModel;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -44,18 +45,21 @@ public class EditEventController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        eventToEdit = new DashboardScene().getController().getSelectedEvent(); // Skal lige finde en anden måde og få dashboardController i på... Tobias
 
-        txTitle.setText(eventToEdit.getTitleProperty().get());
-        txtAreaDescription.setText(eventToEdit.getDescriptionProperty().get());
-        txLocation.setText(eventToEdit.getLocationProperty().get());
-        txArtists.setText(eventToEdit.getArtistsProperty().get());
-        txContactEmail.setText(eventToEdit.getContactEmailProperty().get());
-        txTicktePrice.setText(String.valueOf(eventToEdit.getPriceProperty().get()));
-        txVIPPrice.setText(String.valueOf(eventToEdit.getVipPriceProperty().get()));
+        Platform.runLater(() -> {
+            eventToEdit = dashboardController.getSelectedEvent();
 
-        dpStartData.setValue(eventToEdit.getStartDateProperty().getValue());
-        dpEndData.setValue(eventToEdit.getEndDateProperty().getValue());
+            txTitle.setText(eventToEdit.getTitleProperty().get());
+            txtAreaDescription.setText(eventToEdit.getDescriptionProperty().get());
+            txLocation.setText(eventToEdit.getLocationProperty().get());
+            txArtists.setText(eventToEdit.getArtistsProperty().get());
+            txContactEmail.setText(eventToEdit.getContactEmailProperty().get());
+            txTicktePrice.setText(String.valueOf(eventToEdit.getPriceProperty().get()));
+            txVIPPrice.setText(String.valueOf(eventToEdit.getVipPriceProperty().get()));
+
+            dpStartData.setValue(eventToEdit.getStartDateProperty().getValue());
+            dpEndData.setValue(eventToEdit.getEndDateProperty().getValue());
+        });
 
     }
 
