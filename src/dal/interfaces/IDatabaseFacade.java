@@ -1,6 +1,7 @@
 package dal.interfaces;
 
 import be.Customer;
+import be.Email;
 import be.Event;
 import be.Ticket;
 
@@ -50,7 +51,7 @@ public interface IDatabaseFacade {
     /**
      * @return a hashmap of an email and a password
      */
-    public HashMap<String,String> getCredentials();
+    public Email getCredentials();
 
 
     /**

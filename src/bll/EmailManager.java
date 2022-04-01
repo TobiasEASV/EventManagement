@@ -15,8 +15,6 @@ public class EmailManager implements IEmailManager {
 
     private final String PROP_FILE = ".data/email.settings";
 
-    private HashMap<String,String> cache =  new HashMap<>();
-
     public EmailManager(IDatabaseFacade iDatabaseFacade){
         this.iDatabaseFacade = iDatabaseFacade;
     }

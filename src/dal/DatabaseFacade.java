@@ -1,6 +1,7 @@
 package dal;
 
 import be.Customer;
+import be.Email;
 import be.Event;
 import be.Ticket;
 import dal.interfaces.*;
@@ -88,7 +89,7 @@ public class DatabaseFacade implements IDatabaseFacade {
     }
 
     @Override
-    public HashMap<String, String> getCredentials() {
+    public Email getCredentials() {
         return DBEmailDAO.getCredentials();
     }
 

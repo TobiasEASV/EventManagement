@@ -1,5 +1,6 @@
 package dal;
 
+import be.Email;
 import dal.interfaces.IDBEmailDAO;
 
 import java.sql.Connection;
@@ -19,9 +20,10 @@ public class DBEmailDAO implements IDBEmailDAO {
         this.dbConnecting = dbConnecting;
     }
 
-    public HashMap<String,String> getCredentials(){
+    @Override
+    public Email getCredentials() {
 
-        final HashMap<String,String> credentials = new HashMap<>();
+        Email EmailCredentials = null;
 
         try(Connection connection = dbConnecting.getConnection()){
             String sql = "Select EmailCredentials, PasswordCredentials FROM Email";
@@ -30,19 +32,18 @@ public class DBEmailDAO implements IDBEmailDAO {
             //Extract data from DB
             preparedStatement.execute();
 
-             ResultSet resultSet = preparedStatement.getResultSet();
-             if(resultSet.next()){
-                 String email = resultSet.getString("EmailCredentials");
-                 String password = resultSet.getString("PasswordCredentials");
-                 credentials.put("Email", email);
-                 credentials.put("Password", password);
-             }
+            ResultSet resultSet = preparedStatement.getResultSet();
+            if(resultSet.next()){
+                String email = resultSet.getString("EmailCredentials");
+                String password = resultSet.getString("PasswordCredentials");
+
+                EmailCredentials = new Email(email,password);
+            }
 
         } catch (SQLException SQLe) {
             SQLe.printStackTrace();
         }
-        return credentials;
-
+        return EmailCredentials;
     }
 
     public void setCredentials(String email, String password){
