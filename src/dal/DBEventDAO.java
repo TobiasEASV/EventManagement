@@ -14,7 +14,7 @@ public class DBEventDAO implements IDBEventDAO{
     private DBConnecting dbConnecting;
 
 
-    public DBEventDAO(DBConnecting dbConnecting) throws IOException {
+    public DBEventDAO(DBConnecting dbConnecting) {
         this.dbConnecting = dbConnecting;
     }
 

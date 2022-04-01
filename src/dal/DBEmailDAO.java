@@ -18,7 +18,7 @@ public class DBEmailDAO implements IDBEmailDAO {
 
 
 
-    public DBEmailDAO(DBConnecting dbConnecting) throws IOException {
+    public DBEmailDAO(DBConnecting dbConnecting) {
         this.dbConnecting = dbConnecting;
     }
 
