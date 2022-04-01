@@ -82,6 +82,7 @@ public class EditEventController implements Initializable {
 
             eventManager.updateEvent(eventToEdit);
             new DashboardScene().getController().updateComboBoxView();
+
             EXITScene();
 
         }else{

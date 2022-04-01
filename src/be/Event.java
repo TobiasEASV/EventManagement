@@ -17,13 +17,15 @@ public class Event {
     private DoubleProperty vipPrice = new SimpleDoubleProperty();
 
 
+
+    private BooleanProperty isActive = new SimpleBooleanProperty();
     private IntegerProperty id = new SimpleIntegerProperty();
 
     private ObjectProperty<LocalDate> startDate = new SimpleObjectProperty<>();
     private ObjectProperty<LocalDate> endDate = new SimpleObjectProperty<>();
 
 
-    public Event (String title, String description, String location, String artist, String contactEmail, double price, double vipPrice,  LocalDate startDate, LocalDate endDate)
+    public Event (String title, String description, String location, String artist, String contactEmail, double price, double vipPrice,  LocalDate startDate, LocalDate endDate, boolean isActive)
     {
         this.title.set(title);
         this.description.set(description);
@@ -32,7 +34,7 @@ public class Event {
         this.contactEmail.set(contactEmail);
         this.price.set(price);
         this.vipPrice.set(vipPrice);
-
+        this.isActive.set(isActive);
         this.startDate.set(startDate);
         this.endDate.set(endDate);
     }
@@ -44,7 +46,9 @@ public class Event {
         this.location.set(location);
     }
 
-
+    public void setIsActive(boolean isActive) {
+        this.isActive.set(isActive);
+    }
     public void setTitle(String title) {
         this.title.set(title);
     }
@@ -70,8 +74,6 @@ public class Event {
     }
 
 
-
-
     public void setArtists(String artists) {
         this.artists.set(artists);
     }
@@ -88,6 +90,9 @@ public class Event {
         this.contactEmail.set(contactEmail);
     }
 
+    public BooleanProperty getIsActiveProperty() {
+        return isActive;
+    }
 
     public StringProperty getTitleProperty() {
         return title;

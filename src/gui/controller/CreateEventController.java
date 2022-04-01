@@ -73,7 +73,7 @@ public class CreateEventController implements Initializable {
                     Double.parseDouble(ticketPrice),
                     Double.parseDouble(VIPPrice),
                     dpStartData.getValue(),
-                    dpEndData.getValue());
+                    dpEndData.getValue(), true);
 
             new DashboardScene().getController().updateComboBoxChooseEvent(eventManager.createEvent(event));
             EXITScene();

@@ -130,6 +130,7 @@ public class EventCoordinatorDashboardController implements Initializable {
 
     public EventCoordinatorDashboardController() throws IOException {
         customerModel = new CustomerModel();
+
     }
 
     @Override
@@ -205,7 +206,10 @@ public class EventCoordinatorDashboardController implements Initializable {
     }
 
     public void handleEditEventButton(ActionEvent actionEvent) throws IOException {
+        int placeHolder = comboBoxChooseEvent.getSelectionModel().getSelectedIndex();
         new EditEventScene().loadNewScene(new Stage());
+        comboBoxChooseEvent.getSelectionModel().select(placeHolder);
+        updateEventLabels(getSelectedEvent());
     }
 
     public void handleNewEventButton(ActionEvent actionEvent) throws IOException {
@@ -282,8 +286,19 @@ public class EventCoordinatorDashboardController implements Initializable {
         updateComboBoxView();
     }
 
+    public void handleSetInactiveButton(ActionEvent actionEvent) {
+        int placeholder = comboBoxChooseEvent.getSelectionModel().getSelectedIndex();
+        getSelectedEvent().setIsActive(false);
+        getSelectedEvent().setTitle("INACTIVE " + getSelectedEvent().getTitleProperty().get());
+        eventListModel.setEventInactive(getSelectedEvent());
+        updateComboBoxView();
+        comboBoxChooseEvent.getSelectionModel().select(placeholder);
+        updateEventLabels(getSelectedEvent());
+    }
+
     public void updateComboBoxView() {
         comboBoxChooseEvent.getItems().clear();
         comboBoxChooseEvent.getItems().addAll(eventListModel.getEventList());
     }
+
 }
