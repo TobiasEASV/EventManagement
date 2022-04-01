@@ -4,7 +4,10 @@ import javafx.beans.property.*;
 
 import java.time.LocalDate;
 
-
+/**
+ * The event class holds all the information of an event, such as: ID, Title, Description, Location, Artist, Contact Email,
+ * Price, VIPPrice, Event state(Active/Inactive), Start Date, End Date.
+ */
 public class Event {
 
     private StringProperty title = new SimpleStringProperty();
@@ -16,9 +19,8 @@ public class Event {
     private DoubleProperty price = new SimpleDoubleProperty();
     private DoubleProperty vipPrice = new SimpleDoubleProperty();
 
-
-
     private BooleanProperty isActive = new SimpleBooleanProperty();
+
     private IntegerProperty id = new SimpleIntegerProperty();
 
     private ObjectProperty<LocalDate> startDate = new SimpleObjectProperty<>();

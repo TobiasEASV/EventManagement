@@ -3,34 +3,22 @@ package be;
 import javafx.beans.property.*;
 
 /**
- * Ticket class
+ * The Ticket class holds all the information that a ticket consist of, such as : ID, Event ID, Seat and Row if the event has seats,
+ * Price, VIP status, The ticket owner(Customer), and the Event the ticket is for (Event)
  * Mikkel Theut
  */
 
 public class Ticket {
 
-
-    //private StringProperty customerName= new SimpleStringProperty();
-    //private StringProperty customerEmail= new SimpleStringProperty();
-    private StringProperty paymentStatus= new SimpleStringProperty();
-
     private StringProperty id = new SimpleStringProperty();
-    //private IntegerProperty customerId= new SimpleIntegerProperty();
     private IntegerProperty eventId= new SimpleIntegerProperty();
     private StringProperty seat= new SimpleStringProperty();
     private StringProperty row= new SimpleStringProperty();
-
     private DoubleProperty price = new SimpleDoubleProperty();
-
     private BooleanProperty vip= new SimpleBooleanProperty();
     private BooleanProperty seated= new SimpleBooleanProperty();
-
     private Customer customer;
     private Event event;
-
-    private final String paid = "Paid";
-    private final String notPaid = "Not Paid";
-
 
     public Ticket(){}
     public Ticket(Customer customer, Event event, double price,boolean vip,boolean isSeated) {
@@ -39,10 +27,7 @@ public class Ticket {
         this.price.set(price);
         this.vip.set(vip);
         this.seated.set(isSeated);
-
-
     }
-
 
     public Customer getCustomer() {
         return customer;
@@ -84,15 +69,9 @@ public class Ticket {
         this.vip.set(vip);
     }
 
-
-
     public void setSeated(boolean seated) {
         this.seated.set(seated);
     }
-
-
-
-
 
     public StringProperty getIdProperty() {
         return id;
@@ -114,8 +93,6 @@ public class Ticket {
         return price;
     }
 
-
-
     public BooleanProperty getVipProperty() {
         return vip;
     }
@@ -124,8 +101,5 @@ public class Ticket {
         return seated;
     }
 
-    public StringProperty getPaymentStatusProperty() {
-        return paymentStatus;
-    }
 
 }
