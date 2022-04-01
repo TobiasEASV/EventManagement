@@ -3,8 +3,8 @@ package dal;
 import be.Customer;
 import be.Event;
 import be.Ticket;
+import dal.interfaces.*;
 
-import java.sql.Connection;
 import java.util.HashMap;
 import java.util.List;
 

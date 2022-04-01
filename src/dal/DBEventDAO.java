@@ -1,15 +1,14 @@
 package dal;
 
 import be.Event;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
+import dal.interfaces.IDBEventDAO;
 
-import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DBEventDAO implements IDBEventDAO{
+public class DBEventDAO implements IDBEventDAO {
 
     private DBConnecting dbConnecting;
 

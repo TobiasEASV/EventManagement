@@ -1,15 +1,12 @@
 package dal;
 
-import com.microsoft.sqlserver.jdbc.SQLServerException;
+import dal.interfaces.IDBEmailDAO;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 
 public class DBEmailDAO implements IDBEmailDAO {

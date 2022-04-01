@@ -2,8 +2,8 @@ package dal;
 
 import be.Customer;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+import dal.interfaces.IDBCustomerDAO;
 
-import java.io.IOException;
 import java.sql.*;
 
 public class DBCustomerDAO implements IDBCustomerDAO {
