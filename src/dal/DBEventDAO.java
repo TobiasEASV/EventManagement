@@ -44,6 +44,7 @@ public class DBEventDAO implements IDBEventDAO {
 
         } catch (SQLException SQLe) {
             SQLe.printStackTrace();
+            return null;
         }
         return event;
     }

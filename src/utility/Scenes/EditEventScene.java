@@ -7,11 +7,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import utility.Scenes.interfaces.ILoadScene;
 
 import java.io.File;
 import java.io.IOException;
 
-public class EditEventScene implements ILoadScene<EditEventController>{
+public class EditEventScene implements ILoadScene<EditEventController> {
 
     private final Image image = new Image("gui/images/Icons/ticket_2_icon.png");
     private static FXMLLoader loader;

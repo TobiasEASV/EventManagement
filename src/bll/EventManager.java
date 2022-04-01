@@ -3,7 +3,8 @@ package bll;
 import be.Event;
 import bll.interfaces.IEventManager;
 import dal.DBEventDAO;
-import dal.IDatabaseFacade;
+
+import dal.interfaces.IDatabaseFacade;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 public class EventManager implements IEventManager {
 
     private IDatabaseFacade iDatabaseFacade;
+
 
     public EventManager(IDatabaseFacade iDatabaseFacade){
         this.iDatabaseFacade = iDatabaseFacade;

@@ -81,7 +81,6 @@ public class CreateEventController implements Initializable {
                     dpEndData.getValue());
 
             eventListModel.createEvent(event);
-            //dashboardController.updateComboBoxChooseEvent();
             EXITScene();
 
         }else{

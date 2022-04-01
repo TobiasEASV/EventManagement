@@ -3,8 +3,7 @@ package bll;
 import be.Event;
 import be.Ticket;
 import bll.interfaces.ITicketManager;
-import dal.DBTicketDAO;
-import dal.IDatabaseFacade;
+import dal.interfaces.IDatabaseFacade;
 
 import java.io.IOException;
 import java.util.List;

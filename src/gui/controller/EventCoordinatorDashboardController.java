@@ -16,12 +16,12 @@ import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.WritableImage;
-import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import utility.EmailClient;
 import utility.Scenes.*;
+import utility.Scenes.interfaces.ILoadScene;
 
 import javax.imageio.ImageIO;
 import javax.print.PrintService;
@@ -139,31 +139,26 @@ public class EventCoordinatorDashboardController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        //instantiate the singleton PrintModel
-        printModel = PrintModel.getInstance();
-
-
         Platform.runLater(() -> {
+            // Search functionality in the list view
+            textFieldSearch.textProperty().addListener((observableValue, oldValue, newValue) -> {
+                    ticketListModel.searchTicket(newValue);
+            });
 
-        // Search functionality in the list view
-        textFieldSearch.textProperty().addListener((observableValue, oldValue, newValue) -> {
-                ticketListModel.searchTicket(newValue);
-        });
+            //Set placeholder for tableview if it is empty
+            tvTickets.setPlaceholder(new Label("No tickets found for this event."));
+            tvTickets.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+            tvTickets.setItems(ticketListModel.getTicketList());
+            tcName.setCellValueFactory(addTicket -> addTicket.getValue().getCustomer().getNameProperty());
+            tcTelephoneNumber.setCellValueFactory(addTicket -> addTicket.getValue().getCustomer().getTelephoneNumberProperty());
+            tcEmail.setCellValueFactory(addTicket -> addTicket.getValue().getCustomer().getEmailProperty());
+            tcTicketPrice.setCellValueFactory(addTicket -> addTicket.getValue().getPriceProperty().asObject());
 
-        //Set placeholder for tableview if it is empty
-        tvTickets.setPlaceholder(new Label("No tickets found for this event."));
-        tvTickets.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        tvTickets.setItems(ticketListModel.getTicketList());
-        tcName.setCellValueFactory(addTicket -> addTicket.getValue().getCustomer().getNameProperty());
-        tcTelephoneNumber.setCellValueFactory(addTicket -> addTicket.getValue().getCustomer().getTelephoneNumberProperty());
-        tcEmail.setCellValueFactory(addTicket -> addTicket.getValue().getCustomer().getEmailProperty());
-        tcTicketPrice.setCellValueFactory(addTicket -> addTicket.getValue().getPriceProperty().asObject());
-
-        tvTickets.getSelectionModel().selectedItemProperty().addListener((observable, oldTicket, newTicket) -> {
-            if(newTicket != null)
-                updateTicketLabels(newTicket);
-            }
-        );
+            tvTickets.getSelectionModel().selectedItemProperty().addListener((observable, oldTicket, newTicket) -> {
+                if(newTicket != null)
+                    updateTicketLabels(newTicket);
+                }
+            );
         });
 
     }
@@ -184,13 +179,12 @@ public class EventCoordinatorDashboardController implements Initializable {
         this.emailClient = emailClient;
     }
 
-    public void setController(EventCoordinatorDashboardController dashboardController){
-        this.dashboardController = dashboardController;
+    public void setPrintModel(PrintModel printModel){
+        this.printModel = printModel;
     }
 
-
-    public void updateComboBoxChooseEvent(Event event){
-        comboBoxChooseEvent.getItems().add(event);
+    public void setController(EventCoordinatorDashboardController dashboardController){
+        this.dashboardController = dashboardController;
     }
 
     public void handleSellTicketButton(ActionEvent actionEvent) throws IOException {

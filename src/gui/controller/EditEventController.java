@@ -1,7 +1,6 @@
 package gui.controller;
 
 import be.Event;
-import bll.EventManager;
 import gui.model.EventListModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,9 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import utility.Scenes.DashboardScene;
-import utility.Scenes.ILoadScene;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 

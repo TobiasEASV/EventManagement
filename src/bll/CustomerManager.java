@@ -2,10 +2,7 @@ package bll;
 
 import be.Customer;
 import bll.interfaces.ICustomerManager;
-import dal.DBCustomerDAO;
-import dal.IDatabaseFacade;
-
-import java.io.IOException;
+import dal.interfaces.IDatabaseFacade;
 
 public class CustomerManager implements ICustomerManager {
 

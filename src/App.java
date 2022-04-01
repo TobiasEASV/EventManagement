@@ -6,19 +6,15 @@ import dal.*;
 import gui.controller.EventCoordinatorDashboardController;
 import gui.model.CustomerModel;
 import gui.model.EventListModel;
+import gui.model.PrintModel;
 import gui.model.TicketListModel;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import utility.EmailClient;
 import utility.Scenes.DashboardScene;
-import utility.Scenes.ILoadScene;
+import utility.Scenes.interfaces.ILoadScene;
 
 
-import java.io.File;
 import java.io.IOException;
 
 public class App extends Application {
@@ -38,6 +34,7 @@ public class App extends Application {
         dashboardSceneController.setEmailClient(new EmailClient(new EmailManager(new DatabaseFacade(dbTicketDAO,dbEventDAO,dbCustomerDAO, dbEmailDAO))));
         dashboardSceneController.setEventListModel(new EventListModel(new EventManager(new DatabaseFacade(dbTicketDAO,dbEventDAO,dbCustomerDAO, dbEmailDAO))));
         dashboardSceneController.setTicketListModel(new TicketListModel(new TicketManager(new DatabaseFacade(dbTicketDAO,dbEventDAO,dbCustomerDAO, dbEmailDAO))));
+        dashboardSceneController.setPrintModel(new PrintModel());
 
         dashboardSceneController.setController(dashboardSceneController);
 

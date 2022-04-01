@@ -2,7 +2,8 @@ package bll;
 
 import be.Email;
 import bll.interfaces.IEmailManager;
-import dal.IDatabaseFacade;
+import dal.interfaces.IDatabaseFacade;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
