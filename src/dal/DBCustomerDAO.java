@@ -2,31 +2,28 @@ package dal;
 
 import be.Customer;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+import dal.interfaces.IDBCustomerDAO;
 
-import java.io.IOException;
 import java.sql.*;
 
-public class DBCustomerDAO implements IDBCustomerDAO{
+public class DBCustomerDAO implements IDBCustomerDAO {
 
     private DBConnecting dbConnecting;
 
-    public DBCustomerDAO(DBConnecting dbConnection) throws IOException {
+    public DBCustomerDAO(DBConnecting dbConnection) {
         this.dbConnecting = dbConnection;
     }
 
-    public Customer createCustomer(Customer customer)
-    {
-        String sql= "INSERT INTO [Customer] (FullName, Email, Telephone_Number) VALUES (?,?,?);";
-        try (Connection connection = dbConnecting.getConnection()){
+    public Customer createCustomer(Customer customer) {
+        String sql = "INSERT INTO [Customer] (FullName, Email, Telephone_Number) VALUES (?,?,?);";
+        try (Connection connection = dbConnecting.getConnection()) {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, customer.getNameProperty().get());
             ps.setString(2, customer.getEmailProperty().get());
             ps.setString(3, customer.getTelephoneNumberProperty().get());
-            if(ps.executeUpdate() == 1)
-            {
+            if (ps.executeUpdate() == 1) {
                 ResultSet resultSet = ps.getGeneratedKeys();
-                if (resultSet.next())
-                {
+                if (resultSet.next()) {
                     int id = resultSet.getInt(1);
                     customer.setId(id);
                 }
@@ -39,11 +36,10 @@ public class DBCustomerDAO implements IDBCustomerDAO{
         return customer;
 
     }
-    public Customer getCustomer(Customer customer)
-    {
-        String sql= "SELECT * FROM Customer WHERE ID = (?);";
-        try(Connection connection = dbConnecting.getConnection())
-        {
+
+    public Customer getCustomer(Customer customer) {
+        String sql = "SELECT * FROM Customer WHERE ID = (?);";
+        try (Connection connection = dbConnecting.getConnection()) {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, customer.getIdProperty().get());
             ResultSet rs = ps.getGeneratedKeys();
@@ -63,11 +59,9 @@ public class DBCustomerDAO implements IDBCustomerDAO{
         return null;
     }
 
-    public void updateCustomer(Customer customer)
-    {
+    public void updateCustomer(Customer customer) {
         String sql = "UPDATE Customer SET FullName= (?), Email = (?), Telephone_Number =(?) WHERE ID = (?);";
-        try(Connection connection = dbConnecting.getConnection())
-        {
+        try (Connection connection = dbConnecting.getConnection()) {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, customer.getNameProperty().get());
             ps.setString(2, customer.getEmailProperty().get());
@@ -81,11 +75,9 @@ public class DBCustomerDAO implements IDBCustomerDAO{
         }
     }
 
-    public void deleteCustomer(Customer customer)
-    {
+    public void deleteCustomer(Customer customer) {
         String sql = "DELETE FROM Customer WHERE ID = (?);";
-        try(Connection connection = dbConnecting.getConnection())
-        {
+        try (Connection connection = dbConnecting.getConnection()) {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, customer.getIdProperty().get());
             ps.executeUpdate();

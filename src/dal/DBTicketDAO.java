@@ -3,14 +3,14 @@ package dal;
 import be.Customer;
 import be.Event;
 import be.Ticket;
+import dal.interfaces.IDBTicketDAO;
 
-import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class DBTicketDAO implements IDBTicketDAO{
+public class DBTicketDAO implements IDBTicketDAO {
 
     private DBConnecting dbConnecting;
 
