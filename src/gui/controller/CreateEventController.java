@@ -7,19 +7,20 @@ import bll.EventManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import utility.Scenes.DashboardScene;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class CreateEventController implements Initializable {
 
+    @FXML
+    private ComboBox<String> comboBoxStartTime;
+    @FXML
+    private ComboBox<String> comboBoxEndTime;
     @FXML
     private TextArea txtAreaDescription;
     @FXML
@@ -50,7 +51,34 @@ public class CreateEventController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        comboBoxStartTime.getItems().addAll(getTimes());
+        comboBoxEndTime.getItems().addAll(getTimes());
+    }
 
+    private List<String> getTimes() {
+        List<String> timeList = new ArrayList<>();
+        String time;
+        for (int hour = 0; hour < 10; hour++) {
+            for (int minutes = 0; minutes < 60; minutes += 15) {
+                if (minutes == 0) {
+                    time = "0" + hour + ":" + minutes +"0";
+                }
+                else {
+                    time = "0" + hour + ":" + minutes;}
+                timeList.add(time);
+            }
+        }
+        for (int hour = 10; hour < 24; hour++) {
+            for (int minutes = 0; minutes < 60; minutes += 15) {
+                if (minutes == 0) {
+                    time = hour + ":" + minutes +"0";
+                }
+                else {
+                time = hour + ":" + minutes;}
+                timeList.add(time);
+            }
+        }
+        return timeList;
     }
 
     public void handleButtonOK(ActionEvent actionEvent) {

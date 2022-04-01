@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextArea?>
@@ -10,8 +11,9 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-<GridPane fx:id="parentGridPane" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="500.0" styleClass="backgroundPane" stylesheets="@../utility/SceneStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.CreateEventController">
+<GridPane fx:id="parentGridPane" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="500.0" styleClass="backgroundPane" stylesheets="@../utility/SceneStylesheet.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.CreateEventController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="100.0" prefWidth="100.0" />
   </columnConstraints>
@@ -77,10 +79,36 @@
             <Insets />
          </GridPane.margin>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="15">
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="15">
          <children>
-            <DatePicker fx:id="dpStartData" promptText="Start Date" />
-            <DatePicker fx:id="dpEndData" promptText="End Date" />
+            <VBox>
+               <children>
+                  <DatePicker fx:id="dpStartData" promptText="Start Date">
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </DatePicker>
+                  <ComboBox fx:id="comboBoxStartTime" promptText="Start Time" visibleRowCount="15">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </ComboBox>
+               </children>
+            </VBox>
+            <VBox>
+               <children>
+                  <DatePicker fx:id="dpEndData" promptText="End Date">
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </DatePicker>
+                  <ComboBox fx:id="comboBoxEndTime" promptText="End Time" visibleRowCount="15">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </ComboBox>
+               </children>
+            </VBox>
          </children>
       </HBox>
       <Separator prefWidth="200.0" styleClass="TxtSeparator" GridPane.rowIndex="2" />

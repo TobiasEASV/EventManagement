@@ -9,13 +9,11 @@ import gui.model.TicketListModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import utility.Scenes.DashboardScene;
+import utility.Scenes.SceneSwapper;
 
 import java.io.IOException;
 import java.net.URL;
@@ -82,8 +80,9 @@ public class SellTicketViewController implements Initializable {
     }
 
     public void btnSave(ActionEvent actionEvent) {
-        String seat = "No Seat nr";
-        String row = "No Row nr";
+
+        String seat = "N/A";
+        String row = "N/A";
 
         boolean vip = false;
 
@@ -118,14 +117,19 @@ public class SellTicketViewController implements Initializable {
         if (checkSeated.isSelected())
             isSeated = true;
 
+        if (!txtCustomerName.getText().isEmpty() && !txtCustomerEmail.getText().isEmpty() && !txtCustomerTelephoneNumber.getText().isEmpty()) {
+            Customer customer = new Customer(txtCustomerEmail.getText(), txtCustomerName.getText(), telephoneNumber);
 
-        Customer customer = new Customer(txtCustomerEmail.getText(), txtCustomerName.getText(), telephoneNumber);
-
-        Ticket ticket = new Ticket(customerModel.createCustomer(customer), event, Double.parseDouble(lblPrice.getText()), vip, isSeated);
-        ticket.setRow(row);
-        ticket.setSeat(seat);
-        ticketListModel.addTicketToList(ticket);
-        EXITScene();
+            Ticket ticket = new Ticket(customerModel.createCustomer(customer), event, Double.parseDouble(lblPrice.getText()), vip, isSeated);
+            ticket.setRow(row);
+            ticket.setSeat(seat);
+            ticketListModel.addTicketToList(ticket);
+            EXITScene();
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "You have to fill Name, E-mail and Telephone", ButtonType.OK);
+            alert.show();
+        }
     }
 
 

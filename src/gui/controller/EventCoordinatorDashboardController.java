@@ -169,7 +169,6 @@ public class EventCoordinatorDashboardController implements Initializable {
         tvTickets.setItems(ticketListModel.getTicketList());
         tcName.setCellValueFactory(addTicket -> addTicket.getValue().getCustomer().getNameProperty());
         tcTelephoneNumber.setCellValueFactory(addTicket -> addTicket.getValue().getCustomer().getTelephoneNumberProperty());
-        tcEmail.setCellValueFactory(addTicket -> addTicket.getValue().getCustomer().getEmailProperty());
         tcTicketPrice.setCellValueFactory(addTicket -> addTicket.getValue().getPriceProperty().asObject());
 
         tvTickets.getSelectionModel().selectedItemProperty().addListener((observable, oldTicket, newTicket) -> {
@@ -251,7 +250,7 @@ public class EventCoordinatorDashboardController implements Initializable {
         lblEventArtists.setText(event.getArtistsProperty().get());
         lblEventStartDate.setText(String.valueOf(event.getStartDateProperty().get()));
         lblEventEndDate.setText(String.valueOf(event.getEndDateProperty().get()));
-        lblEventPrice.setText(String.valueOf(event.getPriceProperty().get() + " DK"));
+        lblEventPrice.setText(String.valueOf(event.getPriceProperty().get() + " DKK"));
         lblEventContactEmail.setText(event.getContactEmailProperty().get());
         setCheckBoxesOnEvent(event);
     }
@@ -269,15 +268,14 @@ public class EventCoordinatorDashboardController implements Initializable {
 
         lblTicketTitle.setText(ticket.getEvent().getTitleProperty().get());
         lblCustomerName.setText(ticket.getCustomer().getNameProperty().get());
-        lblCustomerEmail.setText(ticket.getCustomer().getEmailProperty().get());
-        lblTicketPrice.setText(String.valueOf(ticket.getPriceProperty().get() + " DK"));
+        lblTicketPrice.setText(String.valueOf(ticket.getPriceProperty().get() + " DKK"));
         lblTicketType.setText(ticketType);
         lblTicketLocation.setText(ticket.getEvent().getLocationProperty().get());
         lblTicketStartDate.setText(String.valueOf(ticket.getEvent().getStartDateProperty().get()));
         lblTicketEndDate.setText(String.valueOf(ticket.getEvent().getEndDateProperty().get()));
         lblTicketRowNumber.setText("Row: "+ticket.getRowProperty().get());
         lblTicketSeatNumber.setText("Seat: "+ticket.getSeatProperty().get());
-        lblTicketId.setText(String.valueOf(ticket.getIdProperty().get()));
+        lblTicketId.setText("ID: " + ticket.getIdProperty().get());
         lblTicketDescription.setText(ticket.getEvent().getDescriptionProperty().get());
     }
 
