@@ -31,7 +31,6 @@ import java.util.ResourceBundle;
 public class EventCoordinatorDashboardController implements Initializable {
 
 
-
     @FXML
     private GridPane parentGridPane;
 
@@ -114,6 +113,9 @@ public class EventCoordinatorDashboardController implements Initializable {
     @FXML
     private GridPane ticketPane;
 
+    @FXML
+    private Button btnSellTicket;
+
     private CustomerModel customerModel;
 
     //Array that holds printservices available on the PC.
@@ -182,6 +184,7 @@ public class EventCoordinatorDashboardController implements Initializable {
 
     public void updateComboBoxChooseEvent(Event event){
         comboBoxChooseEvent.getItems().add(event);
+
     }
 
     public void handleSellTicketButton(ActionEvent actionEvent) throws IOException {
@@ -245,6 +248,7 @@ public class EventCoordinatorDashboardController implements Initializable {
     }
 
     private void updateEventLabels(Event event) {
+        btnSellTicket.setDisable(!event.getIsActiveProperty().get());
         lblEventTitle.setText(event.getTitleProperty().get());
         lblEventLocation.setText(event.getLocationProperty().get());
         lblEventDescription.setText(event.getDescriptionProperty().get());

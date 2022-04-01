@@ -72,7 +72,7 @@
       </HBox>
       <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="15.0" GridPane.columnIndex="2" GridPane.rowIndex="8">
          <children>
-            <Button mnemonicParsing="false" onAction="#handleSellTicketButton" text="Sell Ticket" />
+            <Button fx:id="btnSellTicket" mnemonicParsing="false" onAction="#handleSellTicketButton" text="Sell Ticket" />
             <Button mnemonicParsing="false" onAction="#handleRefundTicketButton" text="Refund Ticket" />
          </children>
          <padding>
