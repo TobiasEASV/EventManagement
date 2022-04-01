@@ -50,7 +50,7 @@
             </Label>
          </children>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="747.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
          <children>
             <Label text="Sold Tickets">
                <font>
@@ -59,11 +59,12 @@
             </Label>
          </children>
       </HBox>
-      <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="15.0" GridPane.columnSpan="2" GridPane.rowIndex="8">
+      <HBox alignment="BOTTOM_LEFT" prefHeight="88.0" prefWidth="411.0" spacing="15.0" GridPane.columnSpan="3" GridPane.rowIndex="8">
          <children>
             <Button mnemonicParsing="false" onAction="#handleEditEventButton" text="Edit Event" />
             <Button mnemonicParsing="false" onAction="#handleNewEventButton" text="New Event" />
             <Button layoutX="114.0" layoutY="57.0" mnemonicParsing="false" onAction="#handleDeleteEventButton" text="Delete Event" />
+            <Button layoutX="212.0" layoutY="57.0" mnemonicParsing="false" onAction="#handleSetInactiveButton" text="Set Inactive" />
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -277,7 +278,7 @@
           <TableColumn fx:id="tcName" prefWidth="75.0" text="Name" />
             <TableColumn fx:id="tcEmail" prefWidth="75.0" text="Email" />
             <TableColumn fx:id="tcTelephoneNumber" prefWidth="75.0" text="Telephone Number" />
-          <TableColumn fx:id="tcTicketPrice" prefWidth="75.0" text="Ticket price" />
+          <TableColumn fx:id="tcTicketPrice" prefWidth="75.0" text="Ticket price - DK" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

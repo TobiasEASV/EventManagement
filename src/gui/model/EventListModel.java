@@ -29,6 +29,11 @@ public class EventListModel {
         eventManager.deleteEvent(event);
         eventList.remove(event);
     }
+    public void setEventInactive(Event event)
+    {
+        eventManager.updateEvent(event);
+
+    }
 
 
 }

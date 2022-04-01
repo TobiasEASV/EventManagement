@@ -5,15 +5,13 @@ import be.Ticket;
 import bll.TicketManager;
 import bll.util.Isearcher;
 import bll.util.TicketSearcher;
-import gui.controller.EventCoordinatorDashboardController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static utility.SceneSwapper.getDashboardController;
 
 
 public class TicketListModel {
@@ -23,10 +21,8 @@ public class TicketListModel {
     private ObservableList<Ticket> ticketList;
     private List<Ticket> ticketCache;
     private Isearcher ticketSearcher;
-    private EventCoordinatorDashboardController dashboardController;
 
     private TicketListModel() throws IOException {
-        dashboardController = getDashboardController();
         ticketManager = new TicketManager();
         ticketCache = new ArrayList<>();
         ticketList = FXCollections.observableArrayList();

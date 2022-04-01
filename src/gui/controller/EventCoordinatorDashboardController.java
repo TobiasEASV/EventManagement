@@ -16,8 +16,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import utility.EmailClient;
-import utility.SceneSwapper;
+import utility.Scenes.*;
 
 import javax.imageio.ImageIO;
 import javax.print.PrintService;
@@ -125,19 +126,17 @@ public class EventCoordinatorDashboardController implements Initializable {
     private EmailClient email;
     private Ticket ticket;
     private EventListModel eventListModel;
-    private SceneSwapper sceneSwapper;
-
     private final String TICKET_FILE = "src/gui/utility/temp/tempTicket.png";
 
     public EventCoordinatorDashboardController() throws IOException {
         customerModel = new CustomerModel();
+
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
             //Model for handling the combobox with events in the view
-            sceneSwapper = new SceneSwapper();
             //Utility class for switching scenes in javaFX
             eventListModel = new EventListModel();
             email = new EmailClient();
@@ -178,8 +177,6 @@ public class EventCoordinatorDashboardController implements Initializable {
                 updateTicketLabels(newTicket);
             }
         );
-
-
     }
 
 
@@ -188,10 +185,10 @@ public class EventCoordinatorDashboardController implements Initializable {
     }
 
     public void handleSellTicketButton(ActionEvent actionEvent) throws IOException {
-        sceneSwapper.instantiateSellTicketScene();
+        new SellTicketScene().loadNewScene(new Stage());
     }
 
-    public void handleRefundTicketButton(ActionEvent actionEvent) {
+    public void handleRefundTicketButton() {
         if (tvTickets.getSelectionModel().getSelectedItem() != null)
             ticketListModel.deleteTicketFromList(tvTickets.getSelectionModel().getSelectedItem());
     }
@@ -205,20 +202,19 @@ public class EventCoordinatorDashboardController implements Initializable {
 
     public void handleMailTicketButton(ActionEvent actionEvent) throws IOException {
         generateTicket();
-
-        email.sendEmail(ticket.getCustomer().getEmailProperty().get(), "Your Ticket", "Congratulations on your ticket", TICKET_FILE);
+        email.sendEmail(ticket.getCustomer().getEmailProperty().get(), "Your Ticket to " + lblEventTitle.getText(), "Congratulations on your ticket", TICKET_FILE);
     }
 
     public void handleEditEventButton(ActionEvent actionEvent) throws IOException {
-        sceneSwapper.instantiateEditEventScene();
-
+        int selectedIndex = comboBoxChooseEvent.getSelectionModel().getSelectedIndex();
+        new EditEventScene().loadNewScene(new Stage());
+        comboBoxChooseEvent.getSelectionModel().select(selectedIndex);
+        updateEventLabels(getSelectedEvent());
     }
 
     public void handleNewEventButton(ActionEvent actionEvent) throws IOException {
-        sceneSwapper.instantiateCreateEventScene();
-
+        new CreateEventScene().loadNewScene(new Stage());
     }
-
 
     public void handleLogoutButton(ActionEvent actionEvent) {
         System.exit(1);
@@ -237,15 +233,15 @@ public class EventCoordinatorDashboardController implements Initializable {
         }
     }
 
-    public Event getSelectedEvent(){
-        return comboBoxChooseEvent.getSelectionModel().getSelectedItem();
-    }
-
     public void handleChooseEvent(ActionEvent actionEvent) {
         if (getSelectedEvent() != null){
             ticketListModel.updateTicketList(getSelectedEvent());
             updateEventLabels(getSelectedEvent());
         }
+    }
+
+    public Event getSelectedEvent(){
+        return comboBoxChooseEvent.getSelectionModel().getSelectedItem();
     }
 
     private void updateEventLabels(Event event) {
@@ -255,7 +251,7 @@ public class EventCoordinatorDashboardController implements Initializable {
         lblEventArtists.setText(event.getArtistsProperty().get());
         lblEventStartDate.setText(String.valueOf(event.getStartDateProperty().get()));
         lblEventEndDate.setText(String.valueOf(event.getEndDateProperty().get()));
-        lblEventPrice.setText(String.valueOf(event.getPriceProperty().get()));
+        lblEventPrice.setText(String.valueOf(event.getPriceProperty().get() + " DK"));
         lblEventContactEmail.setText(event.getContactEmailProperty().get());
         setCheckBoxesOnEvent(event);
     }
@@ -267,15 +263,14 @@ public class EventCoordinatorDashboardController implements Initializable {
 
     private void updateTicketLabels(Ticket ticket) {
         String ticketType = "Standard";
-
-
-        if (ticket.getVipProperty().get()) ticketType = "VIP";
-
+        if (ticket.getVipProperty().get()) {
+            ticketType = "VIP";
+        }
 
         lblTicketTitle.setText(ticket.getEvent().getTitleProperty().get());
         lblCustomerName.setText(ticket.getCustomer().getNameProperty().get());
         lblCustomerEmail.setText(ticket.getCustomer().getEmailProperty().get());
-        lblTicketPrice.setText(String.valueOf(ticket.getPriceProperty().get()));
+        lblTicketPrice.setText(String.valueOf(ticket.getPriceProperty().get() + " DK"));
         lblTicketType.setText(ticketType);
         lblTicketLocation.setText(ticket.getEvent().getLocationProperty().get());
         lblTicketStartDate.setText(String.valueOf(ticket.getEvent().getStartDateProperty().get()));
@@ -291,8 +286,19 @@ public class EventCoordinatorDashboardController implements Initializable {
         updateComboBoxView();
     }
 
+    public void handleSetInactiveButton(ActionEvent actionEvent) {
+        int selectedIndex = comboBoxChooseEvent.getSelectionModel().getSelectedIndex();
+        getSelectedEvent().setIsActive(false);
+        getSelectedEvent().setTitle("INACTIVE " + getSelectedEvent().getTitleProperty().get());
+        eventListModel.setEventInactive(getSelectedEvent());
+        updateComboBoxView();
+        comboBoxChooseEvent.getSelectionModel().select(selectedIndex);
+        updateEventLabels(getSelectedEvent());
+    }
+
     public void updateComboBoxView() {
         comboBoxChooseEvent.getItems().clear();
         comboBoxChooseEvent.getItems().addAll(eventListModel.getEventList());
     }
+
 }

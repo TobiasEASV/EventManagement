@@ -51,6 +51,7 @@ CREATE TABLE [Event]
     [Contact_Mail] NVARCHAR(70) NULL,
     [Start_Data] DATETIME2 NOT NULL ,
     [End_Data] DATETIME2 NOT NULL,
+    [Active] BIT NOT NULL,
     
     CONSTRAINT PK_Event_ID PRIMARY KEY (ID)
 )

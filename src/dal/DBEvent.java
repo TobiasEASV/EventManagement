@@ -1,7 +1,6 @@
 package dal;
 
 import be.Event;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import java.io.IOException;
 import java.sql.*;
@@ -21,7 +20,7 @@ public class DBEvent {
     public Event createEvent(Event event) {
 
         try (Connection connection = dbConnecting.getConnection()) {
-            String sql = "INSERT INTO [Event](Title, Artist, Description, Location, Price, VIP_Price, Contact_Mail, Start_Data, End_Data) VALUES (?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO [Event](Title, Artist, Description, Location, Price, VIP_Price, Contact_Mail, Start_Data, End_Data, Active) VALUES (?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, event.getTitleProperty().get());
             preparedStatement.setString(2, event.getArtistsProperty().get());
@@ -32,6 +31,7 @@ public class DBEvent {
             preparedStatement.setString(7, event.getContactEmailProperty().get());
             preparedStatement.setObject(8, event.getStartDateProperty().get());
             preparedStatement.setObject(9, event.getEndDateProperty().get());
+            preparedStatement.setBoolean(10,event.getIsActiveProperty().get());
 
 
             //Extract data from DB
@@ -72,9 +72,10 @@ public class DBEvent {
                     Date start_Data = resultSet.getDate("Start_Data");
                     Date end_Data = resultSet.getDate("End_Data");
                     double VIPPrice = resultSet.getDouble("VIP_Price");
+                    boolean isActive = resultSet.getBoolean("Active");
 
 
-                    Event event = new Event(title, description, location, artist, contact_Mail, price, VIPPrice, LocalDate.parse(start_Data.toString()), LocalDate.parse(end_Data.toString()));
+                    Event event = new Event(title, description, location, artist, contact_Mail, price, VIPPrice, LocalDate.parse(start_Data.toString()), LocalDate.parse(end_Data.toString()), isActive);
                     event.setId(id);
                     allEvents.add(event);
                 }
@@ -102,7 +103,7 @@ public class DBEvent {
 
     public Event updateEvent(Event event) {
         try (Connection connection = dbConnecting.getConnection()) {
-            String sql = "UPDATE [Event] SET Title =(?), Artist =(?), Description=(?), Location=(?), Price=(?), VIP_Price=(?),  Contact_Mail=(?), Start_Data=(?), End_Data=(?) WHERE Id = (?)";
+            String sql = "UPDATE [Event] SET Title =(?), Artist =(?), Description=(?), Location=(?), Price=(?), VIP_Price=(?),  Contact_Mail=(?), Start_Data=(?), End_Data=(?), Active=(?) WHERE Id = (?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, event.getTitleProperty().get());
             preparedStatement.setString(2, event.getArtistsProperty().get());
@@ -113,14 +114,13 @@ public class DBEvent {
             preparedStatement.setString(7, event.getContactEmailProperty().get());
             preparedStatement.setObject(8, event.getStartDateProperty().get());
             preparedStatement.setObject(9, event.getEndDateProperty().get());
-            preparedStatement.setInt(10, event.getIdProperty().get());
+            preparedStatement.setBoolean(10,event.getIsActiveProperty().get());
+            preparedStatement.setInt(11, event.getIdProperty().get());
 
 
             //Extract data from DB
             preparedStatement.executeUpdate();
 
-        } catch (SQLServerException throwables) {
-            throwables.printStackTrace();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

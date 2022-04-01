@@ -1,4 +1,4 @@
-package utility;
+package utility.Scenes;
 import gui.controller.EventCoordinatorDashboardController;
 import gui.controller.SellTicketViewController;
 import javafx.fxml.FXMLLoader;
@@ -65,7 +65,8 @@ public class SceneSwapper {
     }
 
     public void instantiateMainScene(Stage stage, String fxmlFile) throws IOException {
-        dashboard = new FXMLLoader(getClass().getResource("../gui/view/" + fxmlFile));
+        dashboard = new FXMLLoader(new File("src/gui/view/EventCoordinatorDashboardView.fxml").toURI().toURL());
+        System.out.println(dashboard.getLocation());
         stage.setScene(new Scene(dashboard.load()));
         stage.setTitle(sceneTitle);
         stage.getIcons().add(image);

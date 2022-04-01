@@ -11,12 +11,12 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import utility.Scenes.DashboardScene;
+import utility.Scenes.ILoadScene;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import static utility.SceneSwapper.getDashboardController;
 
 public class EditEventController implements Initializable {
     @FXML
@@ -48,8 +48,8 @@ public class EditEventController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             eventManager = new EventManager();
-            EventCoordinatorDashboardController dashboardController = getDashboardController();
-            eventToEdit = dashboardController.getSelectedEvent();
+            eventToEdit = new DashboardScene().getController().getSelectedEvent();
+
             txTitle.setText(eventToEdit.getTitleProperty().get());
             txtAreaDescription.setText(eventToEdit.getDescriptionProperty().get());
             txLocation.setText(eventToEdit.getLocationProperty().get());
@@ -67,7 +67,6 @@ public class EditEventController implements Initializable {
     }
 
     public void handleButtonOK(ActionEvent actionEvent) {
-        EventCoordinatorDashboardController dashboardController = getDashboardController();
         if(!txTitle.getText().isBlank() && !txtAreaDescription.getText().isBlank() && !txLocation.getText().isBlank()
                 && !txArtists.getText().isBlank() && !txContactEmail.getText().isBlank() && !(dpStartData.getValue() == null) && !(dpEndData.getValue() == null)){
 
@@ -79,10 +78,11 @@ public class EditEventController implements Initializable {
             eventToEdit.setPrice(Double.parseDouble(txTicktePrice.getText()));
             eventToEdit.setVipPrice(Double.parseDouble(txVIPPrice.getText()));
             eventToEdit.setStartDate(dpStartData.getValue());
-                    eventToEdit.setEndDate(dpEndData.getValue());
+            eventToEdit.setEndDate(dpEndData.getValue());
 
             eventManager.updateEvent(eventToEdit);
-            dashboardController.updateComboBoxView();
+            new DashboardScene().getController().updateComboBoxView();
+
             EXITScene();
 
         }else{

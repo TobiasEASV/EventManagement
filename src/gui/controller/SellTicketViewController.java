@@ -15,12 +15,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import utility.Scenes.DashboardScene;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import static utility.SceneSwapper.getDashboardController;
 
 public class SellTicketViewController implements Initializable {
 
@@ -58,8 +57,7 @@ public class SellTicketViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        EventCoordinatorDashboardController dashboardController = getDashboardController();
-        event = dashboardController.getSelectedEvent();
+        event = new DashboardScene().getController().getSelectedEvent();
         if (event == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error: Something went wrong");
@@ -75,7 +73,7 @@ public class SellTicketViewController implements Initializable {
         }
 
         price = event.getPriceProperty().get();
-        lblPrice.setText(String.valueOf(price));
+        lblPrice.setText(String.valueOf(price + " DK"));
         txtRow.setDisable(true);
         txtSeat.setDisable(true);
 

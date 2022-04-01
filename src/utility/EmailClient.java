@@ -27,14 +27,14 @@ public class EmailClient {
 
         Properties emailCredentials = new Properties();
         emailCredentials.load(new FileInputStream(PROP_FILE));
-        HashMap<String,String> credentials = emailManager.getCredentials();
+        //HashMap<String,String> credentials = emailManager.getCredentials();
 
 
-        final String email = credentials.get("Email");
-        final String password = credentials.get("Password");
+        //final String email = credentials.get("Email");
+        //final String password = credentials.get("Password");
 
-        //String email = emailCredentials.getProperty("Email");
-        //String password = emailCredentials.getProperty("Password");
+        final String email = emailCredentials.getProperty("Email");
+        final String password = emailCredentials.getProperty("Password");
 
         System.out.println("Eamil= " + email);
         System.out.println("Password = " + password);
@@ -86,7 +86,7 @@ public class EmailClient {
         }
             return true;
     }
-
+/**
     public static void main(String[] args) throws IOException {
         EmailClient emailClient = new EmailClient();
         String sendTo = "tobi9782@easv365.dk";
@@ -94,4 +94,5 @@ public class EmailClient {
             System.out.println("yesss");
         }
     }
+ **/
 }
