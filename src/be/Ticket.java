@@ -40,7 +40,6 @@ public class Ticket {
         this.vip.set(vip);
         this.seated.set(isSeated);
 
-
     }
 
 

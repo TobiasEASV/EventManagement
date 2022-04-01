@@ -100,7 +100,7 @@ public class EventCoordinatorDashboardController implements Initializable {
     @FXML
     private Label lblTicketLocation;
     @FXML
-    private Label lblTicketContactEmail;
+    private Label lblTicketId;
     @FXML
     private Label lblTicketStartDate;
     @FXML
@@ -282,7 +282,7 @@ public class EventCoordinatorDashboardController implements Initializable {
         lblTicketEndDate.setText(String.valueOf(ticket.getEvent().getEndDateProperty().get()));
         lblTicketRowNumber.setText("Row: "+ticket.getRowProperty().get());
         lblTicketSeatNumber.setText("Seat: "+ticket.getSeatProperty().get());
-        lblTicketContactEmail.setText(ticket.getEvent().getContactEmailProperty().get());
+        lblTicketId.setText(String.valueOf(ticket.getIdProperty().get()));
         lblTicketDescription.setText(ticket.getEvent().getDescriptionProperty().get());
     }
 
