@@ -9,12 +9,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DBEvent {
+public class DBEventDAO implements IDBEventDAO{
 
     private final DBConnecting dbConnecting;
 
 
-    public DBEvent() throws IOException {
+    public DBEventDAO() throws IOException {
         dbConnecting = new DBConnecting();
     }
 

@@ -1,31 +1,31 @@
 package bll;
 
 import be.Customer;
-import dal.DBCustomer;
+import dal.DBCustomerDAO;
 
 import java.io.IOException;
 
 public class CustomerManager {
-    private DBCustomer dbCustomer;
+    private DBCustomerDAO dbCustomerDAO;
     public CustomerManager() throws IOException {
-        dbCustomer = new DBCustomer();
+        dbCustomerDAO = new DBCustomerDAO();
     }
     public Customer createCustomer(Customer customer) {
-        return dbCustomer.createCustomer(customer);
+        return dbCustomerDAO.createCustomer(customer);
     }
 
     public void updateCustomer(Customer customer)
     {
-        dbCustomer.updateCustomer(customer);
+        dbCustomerDAO.updateCustomer(customer);
     }
 
     public void deleteCustomer(Customer customer)
     {
-        dbCustomer.deleteCustomer(customer);
+        dbCustomerDAO.deleteCustomer(customer);
     }
     public void getCustomer(Customer customer)
     {
-        dbCustomer.getCustomer(customer);
+        dbCustomerDAO.getCustomer(customer);
     }
 
 }

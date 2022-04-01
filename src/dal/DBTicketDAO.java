@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class TicketDAO {
+public class DBTicketDAO implements IDBTicketDAO{
     private DBConnecting dbc = new DBConnecting();
 
-    public TicketDAO() throws IOException {
+    public DBTicketDAO() throws IOException {
     }
 
     public Ticket createTicket(Ticket ticket) {

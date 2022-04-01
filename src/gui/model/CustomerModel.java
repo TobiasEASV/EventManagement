@@ -2,7 +2,6 @@ package gui.model;
 
 import be.Customer;
 import bll.CustomerManager;
-import dal.DBCustomer;
 
 import java.io.IOException;
 

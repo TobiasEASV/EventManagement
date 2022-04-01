@@ -12,13 +12,13 @@ import java.util.HashMap;
 import java.util.List;
 
 
-public class DBEmail {
+public class DBEmailDAO implements IDBEmailDAO {
 
     DBConnecting dbConnecting;
 
 
 
-    public DBEmail() throws IOException {
+    public DBEmailDAO() throws IOException {
         dbConnecting = new DBConnecting();
     }
 
@@ -48,7 +48,7 @@ public class DBEmail {
 
     }
 
-    public void setCredentials(String email, String password) throws SQLServerException {
+    public void setCredentials(String email, String password){
 
         try(Connection connection = dbConnecting.getConnection()){
             String sql = "UPDATE Email SET EmailCredentials = ?, PasswordCredentials = ?";

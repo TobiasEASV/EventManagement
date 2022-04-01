@@ -1,23 +1,23 @@
 package bll;
 
 import com.microsoft.sqlserver.jdbc.SQLServerException;
-import dal.DBEmail;
+import dal.DBEmailDAO;
 
 import java.io.IOException;
 import java.util.HashMap;
 
 public class EmailManager {
 
-        DBEmail dbEmail;
+        DBEmailDAO dbEmailDAO;
         private HashMap<String,String> cache =  new HashMap<>();
 
     public EmailManager() throws IOException {
-        dbEmail = new DBEmail();
+        dbEmailDAO = new DBEmailDAO();
     }
 
     public HashMap<String,String> getCredentials(){
         if(cache.isEmpty()){
-            cache = dbEmail.getCredentials();
+            cache = dbEmailDAO.getCredentials();
         }
         return cache;
     }
@@ -25,7 +25,7 @@ public class EmailManager {
 
     public void updateCredentials(String email, String password) throws SQLServerException {
 
-        dbEmail.setCredentials(email, hashString(password));
+        dbEmailDAO.setCredentials(email, hashString(password));
     }
 
     public String hashString(String textToHash){

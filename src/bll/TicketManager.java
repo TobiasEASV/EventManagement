@@ -2,7 +2,7 @@ package bll;
 
 import be.Event;
 import be.Ticket;
-import dal.TicketDAO;
+import dal.DBTicketDAO;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,29 +10,29 @@ import java.util.Random;
 
 public class TicketManager {
 
-    private TicketDAO ticketDAO;
+    private DBTicketDAO DBTicketDAO;
 
     public TicketManager() throws IOException {
-        ticketDAO = new TicketDAO();
+        DBTicketDAO = new DBTicketDAO();
     }
 
     public Ticket createTicket(Ticket ticket) {
         ticket.setId(generateID());
-        return ticketDAO.createTicket(ticket);
+        return DBTicketDAO.createTicket(ticket);
     }
 
 
     public Ticket updateTicket(Ticket ticket) {
-        return ticketDAO.updateTicket(ticket);
+        return DBTicketDAO.updateTicket(ticket);
     }
 
 
     public void deleteTicket(Ticket ticket) {
-        ticketDAO.deleteTicket(ticket);
+        DBTicketDAO.deleteTicket(ticket);
     }
 
     public List<Ticket> getTicketsFromEvent(Event event) {
-        return ticketDAO.getTicketsFromEvent(event);
+        return DBTicketDAO.getTicketsFromEvent(event);
     }
 
     private String generateID(){
@@ -48,7 +48,7 @@ public class TicketManager {
         }
 
         // see if generate ID is in Database, if not than return new ID
-        if(ticketDAO.foundTicketID(newValueID.toString())){
+        if(DBTicketDAO.foundTicketID(newValueID.toString())){
             generateID();
         }
         return newValueID.toString();

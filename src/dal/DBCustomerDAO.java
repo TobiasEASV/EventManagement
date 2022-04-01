@@ -6,11 +6,11 @@ import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.IOException;
 import java.sql.*;
 
-public class DBCustomer {
+public class DBCustomerDAO implements IDBCustomerDAO{
 
     private DBConnecting dbConnecting;
 
-    public DBCustomer() throws IOException {
+    public DBCustomerDAO() throws IOException {
         dbConnecting = new DBConnecting();
     }
 
