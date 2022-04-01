@@ -250,6 +250,8 @@
                                  <children>
                                     <Label fx:id="lblTicketStartDate" styleClass="informationLabels" text="Start Date" />
                                     <Label fx:id="lblTicketEndDate" styleClass="informationLabels" text="End Date" />
+                                    <Label styleClass="informationLabels" text="Contact Information:" />
+                                    <Label fx:id="lblContactEmail" styleClass="informationLabels" text="E-mail@placeholder" />
                                  </children>
                               </VBox>
                               <Label fx:id="lblTicketId" layoutX="10.0" layoutY="96.0" styleClass="informationLabels" text="ID" wrapText="true" />

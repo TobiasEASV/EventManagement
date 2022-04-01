@@ -71,7 +71,7 @@ public class SellTicketViewController implements Initializable {
         }
 
         price = event.getPriceProperty().get();
-        lblPrice.setText(String.valueOf(price + " DK"));
+        lblPrice.setText(price + " DKK");
         txtRow.setDisable(true);
         txtSeat.setDisable(true);
 

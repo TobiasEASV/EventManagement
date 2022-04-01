@@ -31,10 +31,8 @@ import java.util.ResourceBundle;
 public class EventCoordinatorDashboardController implements Initializable {
 
 
-
     @FXML
     private GridPane parentGridPane;
-
     @FXML
     private TableView<Ticket> tvTickets;
 
@@ -110,6 +108,8 @@ public class EventCoordinatorDashboardController implements Initializable {
     private Label lblTicketPrice;
     @FXML
     private Label lblTicketType;
+    @FXML
+    private Label lblContactEmail;
 
     @FXML
     private GridPane ticketPane;
@@ -277,6 +277,7 @@ public class EventCoordinatorDashboardController implements Initializable {
         lblTicketSeatNumber.setText("Seat: "+ticket.getSeatProperty().get());
         lblTicketId.setText("ID: " + ticket.getIdProperty().get());
         lblTicketDescription.setText(ticket.getEvent().getDescriptionProperty().get());
+        lblContactEmail.setText(ticket.getEvent().getContactEmailProperty().get());
     }
 
     public void handleDeleteEventButton(ActionEvent actionEvent) {
