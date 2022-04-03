@@ -2,10 +2,7 @@ package gui.controller;
 
 import be.Event;
 import be.Ticket;
-import gui.model.EventListModel;
-import gui.model.CustomerModel;
-import gui.model.PrintModel;
-import gui.model.TicketListModel;
+import gui.model.*;
 import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -85,6 +82,8 @@ public class EventCoordinatorDashboardController implements Initializable {
     private Label lblEventPrice;
     @FXML
     private Label lblEventContactEmail;
+    @FXML
+    private Label txtLoginUserName;
 
     // Ticket preview labels
     @FXML
@@ -117,8 +116,6 @@ public class EventCoordinatorDashboardController implements Initializable {
     @FXML
     private GridPane ticketPane;
 
-
-
     //Array that holds printservices available on the PC.
     private PrintService[] printServices;
 
@@ -126,11 +123,10 @@ public class EventCoordinatorDashboardController implements Initializable {
     private EventListModel eventListModel;
     private EmailClient emailClient;
     private TicketListModel ticketListModel;
+    private EventCoordinatorModel eventCoordinatorModel;
     private EventCoordinatorDashboardController dashboardController;
 
-    //gui.model.PrintModel for printing tickets (a singleton)
     private PrintModel printModel;
-
     private Ticket ticket;
 
     private final String TICKET_FILE = "src/gui/utility/temp/tempTicket.png";
@@ -140,6 +136,11 @@ public class EventCoordinatorDashboardController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         Platform.runLater(() -> {
+            //set the login username
+            if(eventCoordinatorModel.getWhoIsLogin() != null){
+                txtLoginUserName.setText(eventCoordinatorModel.getWhoIsLogin().getFullNameProperty().get());
+            }else txtLoginUserName.setText("You got hacked");
+
             // Search functionality in the list view
             textFieldSearch.textProperty().addListener((observableValue, oldValue, newValue) -> {
                     ticketListModel.searchTicket(newValue);
@@ -182,6 +183,11 @@ public class EventCoordinatorDashboardController implements Initializable {
     public void setPrintModel(PrintModel printModel){
         this.printModel = printModel;
     }
+
+    public void setEventCoordinatorModel(EventCoordinatorModel eventCoordinatorModel){
+        this.eventCoordinatorModel = eventCoordinatorModel;
+    }
+
 
     public void setController(EventCoordinatorDashboardController dashboardController){
         this.dashboardController = dashboardController;

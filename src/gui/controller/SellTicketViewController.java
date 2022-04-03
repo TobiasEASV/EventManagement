@@ -3,7 +3,6 @@ package gui.controller;
 import be.Customer;
 import be.Event;
 import be.Ticket;
-import bll.TicketManager;
 import gui.model.CustomerModel;
 import gui.model.TicketListModel;
 import javafx.application.Platform;
@@ -16,9 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import utility.Scenes.DashboardScene;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 

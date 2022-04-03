@@ -16,15 +16,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="backgroundPane" stylesheets="@../utility/SceneStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.LoginController">
    <children>
       <MenuBar layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <menus>
             <Menu mnemonicParsing="false" text="Login As">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Event Coordinator" />
-                  <MenuItem mnemonicParsing="false" text="Admin" />
+                  <MenuItem mnemonicParsing="false" onAction="#handelSetEventCoordinatorLogin" text="Event Coordinator" />
+                  <MenuItem mnemonicParsing="false" onAction="#handelSetAdminLogin" text="Admin" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Help">
@@ -101,7 +100,7 @@
                <children>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnSpan="2147483647" GridPane.rowSpan="2">
                      <children>
-                        <TextField fx:id="txtAdminLoginName" prefHeight="35.0" prefWidth="564.0" promptText="Admin Login Name">
+                        <TextField fx:id="txtAdminLogin" prefHeight="35.0" prefWidth="564.0" promptText="Admin Login">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>

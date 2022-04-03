@@ -1,17 +1,13 @@
-import bll.CustomerManager;
-import bll.EmailManager;
-import bll.EventManager;
-import bll.TicketManager;
+import bll.*;
 import dal.*;
 import gui.controller.EventCoordinatorDashboardController;
-import gui.model.CustomerModel;
-import gui.model.EventListModel;
-import gui.model.PrintModel;
-import gui.model.TicketListModel;
+import gui.controller.LoginController;
+import gui.model.*;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import utility.EmailClient;
-import utility.Scenes.DashboardScene;
+import utility.Scenes.EventCoordinatorDashboardScene;
+import utility.Scenes.LogInScene;
 import utility.Scenes.interfaces.ILoadScene;
 
 
@@ -20,25 +16,49 @@ import java.io.IOException;
 public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
-        ILoadScene<EventCoordinatorDashboardController> dashboardScene =  new DashboardScene();
-        dashboardScene.loadNewScene(primaryStage);
-        EventCoordinatorDashboardController dashboardSceneController = dashboardScene.getController();
+        boolean willIUseTheLogin = false;
 
-        DBConnecting dbConnecting = new DBConnecting();
-        DBCustomerDAO dbCustomerDAO = new DBCustomerDAO(dbConnecting);
-        DBEmailDAO dbEmailDAO = new DBEmailDAO(dbConnecting);
-        DBEventDAO dbEventDAO = new DBEventDAO(dbConnecting);
-        DBTicketDAO dbTicketDAO = new DBTicketDAO(dbConnecting);
+        if(willIUseTheLogin){
+            ILoadScene<LoginController> loginScene =  new LogInScene();
+            loginScene.loadNewScene(primaryStage);
+            LoginController loginController = loginScene.getController();
 
-        dashboardSceneController.setCustomerModel(new CustomerModel(new CustomerManager(new DatabaseFacade(dbTicketDAO,dbEventDAO,dbCustomerDAO, dbEmailDAO))));
-        dashboardSceneController.setEmailClient(new EmailClient(new EmailManager(new DatabaseFacade(dbTicketDAO,dbEventDAO,dbCustomerDAO, dbEmailDAO))));
-        dashboardSceneController.setEventListModel(new EventListModel(new EventManager(new DatabaseFacade(dbTicketDAO,dbEventDAO,dbCustomerDAO, dbEmailDAO))));
-        dashboardSceneController.setTicketListModel(new TicketListModel(new TicketManager(new DatabaseFacade(dbTicketDAO,dbEventDAO,dbCustomerDAO, dbEmailDAO))));
-        dashboardSceneController.setPrintModel(new PrintModel());
+            DBConnecting dbConnecting = new DBConnecting();
+            DBCustomerDAO dbCustomerDAO = new DBCustomerDAO(dbConnecting);
+            DBEmailDAO dbEmailDAO = new DBEmailDAO(dbConnecting);
+            DBEventDAO dbEventDAO = new DBEventDAO(dbConnecting);
+            DBTicketDAO dbTicketDAO = new DBTicketDAO(dbConnecting);
+            DBEventCoordinatorDAO dbEventCoordinatorDAO = new DBEventCoordinatorDAO(dbConnecting);
+            DBAdminDAO dbadminDAO = new DBAdminDAO(dbConnecting);
 
-        dashboardSceneController.setController(dashboardSceneController);
+            loginController.setCustomerModel(new CustomerModel(new CustomerManager(new DatabaseFacade(dbTicketDAO,dbEventDAO,dbCustomerDAO, dbEmailDAO, dbEventCoordinatorDAO, dbadminDAO))));
+            loginController.setEmailClient(new EmailClient(new EmailManager(new DatabaseFacade(dbTicketDAO,dbEventDAO,dbCustomerDAO, dbEmailDAO, dbEventCoordinatorDAO, dbadminDAO))));
+            loginController.setEventListModel(new EventListModel(new EventManager(new DatabaseFacade(dbTicketDAO,dbEventDAO,dbCustomerDAO, dbEmailDAO, dbEventCoordinatorDAO, dbadminDAO))));
+            loginController.setTicketListModel(new TicketListModel(new TicketManager(new DatabaseFacade(dbTicketDAO,dbEventDAO,dbCustomerDAO, dbEmailDAO, dbEventCoordinatorDAO, dbadminDAO))));
+            loginController.setEventCoordinatorModel(new EventCoordinatorModel(new EventCoordinatorManager(new DatabaseFacade(dbTicketDAO,dbEventDAO,dbCustomerDAO, dbEmailDAO, dbEventCoordinatorDAO, dbadminDAO))));
+            loginController.setAdminModel(new AdminModel(new AdminManager(new DatabaseFacade(dbTicketDAO,dbEventDAO,dbCustomerDAO, dbEmailDAO, dbEventCoordinatorDAO, dbadminDAO))));
+            loginController.setPrimaryStage(primaryStage);
+            loginController.setPrintModel(new PrintModel());
+        }else {
+            ILoadScene<EventCoordinatorDashboardController> EventCoordinatorDashboard =  new EventCoordinatorDashboardScene();
+            EventCoordinatorDashboard.loadNewScene(primaryStage);
+            EventCoordinatorDashboardController eventCoordinatorDashboardController = EventCoordinatorDashboard.getController();
 
+            DBConnecting dbConnecting = new DBConnecting();
+            DBCustomerDAO dbCustomerDAO = new DBCustomerDAO(dbConnecting);
+            DBEmailDAO dbEmailDAO = new DBEmailDAO(dbConnecting);
+            DBEventDAO dbEventDAO = new DBEventDAO(dbConnecting);
+            DBTicketDAO dbTicketDAO = new DBTicketDAO(dbConnecting);
+            DBEventCoordinatorDAO dbEventCoordinatorDAO = new DBEventCoordinatorDAO(dbConnecting);
+            DBAdminDAO dbadminDAO = new DBAdminDAO(dbConnecting);
 
+            eventCoordinatorDashboardController.setCustomerModel(new CustomerModel(new CustomerManager(new DatabaseFacade(dbTicketDAO,dbEventDAO,dbCustomerDAO, dbEmailDAO, dbEventCoordinatorDAO, dbadminDAO))));
+            eventCoordinatorDashboardController.setEmailClient(new EmailClient(new EmailManager(new DatabaseFacade(dbTicketDAO,dbEventDAO,dbCustomerDAO, dbEmailDAO, dbEventCoordinatorDAO, dbadminDAO))));
+            eventCoordinatorDashboardController.setEventListModel(new EventListModel(new EventManager(new DatabaseFacade(dbTicketDAO,dbEventDAO,dbCustomerDAO, dbEmailDAO, dbEventCoordinatorDAO, dbadminDAO))));
+            eventCoordinatorDashboardController.setTicketListModel(new TicketListModel(new TicketManager(new DatabaseFacade(dbTicketDAO,dbEventDAO,dbCustomerDAO, dbEmailDAO, dbEventCoordinatorDAO, dbadminDAO))));
+            eventCoordinatorDashboardController.setEventCoordinatorModel(new EventCoordinatorModel(new EventCoordinatorManager(new DatabaseFacade(dbTicketDAO,dbEventDAO,dbCustomerDAO, dbEmailDAO, dbEventCoordinatorDAO, dbadminDAO))));
+            eventCoordinatorDashboardController.setPrintModel(new PrintModel());
+        }
     }
 
     public static void main(String[] args) {

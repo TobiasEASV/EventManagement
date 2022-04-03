@@ -107,6 +107,11 @@
       </HBox>
       <HBox alignment="TOP_RIGHT" spacing="15.0" GridPane.columnIndex="3" GridPane.rowSpan="2">
          <children>
+            <Label fx:id="txtLoginUserName" text="User Name">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
             <Button mnemonicParsing="false" onAction="#handleUserSettingsButton" prefHeight="45.0" prefWidth="45.0" styleClass="userSettingsButton" />
             <Button mnemonicParsing="false" onAction="#handleLogoutButton" prefHeight="45.0" prefWidth="45.0" styleClass="logOutButton" />
          </children>

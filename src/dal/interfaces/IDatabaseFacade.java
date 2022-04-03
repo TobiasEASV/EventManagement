@@ -1,11 +1,7 @@
 package dal.interfaces;
 
-import be.Customer;
-import be.Email;
-import be.Event;
-import be.Ticket;
+import be.*;
 
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -128,4 +124,26 @@ public interface IDatabaseFacade {
      * @return
      */
     public boolean foundTicketID(String id);
+
+    /**
+     * Check to see if username and password a correct
+     * @param userName
+     * @param password
+     * @return a EventCoodinator if username and password was found in database
+     */
+    public EventCoordinator checkCredentialForEventCoordinator(String userName, String password);
+
+    public EventCoordinator createEventCoordinator(EventCoordinator eventCoordinator);
+
+    public List<EventCoordinator> getAllEventCoordinators();
+
+    public void deleteEventCoordinator(EventCoordinator eventCoordinator);
+
+    /**
+     * Check to see if username and password a correct
+     * @param userName
+     * @param password
+     * @return a Admin if username and password was found in database
+     */
+    public Admin checkCredentialForAdmin(String userName, String password);
 }

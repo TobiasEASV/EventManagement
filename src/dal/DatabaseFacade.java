@@ -1,12 +1,8 @@
 package dal;
 
-import be.Customer;
-import be.Email;
-import be.Event;
-import be.Ticket;
+import be.*;
 import dal.interfaces.*;
 
-import java.util.HashMap;
 import java.util.List;
 
 public class DatabaseFacade implements IDatabaseFacade {
@@ -15,12 +11,16 @@ public class DatabaseFacade implements IDatabaseFacade {
     private final IDBEventDAO DBEventDAO;
     private final IDBCustomerDAO DBCustomerDAO;
     private final IDBEmailDAO DBEmailDAO;
+    private final IDBEventCoordinatorDAO DBEventCoordinatorDAO;
+    private final IDBAdminDAO DBAdminDAO;
 
-    public DatabaseFacade(IDBTicketDAO DBTicketDAO, IDBEventDAO DBEventDAO, IDBCustomerDAO DBCustomerDAO, IDBEmailDAO DBEmailDAO){
+    public DatabaseFacade(IDBTicketDAO DBTicketDAO, IDBEventDAO DBEventDAO, IDBCustomerDAO DBCustomerDAO, IDBEmailDAO DBEmailDAO, IDBEventCoordinatorDAO DBEventCoordinatorDAO, IDBAdminDAO DBAdminDAO){
         this.DBTicketDAO = DBTicketDAO;
         this.DBEventDAO = DBEventDAO;
         this.DBCustomerDAO = DBCustomerDAO;
         this.DBEmailDAO = DBEmailDAO;
+        this.DBEventCoordinatorDAO = DBEventCoordinatorDAO;
+        this.DBAdminDAO = DBAdminDAO;
     }
 
     @Override
@@ -46,6 +46,31 @@ public class DatabaseFacade implements IDatabaseFacade {
     @Override
     public boolean foundTicketID(String id) {
         return DBTicketDAO.foundTicketID(id);
+    }
+
+    @Override
+    public EventCoordinator checkCredentialForEventCoordinator(String userName, String password) {
+        return DBEventCoordinatorDAO.checkCredential(userName, password);
+    }
+
+    @Override
+    public EventCoordinator createEventCoordinator(EventCoordinator eventCoordinator) {
+        return DBEventCoordinatorDAO.createEventCoordinator(eventCoordinator);
+    }
+
+    @Override
+    public Admin checkCredentialForAdmin(String userName, String password) {
+        return DBAdminDAO.checkCredential(userName, password);
+    }
+
+    @Override
+    public List<EventCoordinator> getAllEventCoordinators() {
+        return DBEventCoordinatorDAO.getAllEventCoordinators();
+    }
+
+    @Override
+    public void deleteEventCoordinator(EventCoordinator eventCoordinator) {
+        DBEventCoordinatorDAO.deleteEventCoordinator(eventCoordinator);
     }
 
     @Override
