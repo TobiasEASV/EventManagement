@@ -31,6 +31,7 @@ import java.util.ResourceBundle;
 public class EventCoordinatorDashboardController implements Initializable {
 
 
+
     @FXML
     private GridPane parentGridPane;
     @FXML
@@ -100,6 +101,8 @@ public class EventCoordinatorDashboardController implements Initializable {
     private Label lblTicketDescription;
     @FXML
     private Label lblTicketLocation;
+    @FXML
+    private Button btnSellTicket;
     @FXML
     private Label lblTicketId;
     @FXML
@@ -199,6 +202,7 @@ public class EventCoordinatorDashboardController implements Initializable {
         sellTicketScene.getController().setController(dashboardController);
         sellTicketScene.getController().setCustomerModel(customerModel);
         sellTicketScene.getController().setTicketListModel(ticketListModel);
+
     }
 
     public void handleRefundTicketButton() {
@@ -265,6 +269,7 @@ public class EventCoordinatorDashboardController implements Initializable {
     }
 
     private void updateEventLabels(Event event) {
+        System.out.println(event.getIsActiveProperty().get());
         btnSellTicket.setDisable(!event.getIsActiveProperty().get());
         lblEventTitle.setText(event.getTitleProperty().get());
         lblEventLocation.setText(event.getLocationProperty().get());
@@ -300,6 +305,7 @@ public class EventCoordinatorDashboardController implements Initializable {
         lblTicketId.setText("ID: " + ticket.getIdProperty().get());
         lblTicketDescription.setText(ticket.getEvent().getDescriptionProperty().get());
         lblContactEmail.setText(ticket.getEvent().getContactEmailProperty().get());
+
     }
 
     public void handleDeleteEventButton(ActionEvent actionEvent) {
@@ -307,12 +313,10 @@ public class EventCoordinatorDashboardController implements Initializable {
     }
 
     public void handleSetInactiveButton(ActionEvent actionEvent) {
-        int selectedIndex = comboBoxChooseEvent.getSelectionModel().getSelectedIndex();
-        getSelectedEvent().setIsActive(false);
-        getSelectedEvent().setTitle("INACTIVE " + getSelectedEvent().getTitleProperty().get());
-        eventListModel.setEventInactive(getSelectedEvent());
-        comboBoxChooseEvent.getSelectionModel().select(selectedIndex);
-        updateEventLabels(getSelectedEvent());
+        Event event = getSelectedEvent();
+        event.setTitle("INACTIVE " + event.getTitleProperty().get());
+        event.setIsActive(false);
+        eventListModel.updateEvent(event);
     }
 
     @FXML

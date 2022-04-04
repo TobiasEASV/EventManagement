@@ -46,6 +46,8 @@ public class CreateEventController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+    }
+
     private List<String> getTimes() {
         List<String> timeList = new ArrayList<>();
         String time;

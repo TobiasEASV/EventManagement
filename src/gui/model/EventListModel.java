@@ -35,5 +35,6 @@ public class EventListModel {
     public void updateEvent(Event updateEvent){
         eventManager.updateEvent(updateEvent);
         eventList.removeIf(event -> event.getIdProperty() == updateEvent.getIdProperty());
+        eventList.add(updateEvent);
     }
 }

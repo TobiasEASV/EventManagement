@@ -58,6 +58,7 @@ public class App extends Application {
             eventCoordinatorDashboardController.setTicketListModel(new TicketListModel(new TicketManager(new DatabaseFacade(dbTicketDAO,dbEventDAO,dbCustomerDAO, dbEmailDAO, dbEventCoordinatorDAO, dbadminDAO))));
             eventCoordinatorDashboardController.setEventCoordinatorModel(new EventCoordinatorModel(new EventCoordinatorManager(new DatabaseFacade(dbTicketDAO,dbEventDAO,dbCustomerDAO, dbEmailDAO, dbEventCoordinatorDAO, dbadminDAO))));
             eventCoordinatorDashboardController.setPrintModel(new PrintModel());
+            eventCoordinatorDashboardController.setController(eventCoordinatorDashboardController);
         }
     }
 

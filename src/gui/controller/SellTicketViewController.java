@@ -84,6 +84,7 @@ public class SellTicketViewController implements Initializable {
         this.ticketListModel = ticketListModel;
     }
 
+
     public void btnSave(ActionEvent actionEvent) {
 
         String seat = "N/A";
