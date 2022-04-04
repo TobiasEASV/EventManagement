@@ -45,7 +45,8 @@ public class CreateEventController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        comboBoxStartTime.getItems().addAll(getTimes());
+        comboBoxEndTime.getItems().addAll(getTimes());
     }
 
     private List<String> getTimes() {
