@@ -49,6 +49,9 @@
                      </children>
                   </VBox>
                </children>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
             </GridPane>
          </content></Tab>
     <Tab text="EventCoordinator">
@@ -122,6 +125,9 @@
                      </children>
                   </HBox>
                </children>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
             </GridPane>
          </content></Tab>
   </tabs>
