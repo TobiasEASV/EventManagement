@@ -1,31 +1,36 @@
 package bll;
 
 import be.Customer;
-import dal.DBCustomer;
+import bll.interfaces.ICustomerManager;
+import dal.interfaces.IDatabaseFacade;
 
-import java.io.IOException;
+public class CustomerManager implements ICustomerManager {
 
-public class CustomerManager {
-    private DBCustomer dbCustomer;
-    public CustomerManager() throws IOException {
-        dbCustomer = new DBCustomer();
+
+    private IDatabaseFacade iDatabaseFacade;
+
+    public CustomerManager(IDatabaseFacade iDatabaseFacade) {
+        this.iDatabaseFacade = iDatabaseFacade;
     }
+
+    @Override
     public Customer createCustomer(Customer customer) {
-        return dbCustomer.createCustomer(customer);
+        return iDatabaseFacade.createCustomer(customer);
     }
 
-    public void updateCustomer(Customer customer)
-    {
-        dbCustomer.updateCustomer(customer);
+    @Override
+    public void updateCustomer(Customer customer){
+        iDatabaseFacade.updateCustomer(customer);
     }
 
-    public void deleteCustomer(Customer customer)
-    {
-        dbCustomer.deleteCustomer(customer);
+    @Override
+    public void deleteCustomer(Customer customer){
+        iDatabaseFacade.deleteCustomer(customer);
     }
-    public void getCustomer(Customer customer)
-    {
-        dbCustomer.getCustomer(customer);
+
+    @Override
+    public void getCustomer(Customer customer) {
+        iDatabaseFacade.getCustomer(customer);
     }
 
 }

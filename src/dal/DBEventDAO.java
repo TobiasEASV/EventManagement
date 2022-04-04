@@ -1,21 +1,21 @@
 package dal;
 
 import be.Event;
+import dal.interfaces.IDBEventDAO;
 
-import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DBEvent {
+public class DBEventDAO implements IDBEventDAO {
 
-    private final DBConnecting dbConnecting;
+    private DBConnecting dbConnecting;
 
 
-    public DBEvent() throws IOException {
-        dbConnecting = new DBConnecting();
+    public DBEventDAO(DBConnecting dbConnecting) {
+        this.dbConnecting = dbConnecting;
     }
 
     public Event createEvent(Event event) {
@@ -46,6 +46,7 @@ public class DBEvent {
 
         } catch (SQLException SQLe) {
             SQLe.printStackTrace();
+            return null;
         }
         return event;
     }

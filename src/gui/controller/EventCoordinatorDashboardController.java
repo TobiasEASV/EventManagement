@@ -2,10 +2,8 @@ package gui.controller;
 
 import be.Event;
 import be.Ticket;
-import gui.model.EventListModel;
-import gui.model.CustomerModel;
-import gui.model.PrintModel;
-import gui.model.TicketListModel;
+import gui.model.*;
+import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,10 +13,12 @@ import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import utility.EmailClient;
 import utility.Scenes.*;
+import utility.Scenes.interfaces.ILoadScene;
 
 import javax.imageio.ImageIO;
 import javax.print.PrintService;
@@ -80,6 +80,8 @@ public class EventCoordinatorDashboardController implements Initializable {
     private Label lblEventPrice;
     @FXML
     private Label lblEventContactEmail;
+    @FXML
+    private Label txtLoginUserName;
 
     // Ticket preview labels
     @FXML
@@ -114,82 +116,89 @@ public class EventCoordinatorDashboardController implements Initializable {
     @FXML
     private GridPane ticketPane;
 
-    @FXML
-    private Button btnSellTicket;
-
-    private CustomerModel customerModel;
-
     //Array that holds printservices available on the PC.
     private PrintService[] printServices;
 
-    private TicketListModel ticketListModel;
-
-    //gui.model.PrintModel for printing tickets (a singleton)
-    private PrintModel printModel;
-    private EmailClient email;
-    private Ticket ticket;
+    private CustomerModel customerModel;
     private EventListModel eventListModel;
+    private EmailClient emailClient;
+    private TicketListModel ticketListModel;
+    private EventCoordinatorModel eventCoordinatorModel;
+    private EventCoordinatorDashboardController dashboardController;
+
+    private PrintModel printModel;
+    private Ticket ticket;
+
     private final String TICKET_FILE = "src/gui/utility/temp/tempTicket.png";
 
-    public EventCoordinatorDashboardController() throws IOException {
-        customerModel = new CustomerModel();
-
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            //Model for handling the combobox with events in the view
-            //Utility class for switching scenes in javaFX
-            eventListModel = new EventListModel();
-            email = new EmailClient();
-            //Ticket BE entity
-            ticket = new Ticket();
-            ticketListModel = TicketListModel.getInstance();
-        } catch (IOException IOe) {
-            IOe.printStackTrace();
-        }
 
-        //instantiate the singleton PrintModel
-        printModel = PrintModel.getInstance();
+        Platform.runLater(() -> {
+            //set the login username
+            if(eventCoordinatorModel.getWhoIsLogin() != null){
+                txtLoginUserName.setText(eventCoordinatorModel.getWhoIsLogin().getFullNameProperty().get());
+            }else txtLoginUserName.setText("You got hacked");
 
-        comboBoxChooseEvent.getItems().addAll(eventListModel.getEventList());
+            // Search functionality in the list view
+            textFieldSearch.textProperty().addListener((observableValue, oldValue, newValue) -> {
+                    ticketListModel.searchTicket(newValue);
+            });
 
-        //Get print services
-        printServices = PrintServiceLookup.lookupPrintServices(null, null);
-        //Add print services to choose printer drop-down
-        comboBoxChoosePrinter.getItems().setAll(printServices);
+            //Set placeholder for tableview if it is empty
+            tvTickets.setPlaceholder(new Label("No tickets found for this event."));
+            tvTickets.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+            tvTickets.setItems(ticketListModel.getTicketList());
+            tcName.setCellValueFactory(addTicket -> addTicket.getValue().getCustomer().getNameProperty());
+            tcTelephoneNumber.setCellValueFactory(addTicket -> addTicket.getValue().getCustomer().getTelephoneNumberProperty());
+            tcEmail.setCellValueFactory(addTicket -> addTicket.getValue().getCustomer().getEmailProperty());
+            tcTicketPrice.setCellValueFactory(addTicket -> addTicket.getValue().getPriceProperty().asObject());
 
-
-        // Search functionality in the list view
-        textFieldSearch.textProperty().addListener((observableValue, oldValue, newValue) -> {
-                ticketListModel.searchTicket(newValue);
+            tvTickets.getSelectionModel().selectedItemProperty().addListener((observable, oldTicket, newTicket) -> {
+                if(newTicket != null)
+                    updateTicketLabels(newTicket);
+                }
+            );
         });
 
-        //Set placeholder for tableview if it is empty
-        tvTickets.setPlaceholder(new Label("No tickets found for this event."));
-        tvTickets.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        tvTickets.setItems(ticketListModel.getTicketList());
-        tcName.setCellValueFactory(addTicket -> addTicket.getValue().getCustomer().getNameProperty());
-        tcTelephoneNumber.setCellValueFactory(addTicket -> addTicket.getValue().getCustomer().getTelephoneNumberProperty());
-        tcTicketPrice.setCellValueFactory(addTicket -> addTicket.getValue().getPriceProperty().asObject());
-        tcEmail.setCellValueFactory(addTicket -> addTicket.getValue().getCustomer().getEmailProperty());
+    }
 
-        tvTickets.getSelectionModel().selectedItemProperty().addListener((observable, oldTicket, newTicket) -> {
-            if(newTicket != null)
-                updateTicketLabels(newTicket);
-            }
-        );
+    public void setCustomerModel(CustomerModel customerModel){
+        this.customerModel = customerModel;
+    }
+
+    public void setTicketListModel(TicketListModel ticketListModel){
+        this.ticketListModel = ticketListModel;
+    }
+
+    public void setEventListModel(EventListModel eventListModel){
+        this.eventListModel = eventListModel;
+    }
+
+    public void setEmailClient(EmailClient emailClient){
+        this.emailClient = emailClient;
+    }
+
+    public void setPrintModel(PrintModel printModel){
+        this.printModel = printModel;
+    }
+
+    public void setEventCoordinatorModel(EventCoordinatorModel eventCoordinatorModel){
+        this.eventCoordinatorModel = eventCoordinatorModel;
     }
 
 
-    public void updateComboBoxChooseEvent(Event event){
-        comboBoxChooseEvent.getItems().add(event);
-
+    public void setController(EventCoordinatorDashboardController dashboardController){
+        this.dashboardController = dashboardController;
     }
 
     public void handleSellTicketButton(ActionEvent actionEvent) throws IOException {
-        new SellTicketScene().loadNewScene(new Stage());
+        ILoadScene<SellTicketViewController> sellTicketScene = new SellTicketScene();
+        sellTicketScene.loadNewScene(new Stage());
+        sellTicketScene.getController().setController(dashboardController);
+        sellTicketScene.getController().setCustomerModel(customerModel);
+        sellTicketScene.getController().setTicketListModel(ticketListModel);
     }
 
     public void handleRefundTicketButton() {
@@ -205,19 +214,26 @@ public class EventCoordinatorDashboardController implements Initializable {
     }
 
     public void handleMailTicketButton(ActionEvent actionEvent) throws IOException {
-        generateTicket();
-        email.sendEmail(ticket.getCustomer().getEmailProperty().get(), "Your Ticket to " + lblEventTitle.getText(), "Congratulations on your ticket", TICKET_FILE);
+        ticket = tvTickets.getSelectionModel().getSelectedItem();
+        if(ticket != null){
+            //Generate image of the ticket
+            generateTicket();
+            emailClient.sendEmail(ticket.getCustomer().getEmailProperty().get(), "Your Ticket to " + lblEventTitle.getText(), "Congratulations on your ticket", TICKET_FILE);
+        }
     }
 
     public void handleEditEventButton(ActionEvent actionEvent) throws IOException {
-        int selectedIndex = comboBoxChooseEvent.getSelectionModel().getSelectedIndex();
-        new EditEventScene().loadNewScene(new Stage());
-        comboBoxChooseEvent.getSelectionModel().select(selectedIndex);
-        updateEventLabels(getSelectedEvent());
+        EditEventScene editEventScene = new EditEventScene();
+        editEventScene.loadNewScene(new Stage());
+        editEventScene.getController().setEventListModel(eventListModel);
+        editEventScene.getController().setController(dashboardController);
+
     }
 
     public void handleNewEventButton(ActionEvent actionEvent) throws IOException {
-        new CreateEventScene().loadNewScene(new Stage());
+        ILoadScene<CreateEventController> createEventController = new CreateEventScene();
+        createEventController.loadNewScene(new Stage());
+        createEventController.getController().setEventListModel(eventListModel);
     }
 
     public void handleLogoutButton(ActionEvent actionEvent) {
@@ -288,7 +304,6 @@ public class EventCoordinatorDashboardController implements Initializable {
 
     public void handleDeleteEventButton(ActionEvent actionEvent) {
         eventListModel.deleteEventFromList(getSelectedEvent());
-        updateComboBoxView();
     }
 
     public void handleSetInactiveButton(ActionEvent actionEvent) {
@@ -296,14 +311,21 @@ public class EventCoordinatorDashboardController implements Initializable {
         getSelectedEvent().setIsActive(false);
         getSelectedEvent().setTitle("INACTIVE " + getSelectedEvent().getTitleProperty().get());
         eventListModel.setEventInactive(getSelectedEvent());
-        updateComboBoxView();
         comboBoxChooseEvent.getSelectionModel().select(selectedIndex);
         updateEventLabels(getSelectedEvent());
     }
 
-    public void updateComboBoxView() {
+    @FXML
+    private void updateComboBox(MouseEvent mouseEvent) {
         comboBoxChooseEvent.getItems().clear();
         comboBoxChooseEvent.getItems().addAll(eventListModel.getEventList());
     }
 
+    @FXML
+    private void updatePrinter(MouseEvent mouseEvent) {
+        //Get print services
+        printServices = PrintServiceLookup.lookupPrintServices(null, null);
+        //Add print services to choose printer drop-down
+        comboBoxChoosePrinter.getItems().setAll(printServices);
+    }
 }

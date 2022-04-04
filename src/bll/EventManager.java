@@ -1,37 +1,37 @@
 package bll;
 
 import be.Event;
-import be.Ticket;
-import dal.DBEvent;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import bll.interfaces.IEventManager;
+import dal.DBEventDAO;
+
+import dal.interfaces.IDatabaseFacade;
 
 import java.io.IOException;
 import java.util.List;
 
-public class EventManager {
+public class EventManager implements IEventManager {
 
-    private DBEvent dbEvent;
+    private IDatabaseFacade iDatabaseFacade;
 
-    public EventManager() throws IOException {
-        dbEvent = new DBEvent();
+
+    public EventManager(IDatabaseFacade iDatabaseFacade){
+        this.iDatabaseFacade = iDatabaseFacade;
     }
 
     public Event createEvent(Event event){
-        return dbEvent.createEvent(event);
+        return iDatabaseFacade.createEvent(event);
     }
 
     public List<Event> getAllEvents(){
-        return dbEvent.getAllEvents();
+        return iDatabaseFacade.getAllEvents();
     }
 
 
     public void deleteEvent(Event event) {
-        dbEvent.deleteEvent(event);
+        iDatabaseFacade.deleteEvent(event);
     }
 
-
     public Event updateEvent(Event event) {
-        return dbEvent.updateEvent(event);
+        return iDatabaseFacade.updateEvent(event);
     }
 }

@@ -83,7 +83,7 @@
          <children>
             <VBox alignment="BOTTOM_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="15.0" HBox.hgrow="SOMETIMES">
                <children>
-                  <ComboBox fx:id="comboBoxChoosePrinter" prefWidth="150.0" promptText="Choose a printer" />
+                  <ComboBox fx:id="comboBoxChoosePrinter" onMouseClicked="#updatePrinter" prefWidth="150.0" promptText="Choose a printer" />
                   <Button mnemonicParsing="false" onAction="#handlePrintTicketButton" prefWidth="150.0" text="Print Ticket" />
                </children>
                <padding>
@@ -108,6 +108,11 @@
       </HBox>
       <HBox alignment="TOP_RIGHT" spacing="15.0" GridPane.columnIndex="3" GridPane.rowSpan="2">
          <children>
+            <Label fx:id="txtLoginUserName" text="User Name">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
             <Button mnemonicParsing="false" onAction="#handleUserSettingsButton" prefHeight="45.0" prefWidth="45.0" styleClass="userSettingsButton" />
             <Button mnemonicParsing="false" onAction="#handleLogoutButton" prefHeight="45.0" prefWidth="45.0" styleClass="logOutButton" />
          </children>
@@ -180,7 +185,7 @@
             <Label fx:id="lblEventContactEmail" layoutX="104.0" layoutY="391.0" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="13" />
          </children>
       </GridPane>
-      <ComboBox fx:id="comboBoxChooseEvent" onAction="#handleChooseEvent" prefWidth="150.0" promptText="Choose an event" GridPane.rowIndex="3" />
+      <ComboBox fx:id="comboBoxChooseEvent" onAction="#handleChooseEvent" onMouseClicked="#updateComboBox" prefWidth="150.0" promptText="Choose an event" GridPane.rowIndex="3" />
       <Separator prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="2" />
       <Separator prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="7" />
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.rowIndex="6">

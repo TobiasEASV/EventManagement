@@ -2,37 +2,40 @@ package bll;
 
 import be.Event;
 import be.Ticket;
-import dal.TicketDAO;
+import bll.interfaces.ITicketManager;
+import dal.interfaces.IDatabaseFacade;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
-public class TicketManager {
+public class TicketManager implements ITicketManager {
 
-    private TicketDAO ticketDAO;
+    private IDatabaseFacade iDatabaseFacade;
 
-    public TicketManager() throws IOException {
-        ticketDAO = new TicketDAO();
+    public TicketManager(IDatabaseFacade iDatabaseFacade) throws IOException {
+        this.iDatabaseFacade = iDatabaseFacade;
     }
 
+    @Override
     public Ticket createTicket(Ticket ticket) {
         ticket.setId(generateID());
-        return ticketDAO.createTicket(ticket);
+        return iDatabaseFacade.createTicket(ticket);
     }
 
-
+    @Override
     public Ticket updateTicket(Ticket ticket) {
-        return ticketDAO.updateTicket(ticket);
+        return iDatabaseFacade.updateTicket(ticket);
     }
 
-
+    @Override
     public void deleteTicket(Ticket ticket) {
-        ticketDAO.deleteTicket(ticket);
+        iDatabaseFacade.deleteTicket(ticket);
     }
 
+    @Override
     public List<Ticket> getTicketsFromEvent(Event event) {
-        return ticketDAO.getTicketsFromEvent(event);
+        return iDatabaseFacade.getTicketsFromEvent(event);
     }
 
     private String generateID(){
@@ -48,7 +51,7 @@ public class TicketManager {
         }
 
         // see if generate ID is in Database, if not than return new ID
-        if(ticketDAO.foundTicketID(newValueID.toString())){
+        if(iDatabaseFacade.foundTicketID(newValueID.toString())){
             generateID();
         }
         return newValueID.toString();

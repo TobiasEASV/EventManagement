@@ -1,61 +1,41 @@
 package utility;
-
-import bll.EmailManager;
+import be.Email;
+import bll.interfaces.IEmailManager;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.*;
 
 public class EmailClient {
-    
-    private static final String PROP_FILE = ".data/email.settings";
 
-    private EmailManager emailManager;
+    private IEmailManager iEmailManager;
 
-    public EmailClient() throws IOException {
-        //emailManager = new EmailManager();
+    public EmailClient(IEmailManager iEmailManager) throws IOException {
+        this.iEmailManager = iEmailManager;
     }
 
     public Boolean sendEmail(String toEmail, String subject, String text, String attachmentFileURL) throws IOException {
 
-
-
-        Properties emailCredentials = new Properties();
-        emailCredentials.load(new FileInputStream(PROP_FILE));
-        //HashMap<String,String> credentials = emailManager.getCredentials();
-
-
-        //final String email = credentials.get("Email");
-        //final String password = credentials.get("Password");
-
-        final String email = emailCredentials.getProperty("Email");
-        final String password = emailCredentials.getProperty("Password");
-
-        System.out.println("Eamil= " + email);
-        System.out.println("Password = " + password);
-
         Properties emailSetup = new Properties();
+        emailSetup.put("mail.smtp.host", "smtp.outlook.com");
+        emailSetup.put("mail.smtp.port", "587");
+        emailSetup.put("mail.smtp.auth", "true");
+        emailSetup.put("mail.smtp.starttls.enable", "true"); //TLS;
 
-            emailSetup.put("mail.smtp.host", "smtp.outlook.com");
-            emailSetup.put("mail.smtp.port", "587");
-            emailSetup.put("mail.smtp.auth", "true");
-            emailSetup.put("mail.smtp.starttls.enable", "true"); //TLS;
+        Email emailCredentials = iEmailManager.getCredentials();
 
         Session session = Session.getInstance(emailSetup, new javax.mail.Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(email, password);
-                    }
+                        return new PasswordAuthentication(emailCredentials.getEmailNameProperty().get(), emailCredentials.getPasswordProperty().get());}
                 });
-
             try {
 
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(email));
+            message.setFrom(new InternetAddress(emailCredentials.getEmailNameProperty().get()));
             message.setRecipients(
                     Message.RecipientType.TO,
                     InternetAddress.parse(toEmail)
@@ -86,13 +66,4 @@ public class EmailClient {
         }
             return true;
     }
-/**
-    public static void main(String[] args) throws IOException {
-        EmailClient emailClient = new EmailClient();
-        String sendTo = "tobi9782@easv365.dk";
-        if(emailClient.sendEmail(sendTo, "Your ticket", "Congratulations on your ticket, to Esbjerg musik hus", "src/gui/images/Icons/ticket_2_icon.png")){
-            System.out.println("yesss");
-        }
-    }
- **/
 }

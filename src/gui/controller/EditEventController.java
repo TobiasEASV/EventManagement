@@ -1,7 +1,8 @@
 package gui.controller;
 
 import be.Event;
-import bll.EventManager;
+import gui.model.EventListModel;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,10 +12,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import utility.Scenes.DashboardScene;
-import utility.Scenes.ILoadScene;
 
-import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -41,15 +39,15 @@ public class EditEventController implements Initializable {
     @FXML
     private TextField txVIPPrice;
 
-    private EventManager eventManager;
-
+    private EventListModel eventListModel;
+    private EventCoordinatorDashboardController dashboardController;
     private Event eventToEdit;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            eventManager = new EventManager();
-            eventToEdit = new DashboardScene().getController().getSelectedEvent();
+
+        Platform.runLater(() -> {
+            eventToEdit = dashboardController.getSelectedEvent();
 
             txTitle.setText(eventToEdit.getTitleProperty().get());
             txtAreaDescription.setText(eventToEdit.getDescriptionProperty().get());
@@ -58,13 +56,18 @@ public class EditEventController implements Initializable {
             txContactEmail.setText(eventToEdit.getContactEmailProperty().get());
             txTicktePrice.setText(String.valueOf(eventToEdit.getPriceProperty().get()));
             txVIPPrice.setText(String.valueOf(eventToEdit.getVipPriceProperty().get()));
+            dpStartData.setValue(eventToEdit.getStartDateProperty().getValue());
+            dpEndData.setValue(eventToEdit.getEndDateProperty().getValue());
+        });
 
-            dpStartData.setValue(LocalDate.from(eventToEdit.getStartDateProperty().getValue()));
-            dpEndData.setValue(LocalDate.from(eventToEdit.getEndDateProperty().getValue()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    }
 
+    public void setController(EventCoordinatorDashboardController dashboardController) {
+        this.dashboardController = dashboardController;
+    }
+
+    public void setEventListModel(EventListModel eventListModel){
+        this.eventListModel = eventListModel;
     }
 
     public void handleButtonOK(ActionEvent actionEvent) {
@@ -80,10 +83,7 @@ public class EditEventController implements Initializable {
             eventToEdit.setVipPrice(Double.parseDouble(txVIPPrice.getText()));
             eventToEdit.setStartDate(dpStartData.getValue());
             eventToEdit.setEndDate(dpEndData.getValue());
-
-            eventManager.updateEvent(eventToEdit);
-            new DashboardScene().getController().updateComboBoxView();
-
+            eventListModel.updateEvent(eventToEdit);
             EXITScene();
 
         }else{

@@ -3,19 +3,16 @@ package gui.controller;
 import be.Customer;
 import be.Event;
 import be.Ticket;
-import bll.TicketManager;
 import gui.model.CustomerModel;
 import gui.model.TicketListModel;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import utility.Scenes.DashboardScene;
-import utility.Scenes.SceneSwapper;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -46,37 +43,45 @@ public class SellTicketViewController implements Initializable {
 
     private CheckBox checkSeated;
 
+
+    private EventCoordinatorDashboardController dashboardController;
     private Event event;
     private double price;
-    private TicketManager ticketManager;
     private CustomerModel customerModel;
     private TicketListModel ticketListModel;
     private final String DEFAULT_COUNTRY_CODE_DK = "+45";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        event = new DashboardScene().getController().getSelectedEvent();
-        if (event == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error: Something went wrong");
-            alert.setHeaderText("Du skal vælge en Event først");
-            alert.show();
-        }
-        try {
-            ticketListModel = TicketListModel.getInstance();
-            ticketManager = new TicketManager();
-            customerModel = new CustomerModel();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Platform.runLater(() -> {
+            event = dashboardController.getSelectedEvent();
+            if (event == null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error: Something went wrong");
+                alert.setHeaderText("Du skal vælge en Event først");
+                alert.show();
+            }
 
-        price = event.getPriceProperty().get();
-        lblPrice.setText(price + " DKK");
-        txtRow.setDisable(true);
-        txtSeat.setDisable(true);
+            price = event.getPriceProperty().get();
+            lblPrice.setText(price + " DKK");
+            txtRow.setDisable(true);
+            txtSeat.setDisable(true);
 
-        checkVIP.setDisable(event.getVipPriceProperty().get() == 0);
+            checkVIP.setDisable(event.getVipPriceProperty().get() == 0);
+        });
 
+    }
+
+    public void setController(EventCoordinatorDashboardController dashboardController){
+        this.dashboardController = dashboardController;
+    }
+
+    public void setCustomerModel(CustomerModel customerModel){
+        this.customerModel = customerModel;
+    }
+
+    public void setTicketListModel(TicketListModel ticketListModel){
+        this.ticketListModel = ticketListModel;
     }
 
     public void btnSave(ActionEvent actionEvent) {
@@ -119,7 +124,6 @@ public class SellTicketViewController implements Initializable {
 
         if (!txtCustomerName.getText().isEmpty() && !txtCustomerEmail.getText().isEmpty() && !txtCustomerTelephoneNumber.getText().isEmpty()) {
             Customer customer = new Customer(txtCustomerEmail.getText(), txtCustomerName.getText(), telephoneNumber);
-
             Ticket ticket = new Ticket(customerModel.createCustomer(customer), event, Double.parseDouble(lblPrice.getText()), vip, isSeated);
             ticket.setRow(row);
             ticket.setSeat(seat);

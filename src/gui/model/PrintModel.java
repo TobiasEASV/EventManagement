@@ -18,17 +18,8 @@ public class PrintModel {
     public boolean printJobWasSuccessful;
     private Alert alert;
 
-
-    private PrintModel(){
+    public PrintModel(){
         alert = new Alert(Alert.AlertType.NONE);
-    }
-
-    public static PrintModel getInstance()
-    {
-        if (single_instance == null)
-            single_instance = new PrintModel();
-
-        return single_instance;
     }
 
     public void print(PrintService printService, String ticketFile) {

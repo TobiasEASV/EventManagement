@@ -1,30 +1,29 @@
 package dal;
 
-import com.microsoft.sqlserver.jdbc.SQLServerException;
+import be.Email;
+import dal.interfaces.IDBEmailDAO;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 
-public class DBEmail {
+public class DBEmailDAO implements IDBEmailDAO {
 
-    DBConnecting dbConnecting;
+    private DBConnecting dbConnecting;
 
 
 
-    public DBEmail() throws IOException {
-        dbConnecting = new DBConnecting();
+    public DBEmailDAO(DBConnecting dbConnecting) {
+        this.dbConnecting = dbConnecting;
     }
 
-    public HashMap<String,String> getCredentials(){
+    @Override
+    public Email getCredentials() {
 
-        final HashMap<String,String> credentials = new HashMap<>();
+        Email EmailCredentials = null;
 
         try(Connection connection = dbConnecting.getConnection()){
             String sql = "Select EmailCredentials, PasswordCredentials FROM Email";
@@ -33,22 +32,21 @@ public class DBEmail {
             //Extract data from DB
             preparedStatement.execute();
 
-             ResultSet resultSet = preparedStatement.getResultSet();
-             if(resultSet.next()){
-                 String email = resultSet.getString("EmailCredentials");
-                 String password = resultSet.getString("PasswordCredentials");
-                 credentials.put("Email", email);
-                 credentials.put("Password", password);
-             }
+            ResultSet resultSet = preparedStatement.getResultSet();
+            if(resultSet.next()){
+                String email = resultSet.getString("EmailCredentials");
+                String password = resultSet.getString("PasswordCredentials");
+
+                EmailCredentials = new Email(email,password);
+            }
 
         } catch (SQLException SQLe) {
             SQLe.printStackTrace();
         }
-        return credentials;
-
+        return EmailCredentials;
     }
 
-    public void setCredentials(String email, String password) throws SQLServerException {
+    public void setCredentials(String email, String password){
 
         try(Connection connection = dbConnecting.getConnection()){
             String sql = "UPDATE Email SET EmailCredentials = ?, PasswordCredentials = ?";

@@ -3,21 +3,23 @@ package dal;
 import be.Customer;
 import be.Event;
 import be.Ticket;
+import dal.interfaces.IDBTicketDAO;
 
-import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class TicketDAO {
-    private DBConnecting dbc = new DBConnecting();
+public class DBTicketDAO implements IDBTicketDAO {
 
-    public TicketDAO() throws IOException {
+    private DBConnecting dbConnecting;
+
+    public DBTicketDAO(DBConnecting dbConnecting) {
+        this.dbConnecting = dbConnecting;
     }
 
     public Ticket createTicket(Ticket ticket) {
-        try (Connection connection = dbc.getConnection()) {
+        try (Connection connection = dbConnecting.getConnection()) {
             String sql = "INSERT INTO Ticket(ID, Customer_ID, Event_ID, Price, " +
                     " IsSeated, IsVIP, Row, Seat) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -39,7 +41,7 @@ public class TicketDAO {
     }
 
     public Ticket updateTicket(Ticket ticket) {
-        try (Connection connection = dbc.getConnection()) {
+        try (Connection connection = dbConnecting.getConnection()) {
 
             String sql = "UPDATE Ticket SET Price, IsPaid, IsSeated, IsVIP, " +
                     " Row, Seat = (?, ?, ?, ?, ?, ?) WHERE ID = (?);";
@@ -62,7 +64,7 @@ public class TicketDAO {
 
     public void deleteTicket(Ticket ticket) {
         String sql = "DELETE FROM Ticket WHERE ID = (?);";
-        try (Connection connection = dbc.getConnection()) {
+        try (Connection connection = dbConnecting.getConnection()) {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, ticket.getIdProperty().get());
             ps.executeUpdate();
@@ -74,7 +76,7 @@ public class TicketDAO {
 
     public List<Ticket> getTicketsFromEvent(Event event) {
         List<Ticket> allTicketsFromEvent = new ArrayList<>();
-        try (Connection c = dbc.getConnection()) {
+        try (Connection c = dbConnecting.getConnection()) {
             String sql = "SELECT * FROM Ticket JOIN Customer ON ticket.Customer_ID = Customer.ID WHERE Event_ID = ?";
             PreparedStatement ps = c.prepareStatement(sql);
             ps.setInt(1, event.getIdProperty().get());
@@ -105,7 +107,7 @@ public class TicketDAO {
 
     public boolean foundTicketID(String id) {
         String sql = "Select ID FROM Ticket WHERE ID = (?)";
-        try (Connection connection = dbc.getConnection()) {
+        try (Connection connection = dbConnecting.getConnection()) {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, id);
             ps.execute();

@@ -1,4 +1,4 @@
-package utility.Scenes;
+package utility.Scenes.interfaces;
 
 import javafx.stage.Stage;
 
@@ -12,3 +12,4 @@ public interface ILoadScene<T> {
 
 
 }
+

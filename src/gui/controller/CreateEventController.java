@@ -1,17 +1,16 @@
 package gui.controller;
 
 import be.Event;
-import bll.EventManager;
 
 
+import gui.model.EventListModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import utility.Scenes.DashboardScene;
-import java.io.IOException;
+
 import java.net.URL;
 import java.util.*;
 
@@ -42,18 +41,10 @@ public class CreateEventController implements Initializable {
     @FXML
     private TextField txVIPPrice;
 
-    private  EventManager eventManager;
+    private EventListModel eventListModel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            eventManager = new EventManager();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        comboBoxStartTime.getItems().addAll(getTimes());
-        comboBoxEndTime.getItems().addAll(getTimes());
-    }
 
     private List<String> getTimes() {
         List<String> timeList = new ArrayList<>();
@@ -81,6 +72,10 @@ public class CreateEventController implements Initializable {
         return timeList;
     }
 
+    public void setEventListModel(EventListModel eventListModel) {
+        this.eventListModel = eventListModel;
+    }
+
     public void handleButtonOK(ActionEvent actionEvent) {
         if(!txTitle.getText().isBlank() && !txtAreaDescription.getText().isBlank() && !txLocation.getText().isBlank()
                 && !txArtists.getText().isBlank() && !txContactEmail.getText().isBlank() && !(dpStartData.getValue() == null) && !(dpEndData.getValue() == null)){
@@ -103,7 +98,7 @@ public class CreateEventController implements Initializable {
                     dpStartData.getValue(),
                     dpEndData.getValue(), true);
 
-            new DashboardScene().getController().updateComboBoxChooseEvent(eventManager.createEvent(event));
+            eventListModel.createEvent(event);
             EXITScene();
 
         }else{
