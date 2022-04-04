@@ -64,7 +64,7 @@ public class Event {
     }
 
     public void setEndDate(LocalDate endDate) {
-        this.endDate.set(endDate);
+        this.endDate.set(LocalDate.from(endDate));
     }
 
     public ObjectProperty<LocalDate> getStartDateProperty() {
@@ -72,7 +72,7 @@ public class Event {
     }
     
     public void setStartDate(LocalDate startDate) {
-        this.startDate.set(startDate);
+        this.startDate.set(LocalDate.from(startDate));
     }
 
 

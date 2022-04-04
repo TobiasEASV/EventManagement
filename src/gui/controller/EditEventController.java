@@ -16,6 +16,7 @@ import utility.Scenes.ILoadScene;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class EditEventController implements Initializable {
@@ -58,8 +59,8 @@ public class EditEventController implements Initializable {
             txTicktePrice.setText(String.valueOf(eventToEdit.getPriceProperty().get()));
             txVIPPrice.setText(String.valueOf(eventToEdit.getVipPriceProperty().get()));
 
-            dpStartData.setValue(eventToEdit.getStartDateProperty().getValue());
-            dpEndData.setValue(eventToEdit.getEndDateProperty().getValue());
+            dpStartData.setValue(LocalDate.from(eventToEdit.getStartDateProperty().getValue()));
+            dpEndData.setValue(LocalDate.from(eventToEdit.getEndDateProperty().getValue()));
         } catch (IOException e) {
             e.printStackTrace();
         }

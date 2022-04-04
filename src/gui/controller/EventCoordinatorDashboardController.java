@@ -33,7 +33,6 @@ public class EventCoordinatorDashboardController implements Initializable {
 
     @FXML
     private GridPane parentGridPane;
-
     @FXML
     private TableView<Ticket> tvTickets;
 
@@ -100,7 +99,7 @@ public class EventCoordinatorDashboardController implements Initializable {
     @FXML
     private Label lblTicketLocation;
     @FXML
-    private Label lblTicketContactEmail;
+    private Label lblTicketId;
     @FXML
     private Label lblTicketStartDate;
     @FXML
@@ -109,6 +108,8 @@ public class EventCoordinatorDashboardController implements Initializable {
     private Label lblTicketPrice;
     @FXML
     private Label lblTicketType;
+    @FXML
+    private Label lblContactEmail;
 
     @FXML
     private GridPane ticketPane;
@@ -171,8 +172,8 @@ public class EventCoordinatorDashboardController implements Initializable {
         tvTickets.setItems(ticketListModel.getTicketList());
         tcName.setCellValueFactory(addTicket -> addTicket.getValue().getCustomer().getNameProperty());
         tcTelephoneNumber.setCellValueFactory(addTicket -> addTicket.getValue().getCustomer().getTelephoneNumberProperty());
-        tcEmail.setCellValueFactory(addTicket -> addTicket.getValue().getCustomer().getEmailProperty());
         tcTicketPrice.setCellValueFactory(addTicket -> addTicket.getValue().getPriceProperty().asObject());
+        tcEmail.setCellValueFactory(addTicket -> addTicket.getValue().getCustomer().getEmailProperty());
 
         tvTickets.getSelectionModel().selectedItemProperty().addListener((observable, oldTicket, newTicket) -> {
             if(newTicket != null)
@@ -255,7 +256,7 @@ public class EventCoordinatorDashboardController implements Initializable {
         lblEventArtists.setText(event.getArtistsProperty().get());
         lblEventStartDate.setText(String.valueOf(event.getStartDateProperty().get()));
         lblEventEndDate.setText(String.valueOf(event.getEndDateProperty().get()));
-        lblEventPrice.setText(String.valueOf(event.getPriceProperty().get() + " DK"));
+        lblEventPrice.setText(String.valueOf(event.getPriceProperty().get() + " DKK"));
         lblEventContactEmail.setText(event.getContactEmailProperty().get());
         setCheckBoxesOnEvent(event);
     }
@@ -273,16 +274,16 @@ public class EventCoordinatorDashboardController implements Initializable {
 
         lblTicketTitle.setText(ticket.getEvent().getTitleProperty().get());
         lblCustomerName.setText(ticket.getCustomer().getNameProperty().get());
-        lblCustomerEmail.setText(ticket.getCustomer().getEmailProperty().get());
-        lblTicketPrice.setText(String.valueOf(ticket.getPriceProperty().get() + " DK"));
+        lblTicketPrice.setText(String.valueOf(ticket.getPriceProperty().get() + " DKK"));
         lblTicketType.setText(ticketType);
         lblTicketLocation.setText(ticket.getEvent().getLocationProperty().get());
         lblTicketStartDate.setText(String.valueOf(ticket.getEvent().getStartDateProperty().get()));
         lblTicketEndDate.setText(String.valueOf(ticket.getEvent().getEndDateProperty().get()));
         lblTicketRowNumber.setText("Row: "+ticket.getRowProperty().get());
         lblTicketSeatNumber.setText("Seat: "+ticket.getSeatProperty().get());
-        lblTicketContactEmail.setText(ticket.getEvent().getContactEmailProperty().get());
+        lblTicketId.setText("ID: " + ticket.getIdProperty().get());
         lblTicketDescription.setText(ticket.getEvent().getDescriptionProperty().get());
+        lblContactEmail.setText(ticket.getEvent().getContactEmailProperty().get());
     }
 
     public void handleDeleteEventButton(ActionEvent actionEvent) {
