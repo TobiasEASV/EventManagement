@@ -6,18 +6,20 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class EditEventController implements Initializable {
+
     @FXML
     private TextArea txtAreaDescription;
     @FXML
@@ -39,6 +41,11 @@ public class EditEventController implements Initializable {
     @FXML
     private TextField txVIPPrice;
 
+    @FXML
+    private ComboBox<String> comboboxStartTime;
+    @FXML
+    private ComboBox<String> comboboxEndTime;
+
     private EventListModel eventListModel;
     private EventCoordinatorDashboardController dashboardController;
     private Event eventToEdit;
@@ -56,10 +63,41 @@ public class EditEventController implements Initializable {
             txContactEmail.setText(eventToEdit.getContactEmailProperty().get());
             txTicktePrice.setText(String.valueOf(eventToEdit.getPriceProperty().get()));
             txVIPPrice.setText(String.valueOf(eventToEdit.getVipPriceProperty().get()));
-            dpStartData.setValue(eventToEdit.getStartDateProperty().getValue());
-            dpEndData.setValue(eventToEdit.getEndDateProperty().getValue());
+            dpStartData.setValue(eventToEdit.getStartDateProperty().getValue().toLocalDate());
+            dpEndData.setValue(eventToEdit.getEndDateProperty().getValue().toLocalDate());
+            comboboxStartTime.setValue(eventToEdit.getStartDateProperty().getValue().toLocalTime().toString());
+            comboboxEndTime.setValue(eventToEdit.getEndDateProperty().getValue().toLocalTime().toString());
+
+            comboboxStartTime.getItems().addAll(getTimes());
+            comboboxEndTime.getItems().addAll(getTimes());
         });
 
+    }
+
+    private List<String> getTimes() {
+        List<String> timeList = new ArrayList<>();
+        String time;
+        for (int hour = 0; hour < 10; hour++) {
+            for (int minutes = 0; minutes < 60; minutes += 15) {
+                if (minutes == 0) {
+                    time = "0" + hour + ":" + minutes +"0";
+                }
+                else {
+                    time = "0" + hour + ":" + minutes;}
+                timeList.add(time);
+            }
+        }
+        for (int hour = 10; hour < 24; hour++) {
+            for (int minutes = 0; minutes < 60; minutes += 15) {
+                if (minutes == 0) {
+                    time = hour + ":" + minutes +"0";
+                }
+                else {
+                    time = hour + ":" + minutes;}
+                timeList.add(time);
+            }
+        }
+        return timeList;
     }
 
     public void setController(EventCoordinatorDashboardController dashboardController) {
@@ -74,6 +112,11 @@ public class EditEventController implements Initializable {
         if(!txTitle.getText().isBlank() && !txtAreaDescription.getText().isBlank() && !txLocation.getText().isBlank()
                 && !txArtists.getText().isBlank() && !txContactEmail.getText().isBlank() && !(dpStartData.getValue() == null) && !(dpEndData.getValue() == null)){
 
+            LocalTime startClock = LocalTime.parse(comboboxStartTime.getSelectionModel().getSelectedItem());
+            LocalTime endClock = LocalTime.parse(comboboxEndTime.getSelectionModel().getSelectedItem());
+            LocalDateTime startTime = LocalDateTime.of(dpStartData.getValue(),startClock);
+            LocalDateTime endTime = LocalDateTime.of(dpEndData.getValue(),endClock);
+
             eventToEdit.setTitle(txTitle.getText());
             eventToEdit.setDescription(txtAreaDescription.getText());
             eventToEdit.setLocation(txLocation.getText());
@@ -81,8 +124,8 @@ public class EditEventController implements Initializable {
             eventToEdit.setContactEmail(txContactEmail.getText());
             eventToEdit.setPrice(Double.parseDouble(txTicktePrice.getText()));
             eventToEdit.setVipPrice(Double.parseDouble(txVIPPrice.getText()));
-            eventToEdit.setStartDate(dpStartData.getValue());
-            eventToEdit.setEndDate(dpEndData.getValue());
+            eventToEdit.setStartDate(startTime);
+            eventToEdit.setEndDate(endTime);
             eventListModel.updateEvent(eventToEdit);
             EXITScene();
 

@@ -24,7 +24,7 @@ public class EditEventScene implements ILoadScene<EditEventController> {
         stage.setScene(new Scene(loader.load()));
         stage.setTitle("Event Manager");
         stage.getIcons().add(image);
-        stage.showAndWait();
+        stage.show();
     }
 
     @Override

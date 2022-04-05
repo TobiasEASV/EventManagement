@@ -125,7 +125,7 @@ public class SellTicketViewController implements Initializable {
 
         if (!txtCustomerName.getText().isEmpty() && !txtCustomerEmail.getText().isEmpty() && !txtCustomerTelephoneNumber.getText().isEmpty()) {
             Customer customer = new Customer(txtCustomerEmail.getText(), txtCustomerName.getText(), telephoneNumber);
-            Ticket ticket = new Ticket(customerModel.createCustomer(customer), event, Double.parseDouble(lblPrice.getText()), vip, isSeated);
+            Ticket ticket = new Ticket(customerModel.createCustomer(customer), event, price, vip, isSeated);
             ticket.setRow(row);
             ticket.setSeat(seat);
             ticketListModel.addTicketToList(ticket);

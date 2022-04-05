@@ -26,6 +26,7 @@ import javax.print.PrintServiceLookup;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class EventCoordinatorDashboardController implements Initializable {
@@ -191,15 +192,15 @@ public class EventCoordinatorDashboardController implements Initializable {
         this.eventCoordinatorModel = eventCoordinatorModel;
     }
 
-
     public void setController(EventCoordinatorDashboardController dashboardController){
+
         this.dashboardController = dashboardController;
     }
 
     public void handleSellTicketButton(ActionEvent actionEvent) throws IOException {
         ILoadScene<SellTicketViewController> sellTicketScene = new SellTicketScene();
         sellTicketScene.loadNewScene(new Stage());
-        sellTicketScene.getController().setController(dashboardController);
+        sellTicketScene.getController().setController(this.dashboardController);
         sellTicketScene.getController().setCustomerModel(customerModel);
         sellTicketScene.getController().setTicketListModel(ticketListModel);
 
@@ -231,6 +232,7 @@ public class EventCoordinatorDashboardController implements Initializable {
         editEventScene.loadNewScene(new Stage());
         editEventScene.getController().setEventListModel(eventListModel);
         editEventScene.getController().setController(dashboardController);
+
 
     }
 
@@ -269,15 +271,18 @@ public class EventCoordinatorDashboardController implements Initializable {
     }
 
     private void updateEventLabels(Event event) {
-        System.out.println(event.getIsActiveProperty().get());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd  HH:mm");
+
         btnSellTicket.setDisable(!event.getIsActiveProperty().get());
         lblEventTitle.setText(event.getTitleProperty().get());
         lblEventLocation.setText(event.getLocationProperty().get());
         lblEventDescription.setText(event.getDescriptionProperty().get());
         lblEventArtists.setText(event.getArtistsProperty().get());
-        lblEventStartDate.setText(String.valueOf(event.getStartDateProperty().get()));
-        lblEventEndDate.setText(String.valueOf(event.getEndDateProperty().get()));
-        lblEventPrice.setText(String.valueOf(event.getPriceProperty().get() + " DKK"));
+
+        lblEventStartDate.setText(event.getStartDateProperty().get().format(formatter));
+        lblEventEndDate.setText(event.getEndDateProperty().get().format(formatter));
+
+        lblEventPrice.setText(event.getPriceProperty().get() + " DKK");
         lblEventContactEmail.setText(event.getContactEmailProperty().get());
         setCheckBoxesOnEvent(event);
     }
@@ -288,6 +293,7 @@ public class EventCoordinatorDashboardController implements Initializable {
     }
 
     private void updateTicketLabels(Ticket ticket) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd  HH:mm");
         String ticketType = "Standard";
         if (ticket.getVipProperty().get()) {
             ticketType = "VIP";
@@ -295,11 +301,11 @@ public class EventCoordinatorDashboardController implements Initializable {
 
         lblTicketTitle.setText(ticket.getEvent().getTitleProperty().get());
         lblCustomerName.setText(ticket.getCustomer().getNameProperty().get());
-        lblTicketPrice.setText(String.valueOf(ticket.getPriceProperty().get() + " DKK"));
+        lblTicketPrice.setText(ticket.getPriceProperty().get() + " DKK");
         lblTicketType.setText(ticketType);
         lblTicketLocation.setText(ticket.getEvent().getLocationProperty().get());
-        lblTicketStartDate.setText(String.valueOf(ticket.getEvent().getStartDateProperty().get()));
-        lblTicketEndDate.setText(String.valueOf(ticket.getEvent().getEndDateProperty().get()));
+        lblTicketStartDate.setText(ticket.getEvent().getStartDateProperty().get().format(formatter));
+        lblTicketEndDate.setText(ticket.getEvent().getEndDateProperty().get().format(formatter));
         lblTicketRowNumber.setText("Row: "+ticket.getRowProperty().get());
         lblTicketSeatNumber.setText("Seat: "+ticket.getSeatProperty().get());
         lblTicketId.setText("ID: " + ticket.getIdProperty().get());
