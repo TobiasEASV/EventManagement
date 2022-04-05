@@ -2,6 +2,7 @@ package gui.controller;
 
 import be.Event;
 import be.Ticket;
+import bll.util.TicketsToFileWriter;
 import gui.model.*;
 import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
@@ -10,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.WritableImage;
@@ -23,13 +25,13 @@ import utility.Scenes.interfaces.ILoadScene;
 import javax.imageio.ImageIO;
 import javax.print.PrintService;
 import javax.print.PrintServiceLookup;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class EventCoordinatorDashboardController implements Initializable {
-
 
 
     @FXML
@@ -104,6 +106,8 @@ public class EventCoordinatorDashboardController implements Initializable {
     @FXML
     private Button btnSellTicket;
     @FXML
+    private Button btnGetPdf;
+    @FXML
     private Label lblTicketId;
     @FXML
     private Label lblTicketStartDate;
@@ -133,7 +137,6 @@ public class EventCoordinatorDashboardController implements Initializable {
     private Ticket ticket;
 
     private final String TICKET_FILE = "src/gui/utility/temp/tempTicket.png";
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -332,4 +335,10 @@ public class EventCoordinatorDashboardController implements Initializable {
         //Add print services to choose printer drop-down
         comboBoxChoosePrinter.getItems().setAll(printServices);
     }
+
+    public void handleBtnGetPdf(ActionEvent actionEvent) {
+        TicketsToFileWriter.printToPdf(tvTickets.getItems(), comboBoxChoosePrinter.getValue());
+    }
+
+
 }

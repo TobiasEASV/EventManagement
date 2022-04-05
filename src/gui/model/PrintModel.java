@@ -25,8 +25,9 @@ public class PrintModel {
     public void print(PrintService printService, String ticketFile) {
         printJobWasSuccessful=false;
 
-        try (FileInputStream fileInputStream = new FileInputStream(ticketFile)){
-            Doc doc = new SimpleDoc(fileInputStream, DocFlavor.INPUT_STREAM.GIF, null);
+        try (FileInputStream fileInputStream = new FileInputStream(ticketFile)){    /** JAN - vi har prøvet en masse lort */
+            //Doc doc = new SimpleDoc(fileInputStream, DocFlavor.READER.INPUT_STREAM.TEXT_PLAIN_UTF_8, null);
+            Doc doc = new SimpleDoc(fileInputStream, DocFlavor.INPUT_STREAM.TEXT_HTML_HOST, null);
             PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
             pras.add(new Copies(1));
 
@@ -67,4 +68,5 @@ public class PrintModel {
             e.printStackTrace();
         }
     }
+
 }
