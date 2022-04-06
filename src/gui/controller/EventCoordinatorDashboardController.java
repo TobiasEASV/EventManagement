@@ -3,6 +3,7 @@ package gui.controller;
 import be.Event;
 import be.Ticket;
 import bll.util.TicketsToFileWriter;
+import bll.util.pdfConverter;
 import gui.model.*;
 import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
@@ -337,7 +338,8 @@ public class EventCoordinatorDashboardController implements Initializable {
     }
 
     public void handleBtnGetPdf(ActionEvent actionEvent) {
-        TicketsToFileWriter.printToPdf(tvTickets.getItems(), comboBoxChoosePrinter.getValue());
+        pdfConverter.printToPdf(tvTickets.getItems());
+        //TicketsToFileWriter.printToPdf(tvTickets.getItems(), comboBoxChoosePrinter.getValue());
     }
 
 
