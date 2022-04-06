@@ -2,12 +2,19 @@ package bll.util;
 
 
 import be.Ticket;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
+
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 
 public class PDFConverter {
@@ -22,9 +29,9 @@ public class PDFConverter {
 
     }
 
-    public void printToPdf(List<Ticket> ticketList) {
+    public Window printToPdf(List<Ticket> ticketList) {
         if (ticketList.isEmpty())
-            return;
+            return null;
 
         try (PDDocument doc = new PDDocument()) {
             doc.addPage(page);
@@ -73,11 +80,27 @@ public class PDFConverter {
                 }
             }
             content.close();
-            doc.save(FILEPATH);
+
+            /**
+             * Saving doc to desires destination.
+             */
+            FileChooser fc = new FileChooser();
+            fc.setInitialFileName("Ticket Overview.pdf");
+            FileChooser.ExtensionFilter ef = new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf");
+            fc.getExtensionFilters().add(ef);
+            File file = fc.showSaveDialog(null);
+            if(file != null){
+                try {
+                    doc.save(file.getPath());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return null;
     }
 
     public void setTitleAndSubtitles(PDPageContentStream content, String title) throws IOException {

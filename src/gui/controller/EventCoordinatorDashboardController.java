@@ -348,8 +348,5 @@ public class EventCoordinatorDashboardController implements Initializable {
 
     public void handleBtnGetPdf(ActionEvent actionEvent) {
         pdfConverter.printToPdf(tvTickets.getItems());
-        //TicketsToFileWriter.printToPdf(tvTickets.getItems(), comboBoxChoosePrinter.getValue());
     }
-
-
 }
