@@ -8,12 +8,13 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="javax.mail" level="project" />
+    <orderEntry type="library" name="javax.mail" level="project" />
     <orderEntry type="library" name="javax.activation" level="project" />
-    <orderEntry type="library" exported="" name="lib" level="project" />
-    <orderEntry type="library" exported="" name="activation-1.1.1" level="project" />
-    <orderEntry type="library" exported="" name="mssql-jdbc-9.4.0.jre16" level="project" />
+    <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" name="activation-1.1.1" level="project" />
+    <orderEntry type="library" name="mssql-jdbc-9.4.0.jre16" level="project" />
     <orderEntry type="library" name="jfoenix" level="project" />
-    <orderEntry type="library" exported="" name="jfoenix-9.0.10" level="project" />
+    <orderEntry type="library" name="jfoenix-9.0.10" level="project" />
+    <orderEntry type="library" name="pdfbox-app-2.0.25" level="project" />
   </component>
 </module>
