@@ -1,4 +1,5 @@
 import bll.*;
+import bll.util.PDFConverter;
 import dal.*;
 import gui.controller.EventCoordinatorDashboardController;
 import gui.controller.LoginController;
@@ -38,6 +39,7 @@ public class App extends Application {
             loginController.setEventCoordinatorModel(new EventCoordinatorModel(new EventCoordinatorManager(new DatabaseFacade(dbTicketDAO,dbEventDAO,dbCustomerDAO, dbEmailDAO, dbEventCoordinatorDAO, dbadminDAO))));
             loginController.setAdminModel(new AdminModel(new AdminManager(new DatabaseFacade(dbTicketDAO,dbEventDAO,dbCustomerDAO, dbEmailDAO, dbEventCoordinatorDAO, dbadminDAO))));
             loginController.setPrimaryStage(primaryStage);
+            loginController.setPdfConverter(new PDFConverter());
             loginController.setPrintModel(new PrintModel());
         }else {
             ILoadScene<EventCoordinatorDashboardController> EventCoordinatorDashboard =  new EventCoordinatorDashboardScene();
@@ -58,6 +60,7 @@ public class App extends Application {
             eventCoordinatorDashboardController.setTicketListModel(new TicketListModel(new TicketManager(new DatabaseFacade(dbTicketDAO,dbEventDAO,dbCustomerDAO, dbEmailDAO, dbEventCoordinatorDAO, dbadminDAO))));
             eventCoordinatorDashboardController.setEventCoordinatorModel(new EventCoordinatorModel(new EventCoordinatorManager(new DatabaseFacade(dbTicketDAO,dbEventDAO,dbCustomerDAO, dbEmailDAO, dbEventCoordinatorDAO, dbadminDAO))));
             eventCoordinatorDashboardController.setPrintModel(new PrintModel());
+            eventCoordinatorDashboardController.setPdfConverter(new PDFConverter());
             eventCoordinatorDashboardController.setController(eventCoordinatorDashboardController);
         }
     }

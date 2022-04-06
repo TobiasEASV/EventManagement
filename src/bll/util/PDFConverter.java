@@ -2,25 +2,27 @@ package bll.util;
 
 
 import be.Ticket;
-import javafx.scene.shape.Path;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
-
 import java.io.IOException;
 import java.util.List;
 
-public class pdfConverter {
-    private static String FILEPATH = "src/gui/utility/temp/ticketList.pdf";
+public class PDFConverter {
+    private String FILEPATH = "src/gui/utility/temp/ticketList.pdf";
     //Setup for DPF page
-    private static PDFont font = PDType1Font.HELVETICA;
-    private static PDFont fontBold = PDType1Font.HELVETICA_BOLD;
-    private static PDPage page = new PDPage();
-    private static int startX = 20;
+    private PDFont font = PDType1Font.HELVETICA;
+    private PDFont fontBold = PDType1Font.HELVETICA_BOLD;
+    private PDPage page = new PDPage();
+    private int startX = 20;
 
-    public static void printToPdf(List<Ticket> ticketList) {
+    public PDFConverter(){
+
+    }
+
+    public void printToPdf(List<Ticket> ticketList) {
         if (ticketList.isEmpty())
             return;
 
@@ -78,16 +80,17 @@ public class pdfConverter {
         }
     }
 
-    public static void setTitleAndSubtitles(PDPageContentStream content, String title) throws IOException {
+    public void setTitleAndSubtitles(PDPageContentStream content, String title) throws IOException {
         // Set up title
         content.setFont(fontBold, 20);
         content.beginText();
-        content.newLineAtOffset(page.getMediaBox().getWidth()/2 - title.length()/2, page.getMediaBox().getHeight()-30);
+        content.newLineAtOffset(20, page.getMediaBox().getHeight()-30);
         content.showText(title);
         content.endText();
+
         startX = 20;
 
-        //Set up titles on page 1
+        //Set up subtitles
         String [] subtitles = {"Navn", "Email", "Telefon", "Ticket ID", "VIP"};
 
         content.setFont(fontBold, 12);

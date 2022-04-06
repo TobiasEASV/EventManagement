@@ -1,6 +1,7 @@
 package gui.controller;
 
 import be.EventCoordinator;
+import bll.util.PDFConverter;
 import gui.model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -44,6 +45,7 @@ public class LoginController implements Initializable {
     private EventCoordinatorModel eventCoordinatorModel;
     private AdminModel adminModel;
     private Stage primaryStage;
+    private PDFConverter pdfConverter;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -52,6 +54,10 @@ public class LoginController implements Initializable {
         APAdminLogin.setVisible(false);
         APEventCoordinatorLogin.setDisable(true);
         APEventCoordinatorLogin.setVisible(false);
+    }
+
+    public void setPdfConverter(PDFConverter pdfConverter){
+        this.pdfConverter = pdfConverter;
     }
 
     public void setCustomerModel(CustomerModel customerModel){
@@ -101,6 +107,7 @@ public class LoginController implements Initializable {
             dashboardSceneController.setTicketListModel(ticketListModel);
             dashboardSceneController.setEventCoordinatorModel(eventCoordinatorModel);
             dashboardSceneController.setPrintModel(printModel);
+            dashboardSceneController.setPdfConverter(new PDFConverter());
 
             eventCoordinatorModel.setWhoIsLogin(eventCoordinator);
         }

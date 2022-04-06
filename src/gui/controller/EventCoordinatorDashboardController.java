@@ -2,8 +2,7 @@ package gui.controller;
 
 import be.Event;
 import be.Ticket;
-import bll.util.TicketsToFileWriter;
-import bll.util.pdfConverter;
+import bll.util.PDFConverter;
 import gui.model.*;
 import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
@@ -26,7 +25,6 @@ import utility.Scenes.interfaces.ILoadScene;
 import javax.imageio.ImageIO;
 import javax.print.PrintService;
 import javax.print.PrintServiceLookup;
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -134,6 +132,7 @@ public class EventCoordinatorDashboardController implements Initializable {
     private TicketListModel ticketListModel;
     private EventCoordinatorModel eventCoordinatorModel;
     private EventCoordinatorDashboardController dashboardController;
+    private PDFConverter pdfConverter;
 
     private PrintModel printModel;
     private Ticket ticket;
@@ -170,6 +169,10 @@ public class EventCoordinatorDashboardController implements Initializable {
             );
         });
 
+    }
+
+    public void setPdfConverter(PDFConverter pdfConverter){
+        this.pdfConverter = pdfConverter;
     }
 
     public void setCustomerModel(CustomerModel customerModel){
