@@ -3,6 +3,7 @@ package be;
 import javafx.beans.property.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * The event class holds all the information of an event, such as: ID, Title, Description, Location, Artist, Contact Email,
@@ -23,11 +24,11 @@ public class Event {
 
     private IntegerProperty id = new SimpleIntegerProperty();
 
-    private ObjectProperty<LocalDate> startDate = new SimpleObjectProperty<>();
-    private ObjectProperty<LocalDate> endDate = new SimpleObjectProperty<>();
+    private ObjectProperty<LocalDateTime> startDate = new SimpleObjectProperty<>();
+    private ObjectProperty<LocalDateTime> endDate = new SimpleObjectProperty<>();
 
 
-    public Event (String title, String description, String location, String artist, String contactEmail, double price, double vipPrice,  LocalDate startDate, LocalDate endDate, boolean isActive)
+    public Event (String title, String description, String location, String artist, String contactEmail, double price, double vipPrice,  LocalDateTime startDate, LocalDateTime endDate, boolean isActive)
     {
         this.title.set(title);
         this.description.set(description);
@@ -59,20 +60,20 @@ public class Event {
         this.id.set(id);
     }
     
-    public ObjectProperty<LocalDate> getEndDateProperty() {
+    public ObjectProperty<LocalDateTime> getEndDateProperty() {
         return endDate;
     }
 
-    public void setEndDate(LocalDate endDate) {
-        this.endDate.set(LocalDate.from(endDate));
+    public void setEndDate(LocalDateTime endDate) {
+        this.endDate.set(endDate);
     }
 
-    public ObjectProperty<LocalDate> getStartDateProperty() {
+    public ObjectProperty<LocalDateTime> getStartDateProperty() {
         return startDate;
     }
     
-    public void setStartDate(LocalDate startDate) {
-        this.startDate.set(LocalDate.from(startDate));
+    public void setStartDate(LocalDateTime startDate) {
+        this.startDate.set(startDate);
     }
 
 

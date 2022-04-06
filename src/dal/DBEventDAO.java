@@ -6,6 +6,9 @@ import dal.interfaces.IDBEventDAO;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,13 +74,12 @@ public class DBEventDAO implements IDBEventDAO {
                     String location = resultSet.getString("Location");
                     double price = resultSet.getDouble("Price");
                     String contact_Mail = resultSet.getString("Contact_Mail");
-                    Date start_Data = resultSet.getDate("Start_Data");
-                    Date end_Data = resultSet.getDate("End_Data");
+                    Timestamp start_Data = resultSet.getTimestamp("Start_Data");
+                    Timestamp end_Data = resultSet.getTimestamp("End_Data");
                     double VIPPrice = resultSet.getDouble("VIP_Price");
                     boolean isActive = resultSet.getBoolean("Active");
 
-
-                    Event event = new Event(title, description, location, artist, contact_Mail, price, VIPPrice, LocalDate.parse(start_Data.toString()), LocalDate.parse(end_Data.toString()), isActive);
+                    Event event = new Event(title, description, location, artist, contact_Mail, price, VIPPrice, start_Data.toLocalDateTime(), end_Data.toLocalDateTime(), isActive);
                     event.setId(id);
                     allEvents.add(event);
                 }

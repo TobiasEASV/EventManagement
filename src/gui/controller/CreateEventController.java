@@ -12,6 +12,9 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.*;
 
 public class CreateEventController implements Initializable {
@@ -82,13 +85,16 @@ public class CreateEventController implements Initializable {
     public void handleButtonOK(ActionEvent actionEvent) {
         if(!txTitle.getText().isBlank() && !txtAreaDescription.getText().isBlank() && !txLocation.getText().isBlank()
                 && !txArtists.getText().isBlank() && !txContactEmail.getText().isBlank() && !(dpStartData.getValue() == null) && !(dpEndData.getValue() == null)){
+            LocalTime startClock = LocalTime.parse(comboBoxStartTime.getSelectionModel().getSelectedItem());
+            LocalTime endClock = LocalTime.parse(comboBoxEndTime.getSelectionModel().getSelectedItem());
+            LocalDateTime startTime = LocalDateTime.of(dpStartData.getValue(),startClock);
+            LocalDateTime endTime = LocalDateTime.of(dpEndData.getValue(),endClock);
 
             String ticketPrice = "0", VIPPrice = "0";
             if (!txTicktePrice.getText().isEmpty())
                 ticketPrice = txTicktePrice.getText();
             if (!txVIPPrice.getText().isEmpty())
                 VIPPrice = txVIPPrice.getText();
-
 
             Event event = new Event(
                     txTitle.getText(),
@@ -98,8 +104,8 @@ public class CreateEventController implements Initializable {
                     txContactEmail.getText(),
                     Double.parseDouble(ticketPrice),
                     Double.parseDouble(VIPPrice),
-                    dpStartData.getValue(),
-                    dpEndData.getValue(), true);
+                    startTime,
+                    endTime, true);
 
             eventListModel.createEvent(event);
             EXITScene();
