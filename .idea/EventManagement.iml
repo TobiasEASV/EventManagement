@@ -15,5 +15,6 @@
     <orderEntry type="library" name="mssql-jdbc-9.4.0.jre16" level="project" />
     <orderEntry type="library" name="jfoenix" level="project" />
     <orderEntry type="library" name="jfoenix-9.0.10" level="project" />
+    <orderEntry type="library" name="pdfbox-app-2.0.25" level="project" />
   </component>
 </module>
