@@ -82,7 +82,7 @@ public class pdfConverter {
         // Set up title
         content.setFont(fontBold, 20);
         content.beginText();
-        content.newLineAtOffset(page.getMediaBox().getWidth()/2 -50, page.getMediaBox().getHeight()-30);
+        content.newLineAtOffset(page.getMediaBox().getWidth()/2 - title.length()/2, page.getMediaBox().getHeight()-30);
         content.showText(title);
         content.endText();
         startX = 20;
