@@ -18,8 +18,6 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class PDFConverter {
-    private String FILEPATH = "src/gui/utility/temp/ticketList.pdf";
-    //Setup for DPF page
     private PDFont font = PDType1Font.HELVETICA;
     private PDFont fontBold = PDType1Font.HELVETICA_BOLD;
     private PDPage page = new PDPage();
