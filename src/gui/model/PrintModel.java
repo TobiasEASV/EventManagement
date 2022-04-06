@@ -27,7 +27,7 @@ public class PrintModel {
 
         try (FileInputStream fileInputStream = new FileInputStream(ticketFile)){    /** JAN - vi har prøvet en masse lort */
             //Doc doc = new SimpleDoc(fileInputStream, DocFlavor.READER.INPUT_STREAM.TEXT_PLAIN_UTF_8, null);
-            Doc doc = new SimpleDoc(fileInputStream, DocFlavor.INPUT_STREAM.TEXT_HTML_HOST, null);
+            Doc doc = new SimpleDoc(fileInputStream, DocFlavor.INPUT_STREAM.GIF, null);
             PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
             pras.add(new Copies(1));
 
