@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane fx:id="parentGridPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1150.0" styleClass="backgroundPane" stylesheets="@../utility/SceneStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.EventCoordinatorDashboardController">
+<GridPane fx:id="parentGridPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1150.0" styleClass="backgroundPane" stylesheets="@../utility/SceneStylesheet.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.EventCoordinatorDashboardController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="17.0" prefWidth="100.0" />
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="17.0" prefWidth="100.0" />
@@ -39,7 +39,7 @@
    <children>
       <TextField fx:id="textFieldSearch" prefWidth="670.0" promptText="Search for an email or a name" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3">
          <GridPane.margin>
-            <Insets left="25.0" right="100.0" />
+            <Insets left="25.0" right="25.0" />
          </GridPane.margin></TextField>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
          <children>
@@ -90,14 +90,9 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </VBox>
-            <VBox alignment="BOTTOM_LEFT" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="SOMETIMES">
+            <VBox alignment="BOTTOM_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="15.0" HBox.hgrow="SOMETIMES">
                <children>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <TextField fx:id="txtAlternativeEmail" alignment="CENTER" prefWidth="180.0" promptText="Alternative Email" />
-                        <Separator prefWidth="180.0" styleClass="TxtSeparator" />
-                     </children>
-                  </VBox>
+                  <Button fx:id="btnGetPdf" mnemonicParsing="false" onAction="#handleBtnGetPdf" prefWidth="186.0" text="Save ticket list as PDF" />
                   <Button mnemonicParsing="false" onAction="#handleMailTicketButton" prefWidth="186.0" text="Mail Ticket" />
                </children>
                <padding>
@@ -292,7 +287,7 @@
       </VBox>
       <Separator prefWidth="200.0" styleClass="TxtSeparator" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="4">
          <GridPane.margin>
-            <Insets left="25.0" right="100.0" />
+            <Insets left="25.0" right="25.0" />
          </GridPane.margin>
       </Separator>
       <TableView fx:id="tvTickets" editable="true" prefHeight="200.0" prefWidth="550.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="5">
@@ -309,11 +304,6 @@
             <Insets left="25.0" right="25.0" />
          </GridPane.margin>
       </TableView>
-      <Button fx:id="btnGetPdf" mnemonicParsing="false" onAction="#handleBtnGetPdf" text="Get PDF" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
-         <GridPane.margin>
-            <Insets right="25.0" />
-         </GridPane.margin>
-      </Button>
    </children>
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

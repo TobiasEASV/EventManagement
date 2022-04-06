@@ -35,8 +35,6 @@ public class EventCoordinatorDashboardController implements Initializable {
 
 
     @FXML
-    private GridPane parentGridPane;
-    @FXML
     private TableView<Ticket> tvTickets;
 
     @FXML
@@ -50,8 +48,6 @@ public class EventCoordinatorDashboardController implements Initializable {
 
     @FXML
     private TextField textFieldSearch;
-    @FXML
-    private TextField txtAlternativeEmail;
 
     @FXML
     private ComboBox<PrintService> comboBoxChoosePrinter;
@@ -59,13 +55,7 @@ public class EventCoordinatorDashboardController implements Initializable {
     private ComboBox<Event> comboBoxChooseEvent;
 
     @FXML
-    private CheckBox checkBoxTicketTypeStandard;
-    @FXML
     private CheckBox checkBoxTicketTypeVIP;
-    @FXML
-    private CheckBox checkBoxTicketTypeFoodIncl;
-    @FXML
-    private CheckBox checkBoxTicketTypeDrinksIncl;
 
     @FXML
     private Label lblEventTitle;
@@ -94,19 +84,13 @@ public class EventCoordinatorDashboardController implements Initializable {
     @FXML
     private Label lblCustomerName;
     @FXML
-    private Label lblCustomerEmail;
-    @FXML
     private Label lblTicketTitle;
-    @FXML
-    private Label lblTicketSubtitle;
     @FXML
     private Label lblTicketDescription;
     @FXML
     private Label lblTicketLocation;
     @FXML
     private Button btnSellTicket;
-    @FXML
-    private Button btnGetPdf;
     @FXML
     private Label lblTicketId;
     @FXML

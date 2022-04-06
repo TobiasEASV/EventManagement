@@ -244,12 +244,38 @@ Combobox styling
 
 .combo-box {
     -fx-font-weight: bold;
-    -fx-border-width: 2;
+    -fx-border-width: 3;
     -fx-background-insets: 0;
     -fx-border-radius: 2;
     -fx-border-color: black;
     -fx-padding: -1;
     -fx-background-color: rgba(190, 145, 86, 1);
+}
+/* Styling for the dropdown in the comboxes */
+.combo-box .combo-box-popup .list-view, .combo-box .combo-box-popup .list-cell {
+    -fx-background-color: linear-gradient(to right, rgba(190, 145, 86, 1) 0%, rgba(215,182,140,1) 87%, rgba(215, 164, 140, 1) 100%);
+}
+
+.combo-box .combo-box-popup .list-view{
+    -fx-border-color: black;
+    -fx-border-width: 2;
+}
+
+.combo-box .virtual-flow .scroll-bar:vertical,
+.combo-box .virtual-flow .scroll-bar:vertical .track,
+.combo-box .virtual-flow .scroll-bar:vertical .track-background,
+.combo-box .virtual-flow .scroll-bar:horizontal,
+.combo-box .virtual-flow .scroll-bar:horizontal .track,
+.combo-box .virtual-flow .scroll-bar:horizontal .track-background {
+    -fx-background-color: transparent;
+}
+
+.combo-box .virtual-flow .scroll-bar:vertical .thumb{
+    -fx-background-color:  white;
+}
+
+.combo-box .virtual-flow .scroll-bar:horizontal .thumb {
+    -fx-background-color:  rgba(190, 145, 86, 1);
 }
 
 .combo-box:editable > .arrow-button {
