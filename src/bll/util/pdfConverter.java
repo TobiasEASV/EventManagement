@@ -60,13 +60,14 @@ public class pdfConverter {
                     content.endText();
                 }
                 ++lines;
-                if (lines % 30 == 0) {
+                if (lines % 22 == 0) {
                     page = new PDPage();
                     doc.addPage(page);
-                    setTitleAndSubtitles(content, ticket.getEvent().getTitleProperty().get());
                     content.close();
                     content = new PDPageContentStream(doc, page);
                     content.setFont(font, 12);
+                    setTitleAndSubtitles(content, ticket.getEvent().getTitleProperty().get());
+                    lines = 1;
                 }
             }
             content.close();
@@ -84,7 +85,7 @@ public class pdfConverter {
         content.newLineAtOffset(page.getMediaBox().getWidth()/2 -50, page.getMediaBox().getHeight()-30);
         content.showText(title);
         content.endText();
-
+        startX = 20;
 
         //Set up titles on page 1
         String [] subtitles = {"Navn", "Email", "Telefon", "Ticket ID", "VIP"};
